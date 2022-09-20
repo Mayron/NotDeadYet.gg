@@ -1,0 +1,32 @@
+{
+  "typescript.tsc.autoDetect": "off",
+  "task.allowAutomaticTasks": "on",
+  "typescript.tsserver.experimental.enableProjectDiagnostics": true,
+  "problems.defaultViewMode": "table",
+  "problems.sortOrder": "severity",
+  "eslint.validate": ["typescript", "typescriptreact"],
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll": true
+  },
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "colorize.include": [".ts", ".tsx"],
+  "colorize.languages": [
+    "css",
+    "sass",
+    "scss",
+    "less",
+    "postcss",
+    "sss",
+    "stylus",
+    "xml",
+    "svg",
+    "javascriptreact",
+    "javascript",
+    "typescriptreact",
+    "typescript"
+  ]
+}

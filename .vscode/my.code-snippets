@@ -1,0 +1,68 @@
+{
+  "React TS component": {
+    "prefix": "c",
+    "body": [
+      "const ${1:componentName}: React.FC = () => {",
+      "  return (<${2}>${3}</${2}>);",
+      "};"
+    ],
+    "description": "Creates a react TS component without an interface "
+  },
+  "React TS component and export": {
+    "prefix": "ce",
+    "body": [
+      "const ${1:componentName}: React.FC = () => {",
+      "  return (<${2}>${3}</${2}>);",
+      "};",
+      "",
+      "export default ${1:componentName};"
+    ],
+    "description": "Creates a react TS component without an interface "
+  },
+  "React TS component with interface": {
+    "prefix": "ci",
+    "body": [
+      "interface I${1:componentName}Props {",
+      "}",
+      "",
+      "const ${1:componentName}: React.FC<I${1:componentName}Props> = ({}) => {",
+      "  return (<${2}>${3}</${2:tag}>);",
+      "};"
+    ],
+    "description": "Creates a react TS component with an interface "
+  },
+  "React TS component with interface and export": {
+    "prefix": "cie",
+    "body": [
+      "interface I${1:componentName}Props {",
+      "}",
+      "",
+      "const ${1:componentName}: React.FC<I${1:componentName}Props> = ({}) => {",
+      "  return (<${2}>${3}</${2}>);",
+      "};",
+      "",
+      "export default ${1:componentName};"
+    ],
+    "description": "Creates a react TS component with an interface and export to default."
+  },
+  "Import React": {
+    "prefix": "react",
+    "body": ["import React from \"react\";", ""],
+    "description": "Adds the react import."
+  },
+  "Add Children Property": {
+    "prefix": "cp",
+    "body": ["children: React.ReactNode | React.ReactNode[];"],
+    "description": "Adds children as a property"
+  },
+  "Add Children Property with Interface": {
+    "prefix": "cpi",
+    "body": [
+      "interface I${1:componentName}Props {",
+      "  children: React.ReactNode | React.ReactNode[];",
+      "}",
+      ""
+    ],
+    "description": "Adds children as a property"
+  }
+}

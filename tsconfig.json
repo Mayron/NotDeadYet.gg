@@ -1,0 +1,35 @@
+{
+  "include": ["**/*.ts", "**/*.tsx"],
+  // Including css-prop.d.ts extends React element attributes to allow the css property
+  "files": ["next-env.d.ts", "contentful-types.d.ts"],
+  "exclude": ["node_modules"],
+  "compilerOptions": {
+    "target": "es5",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "jsx": "preserve", // why preserve and not react-jsx?
+    "jsxImportSource": "@emotion/react",
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "allowJs": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": true,
+    "isolatedModules": true,
+    "incremental": true,
+    "plugins": [
+      {
+        "name": "typescript-styled-plugin",
+        "lint": {
+          "vendorPrefix": "error",
+          "validProperties": ["contain-intrinsic-size"],
+          "duplicateProperties": "error",
+          "important": "warning",
+          "float": "error"
+        }
+      }
+    ]
+  }
+}
