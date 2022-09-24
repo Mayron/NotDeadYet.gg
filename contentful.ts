@@ -14,6 +14,14 @@ const fetchGraphQL = async <T>(query: string): Promise<T> => {
   return result;
 };
 
+interface IRulesResponse {
+  data: {
+    rulesCollection: {
+      items: Rule[];
+    };
+  };
+}
+
 export const getAllRules = async (): Promise<Rule[]> => {
   const query = `#graphql    
     query {
@@ -26,6 +34,27 @@ export const getAllRules = async (): Promise<Rule[]> => {
     }
   `;
 
-  const response = await fetchGraphQL<IRulesResponse<Rule>>(query);
+  const response = await fetchGraphQL<IRulesResponse>(query);
   return response.data.rulesCollection.items;
+};
+
+interface IApplyInfoResponse {
+  data: {
+    applyInfo: {
+      content: string;
+    };
+  };
+}
+
+export const getApplyInfo = async (): Promise<string> => {
+  const query = `#graphql    
+    query {
+      applyInfo(id: "7a7LjQezrsdybLN5VTboM1") {
+        content
+      }
+    }
+  `;
+
+  const response = await fetchGraphQL<IApplyInfoResponse>(query);
+  return response.data.applyInfo.content;
 };

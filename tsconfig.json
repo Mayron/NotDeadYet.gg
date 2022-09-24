@@ -1,7 +1,7 @@
 {
   "include": ["**/*.ts", "**/*.tsx"],
   // Including css-prop.d.ts extends React element attributes to allow the css property
-  "files": ["next-env.d.ts", "contentful-types.d.ts"],
+  "files": ["next-env.d.ts", "contentful-types.d.ts", "models.d.ts"],
   "exclude": ["node_modules"],
   "compilerOptions": {
     "target": "es5",

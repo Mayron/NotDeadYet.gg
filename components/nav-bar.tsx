@@ -57,7 +57,7 @@ const NavBar: React.FC = () => (
         <Route text="Rules" to="/rules" />
       </li>
       <li>
-        <Route text="Join Us" to="/join-us" />
+        <Route text="Apply" to="/apply" />
       </li>
       <li>
         <Route text="Discord" to="/discord">

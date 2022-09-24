@@ -1,4 +1,5 @@
 import Head from "next/head";
+import Script from "next/script";
 import Footer from "./footer";
 
 interface ILayoutProps {
@@ -49,6 +50,11 @@ const Layout: React.FC<ILayoutProps> = ({ children, title }) => {
         <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
         {/* <link rel="shortcut icon" href="/favicon32.png" type="" /> */}
         <link rel="preconnect" href="https://fonts.gstatic.com" />
+        <link
+          type="text/css"
+          rel="stylesheet"
+          href="https://www.gstatic.com/firebasejs/ui/6.0.1/firebase-ui-auth.css"
+        />
 
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="Not Dead Yet" />
@@ -71,6 +77,7 @@ const Layout: React.FC<ILayoutProps> = ({ children, title }) => {
         />
       </Head>
       <main>{children}</main>
+      <Script src="https://www.gstatic.com/firebasejs/ui/6.0.1/firebase-ui-auth.js" />
       <Footer />
     </>
   );
