@@ -1,4 +1,5 @@
 import { marked } from "marked";
+import BackgroundPattern from "../components/background-pattern";
 import Layout from "../components/layout";
 import WhitePanel from "../components/white-panel";
 import { getAllRules } from "../contentful";
@@ -9,6 +10,7 @@ interface IRulesPageProps {
 
 const RulesPage: React.FC<IRulesPageProps> = ({ rules }) => (
   <Layout title="Rules | Not Dead Yet">
+    <BackgroundPattern />
     <section>
       <header>
         <h1>Rules</h1>
