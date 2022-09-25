@@ -1,5 +1,6 @@
 import { marked } from "marked";
 import Layout from "../components/layout";
+import WhitePanel from "../components/white-panel";
 import { getAllRules } from "../contentful";
 
 interface IRulesPageProps {
@@ -12,12 +13,13 @@ const RulesPage: React.FC<IRulesPageProps> = ({ rules }) => (
       <header>
         <h1>Rules</h1>
       </header>
+
       <article>
         {rules.map((rule) => (
-          <div key={rule.title}>
+          <WhitePanel key={rule.title}>
             <h2>{rule.title}</h2>
             <p dangerouslySetInnerHTML={{ __html: marked.parse(rule.content) }}></p>
-          </div>
+          </WhitePanel>
         ))}
       </article>
     </section>
