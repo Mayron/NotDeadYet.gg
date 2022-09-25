@@ -132,7 +132,6 @@ const globalStyles = css`
     }
 
     h3 {
-      text-align: left;
       margin-top: 20px;
     }
 

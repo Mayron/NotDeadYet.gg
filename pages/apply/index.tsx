@@ -11,6 +11,7 @@ import Panel from "../../components/panel";
 import BattleNet from "../../svgs/battle-net.svg";
 import { authOptions } from "../api/auth/[...nextauth]";
 import BackgroundPattern from "../../components/background-pattern";
+import WhitePanel from "../../components/white-panel";
 
 interface IApplyPageProps {
   applyInfo: string;
@@ -31,7 +32,10 @@ const ApplyPage: React.FC<IApplyPageProps> = ({ applyInfo, username }) => (
           Apply to Not Dead Yet
         </h1>
       </header>
-      <article dangerouslySetInnerHTML={{ __html: marked.parse(applyInfo) }}></article>
+      <WhitePanel>
+        <article dangerouslySetInnerHTML={{ __html: marked.parse(applyInfo) }}></article>
+      </WhitePanel>
+
       <hr />
 
       {username ? (

@@ -39,6 +39,10 @@ const PageNavigation: React.FC<IPageNavigationProps> = ({ username }) => {
           align-items: stretch;
           text-transform: uppercase;
 
+          li {
+            user-select: none;
+          }
+
           a {
             height: 100%;
             display: flex;

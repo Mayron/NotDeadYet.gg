@@ -61,7 +61,7 @@ const PrimaryProfessionQuestions: React.FC<IPrimaryProfessionQuestionsProps> = (
             labelId={`primaryProf${id}`}
             label={`Primary Profession #${id}`}
             {...register(id === 1 ? "primaryProfession1" : "primaryProfession2", {
-              required: true,
+              required: "Please choose a profession",
             })}
           >
             {professions.map((p) => (
@@ -105,8 +105,13 @@ const PrimaryProfessionQuestions: React.FC<IPrimaryProfessionQuestionsProps> = (
 
         {reasonShown && (
           <>
-            <p>
-              What is your character&apos; s current skill level for this profession?
+            <p
+              css={css`
+                margin-bottom: 10px;
+                margin-top: 10px;
+              `}
+            >
+              What is your character&apos;s current skill level for this profession?
               <br />
               Can you max out this profession before raiding with us? If not, why?
             </p>

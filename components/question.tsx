@@ -5,7 +5,11 @@ interface IQuestionProps {
 }
 
 const StyledQuestion = styled.div`
-  margin: 30px 0;
+  padding: 15px 0;
+
+  p:first-child {
+    padding-bottom: 6px;
+  }
 
   &:first-child {
     margin-top: 0;
@@ -15,13 +19,8 @@ const StyledQuestion = styled.div`
     margin-bottom: 0;
   }
 
-  p {
-    padding: 10px 0;
-
-    &.MuiFormHelperText-root {
-      padding-top: 0;
-      padding-bottom: 0;
-    }
+  .MuiFormControl-root {
+    margin-top: 6px;
   }
 `;
 

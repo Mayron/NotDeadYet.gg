@@ -6,12 +6,13 @@ import Layout from "../../components/layout";
 import { authOptions } from "../api/auth/[...nextauth]";
 import BackgroundPattern from "../../components/background-pattern";
 import CharacterInfoForm from "../../components/forms/containers/character-info-form";
+import AboutYouForm from "../../components/forms/containers/about-you-form";
 
-interface IApplyCharacterInfoProps {
+interface IAboutYouPageProps {
   username: string;
 }
 
-const ApplyPage: React.FC<IApplyCharacterInfoProps> = ({ username }) => (
+const AboutYouPage: React.FC<IAboutYouPageProps> = ({ username }) => (
   <Layout title="Apply | Not Dead Yet" username={username}>
     <BackgroundPattern />
     <section>
@@ -21,7 +22,7 @@ const ApplyPage: React.FC<IApplyCharacterInfoProps> = ({ username }) => (
             font-size: 2rem;
           `}
         >
-          Character Information
+          Tell Us About Yourself
         </h1>
         <p
           css={css`
@@ -30,17 +31,18 @@ const ApplyPage: React.FC<IApplyCharacterInfoProps> = ({ username }) => (
             text-align: center;
           `}
         >
-          Please provide the following basic character details for the character you are
-          applying with.
+          This last section of your application form is all about yourself, your raiding
+          experience, and your philosophy towards raiding to see if you&apos;re a good fit
+          for our guild.
         </p>
       </header>
 
-      <CharacterInfoForm />
+      <AboutYouForm />
     </section>
   </Layout>
 );
 
-export default ApplyPage;
+export default AboutYouPage;
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const session = await unstable_getServerSession(context.req, context.res, authOptions);

@@ -18,3 +18,18 @@ declare interface ICharacterInfoFormInput {
   primaryMaxLevel2: string;
   primaryNotMaxedReason2: string;
 }
+
+declare interface IAboutYouFormInput {
+  canTalk: string;
+  cannotTalkReason: string;
+
+  bringConsumes: string;
+  cannotBringConsumesReason: string;
+
+  wowExperience: string;
+  describeSelf: string;
+
+  discordId: string;
+  vouch: string;
+  anythingElse: string;
+}
