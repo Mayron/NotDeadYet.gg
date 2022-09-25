@@ -5,8 +5,8 @@ import type { GetServerSidePropsContext } from "next";
 import Layout from "../../components/layout";
 import { authOptions } from "../api/auth/[...nextauth]";
 import BackgroundPattern from "../../components/background-pattern";
-import CharacterInfoForm from "../../components/forms/containers/character-info-form";
 import AboutYouForm from "../../components/forms/containers/about-you-form";
+import ApplicationStepper from "../../components/application-stepper";
 
 interface IAboutYouPageProps {
   username: string;
@@ -24,6 +24,7 @@ const AboutYouPage: React.FC<IAboutYouPageProps> = ({ username }) => (
         >
           Tell Us About Yourself
         </h1>
+
         <p
           css={css`
             margin-bottom: 60px;
@@ -35,6 +36,7 @@ const AboutYouPage: React.FC<IAboutYouPageProps> = ({ username }) => (
           experience, and your philosophy towards raiding to see if you&apos;re a good fit
           for our guild.
         </p>
+        <ApplicationStepper activeStep={2} />
       </header>
 
       <AboutYouForm />

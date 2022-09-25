@@ -135,8 +135,6 @@ const CharacterInfoForm = () => {
           id={1}
         />
 
-        <hr />
-
         <PrimaryProfessionQuestions
           register={register}
           control={control}

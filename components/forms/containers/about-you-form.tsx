@@ -40,7 +40,7 @@ const AboutYouForm = () => {
     handleSubmit,
     control,
     formState: { errors },
-  } = useForm<IAboutYouFormInput>({ defaultValues, mode: "onBlur" });
+  } = useForm<IAboutYouFormInput>({ defaultValues, mode: "onChange" });
 
   const onSubmit = async (data: IAboutYouFormInput) => {
     setLoading(true);
@@ -113,8 +113,9 @@ const AboutYouForm = () => {
         <FormControl>
           <Question>
             <p>
-              Are you able to bring full consumes/food, etc... every time while raiding
-              (both 10 and 25 player raids).
+              Are you able to enough bring consumables (e.g., food, elixirs/flasks, weapon
+              enchants, etc...) for all boss attempts for each raid night per week? This
+              includes both progression and farm raid nights.
             </p>
 
             <Controller
@@ -176,6 +177,7 @@ const AboutYouForm = () => {
             label="I started raiding back in..."
             variant="outlined"
             minRows={4}
+            maxRows={10}
             multiline
             error={!!errors?.wowExperience}
             helperText={errors?.wowExperience?.message}
@@ -199,6 +201,7 @@ const AboutYouForm = () => {
             label="I like to come prepared by..."
             variant="outlined"
             minRows={4}
+            maxRows={10}
             multiline
             error={!!errors?.describeSelf}
             helperText={errors?.describeSelf?.message}

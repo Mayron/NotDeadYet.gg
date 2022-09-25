@@ -6,12 +6,13 @@ import Layout from "../../components/layout";
 import { authOptions } from "../api/auth/[...nextauth]";
 import BackgroundPattern from "../../components/background-pattern";
 import CharacterInfoForm from "../../components/forms/containers/character-info-form";
+import ApplicationStepper from "../../components/application-stepper";
 
-interface IApplyCharacterInfoProps {
+interface ICharacterInfoPageProps {
   username: string;
 }
 
-const ApplyPage: React.FC<IApplyCharacterInfoProps> = ({ username }) => (
+const CharacterInfoPage: React.FC<ICharacterInfoPageProps> = ({ username }) => (
   <Layout title="Apply | Not Dead Yet" username={username}>
     <BackgroundPattern />
     <section>
@@ -23,6 +24,7 @@ const ApplyPage: React.FC<IApplyCharacterInfoProps> = ({ username }) => (
         >
           Character Information
         </h1>
+
         <p
           css={css`
             margin-bottom: 60px;
@@ -33,6 +35,7 @@ const ApplyPage: React.FC<IApplyCharacterInfoProps> = ({ username }) => (
           Please provide the following basic character details for the character you are
           applying with.
         </p>
+        <ApplicationStepper activeStep={1} />
       </header>
 
       <CharacterInfoForm />
@@ -40,7 +43,7 @@ const ApplyPage: React.FC<IApplyCharacterInfoProps> = ({ username }) => (
   </Layout>
 );
 
-export default ApplyPage;
+export default CharacterInfoPage;
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const session = await unstable_getServerSession(context.req, context.res, authOptions);
