@@ -46,7 +46,7 @@ export default AboutYouPage;
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const session = await unstable_getServerSession(context.req, context.res, authOptions);
-  const username = session?.user?.name;
+  const username = session?.user?.name || null;
 
   if (!username) {
     return {

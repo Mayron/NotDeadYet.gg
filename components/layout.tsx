@@ -7,6 +7,7 @@ interface ILayoutProps {
   children: React.ReactNode | React.ReactNode[];
   title: string;
   username?: string;
+  hidePageNavigation?: boolean;
 }
 
 const jsonLinkedData = {
@@ -18,7 +19,12 @@ const jsonLinkedData = {
   description: process.env.NEXT_PUBLIC_NDY_DESCRIPTION,
 };
 
-const Layout: React.FC<ILayoutProps> = ({ children, title, username }) => (
+const Layout: React.FC<ILayoutProps> = ({
+  children,
+  title,
+  username,
+  hidePageNavigation,
+}) => (
   <>
     <Head>
       <title>{title}</title>
@@ -55,7 +61,7 @@ const Layout: React.FC<ILayoutProps> = ({ children, title, username }) => (
       />
     </Head>
 
-    {username && <PageNavigation username={username} />}
+    {!hidePageNavigation && <PageNavigation username={username} />}
     <main>{children}</main>
     <Script src="https://www.gstatic.com/firebasejs/ui/6.0.1/firebase-ui-auth.js" />
     <Footer />

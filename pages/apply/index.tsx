@@ -61,8 +61,9 @@ export default ApplyPage;
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const applyInfo = await getApplyInfo();
   const session = await unstable_getServerSession(context.req, context.res, authOptions);
+  const username = session?.user?.name || null;
 
   return {
-    props: { applyInfo, username: session?.user?.name },
+    props: { applyInfo, username },
   };
 }

@@ -21,7 +21,7 @@ const Home: NextPage = () => {
   };
 
   return (
-    <Layout title="Not Dead Yet | Gehennas (EU)">
+    <Layout title="Not Dead Yet | Gehennas (EU)" hidePageNavigation>
       <HomeBanner />
       <div
         css={css`

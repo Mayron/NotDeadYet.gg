@@ -7,7 +7,7 @@ import { faDiscord } from "@fortawesome/free-brands-svg-icons";
 import Route from "./route";
 
 interface IPageNavigationProps {
-  username: string;
+  username?: string;
 }
 
 const PageNavigation: React.FC<IPageNavigationProps> = ({ username }) => {
@@ -38,6 +38,7 @@ const PageNavigation: React.FC<IPageNavigationProps> = ({ username }) => {
           display: flex;
           align-items: stretch;
           text-transform: uppercase;
+          min-height: 40px;
 
           li {
             user-select: none;
@@ -75,33 +76,36 @@ const PageNavigation: React.FC<IPageNavigationProps> = ({ username }) => {
             <FontAwesomeIcon title="Discord" icon={faDiscord} />
           </Route>
         </li>
-        <li
-          css={css`
-            margin-left: auto;
-          `}
-        >
-          <Button
-            id="userMenuBtn"
-            aria-controls={open ? "userMenu" : undefined}
-            aria-haspopup="true"
-            aria-expanded={open ? "true" : undefined}
-            onClick={handleClick}
-            endIcon={<KeyboardArrowDownIcon />}
+
+        {username && (
+          <li
+            css={css`
+              margin-left: auto;
+            `}
           >
-            {username}
-          </Button>
-          <Menu
-            id="userMenu"
-            anchorEl={anchorEl}
-            open={open}
-            onClose={handleClose}
-            MenuListProps={{
-              "aria-labelledby": "userMenuBtn",
-            }}
-          >
-            <MenuItem onClick={() => signOut()}>Sign Out</MenuItem>
-          </Menu>
-        </li>
+            <Button
+              id="userMenuBtn"
+              aria-controls={open ? "userMenu" : undefined}
+              aria-haspopup="true"
+              aria-expanded={open ? "true" : undefined}
+              onClick={handleClick}
+              endIcon={<KeyboardArrowDownIcon />}
+            >
+              {username}
+            </Button>
+            <Menu
+              id="userMenu"
+              anchorEl={anchorEl}
+              open={open}
+              onClose={handleClose}
+              MenuListProps={{
+                "aria-labelledby": "userMenuBtn",
+              }}
+            >
+              <MenuItem onClick={() => signOut()}>Sign Out</MenuItem>
+            </Menu>
+          </li>
+        )}
       </ul>
     </nav>
   );
