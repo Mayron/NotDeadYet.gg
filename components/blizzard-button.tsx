@@ -1,34 +1,59 @@
-import React from "react";
+import React, { type MouseEventHandler } from "react";
 import { css } from "@emotion/react";
+import { useRouter } from "next/router";
 import blizBtnHover from "../public/assets/bliz-btn-hover.png";
 import blizBtnNormal from "../public/assets/bliz-btn-normal.png";
 import blizBtnActive from "../public/assets/bliz-btn-active.png";
-import Route from "./route";
 
 interface IBlizzardButtonProps {
   text: string;
-  href: string;
+  href?: string;
+  submit?: boolean;
+  onClick?: MouseEventHandler<HTMLButtonElement>;
 }
 
-const BlizzardButton: React.FC<IBlizzardButtonProps> = ({ text, href }) => (
-  <button
-    css={css`
-      background-image: url(${blizBtnNormal.src});
-      height: ${blizBtnNormal.height}px;
-      width: ${blizBtnNormal.width}px;
-      transform: scale(1.2);
+const BlizzardButton: React.FC<IBlizzardButtonProps> = ({
+  text,
+  href,
+  submit = false,
+  onClick,
+}) => {
+  const router = useRouter();
+  let handleOnClick: MouseEventHandler<HTMLButtonElement> | undefined;
 
-      &:hover {
-        background-image: url(${blizBtnHover.src});
+  if (onClick || href) {
+    handleOnClick = async (e) => {
+      e.preventDefault();
+
+      if (onClick) {
+        onClick(e);
       }
 
-      &:active {
-        background-image: url(${blizBtnActive.src});
+      if (href) {
+        await router.push(href);
       }
-    `}
-    type="button"
-  >
-    <Route to={href}>
+    };
+  }
+
+  return (
+    <button
+      type={submit ? "submit" : "button"}
+      onClick={handleOnClick}
+      css={css`
+        background-image: url(${blizBtnNormal.src});
+        height: ${blizBtnNormal.height}px;
+        width: ${blizBtnNormal.width}px;
+        transform: scale(1.2);
+
+        &:hover {
+          background-image: url(${blizBtnHover.src});
+        }
+
+        &:active {
+          background-image: url(${blizBtnActive.src});
+        }
+      `}
+    >
       <span
         css={css`
           color: #fdd400;
@@ -37,8 +62,8 @@ const BlizzardButton: React.FC<IBlizzardButtonProps> = ({ text, href }) => (
       >
         {text}
       </span>
-    </Route>
-  </button>
-);
+    </button>
+  );
+};
 
 export default BlizzardButton;

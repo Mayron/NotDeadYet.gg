@@ -17,6 +17,7 @@ const globalStyles = css`
     background-color: ${colors.background};
     transition: margin-top 0.2s ease-in;
     min-height: 100vh;
+    position: relative;
   }
 
   ul {
@@ -116,7 +117,9 @@ const globalStyles = css`
     max-width: ${vars.maxContentSize};
     margin: 0 auto;
     padding: ${vars.sectionPadding};
+  }
 
+  article {
     ul,
     p {
       &:not(:last-child) {
@@ -127,6 +130,22 @@ const globalStyles = css`
     li:not(:last-child) {
       padding-bottom: 10px;
     }
+
+    h3 {
+      text-align: left;
+      margin-top: 20px;
+    }
+
+    h4 {
+      font-size: 1.4rem;
+    }
+  }
+
+  hr {
+    margin: 40px auto;
+    border: none;
+    background-color: #c1c1c1;
+    height: 1px;
   }
 
   ::-webkit-input-placeholder,
