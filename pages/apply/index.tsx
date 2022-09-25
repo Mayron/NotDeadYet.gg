@@ -6,7 +6,7 @@ import { unstable_getServerSession } from "next-auth";
 import type { GetServerSidePropsContext } from "next";
 import Layout from "../../components/layout";
 import { getApplyInfo } from "../../contentful";
-import AttendanceForm from "../../components/forms/containers/attendance-form";
+import RequirementsForm from "../../components/forms/containers/requirements-form";
 import Panel from "../../components/panel";
 import BattleNet from "../../svgs/battle-net.svg";
 import { authOptions } from "../api/auth/[...nextauth]";
@@ -42,7 +42,7 @@ const ApplyPage: React.FC<IApplyPageProps> = ({ applyInfo, username }) => (
       <hr />
 
       {username ? (
-        <AttendanceForm />
+        <RequirementsForm />
       ) : (
         <Panel>
           <p>

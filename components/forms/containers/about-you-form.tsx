@@ -10,6 +10,7 @@ import {
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
+import useFormPersist from "react-hook-form-persist";
 import BlizzardButton from "../../blizzard-button";
 import Question from "../../question";
 import WhitePanel from "../../white-panel";
@@ -39,12 +40,15 @@ const AboutYouForm = () => {
     register,
     handleSubmit,
     control,
+    watch,
+    setValue,
     formState: { errors },
   } = useForm<IAboutYouFormInput>({ defaultValues, mode: "onChange" });
 
-  const onSubmit = async (data: IAboutYouFormInput) => {
+  useFormPersist("application", { watch, setValue, storage: localStorage });
+
+  const onSubmit = async () => {
     setLoading(true);
-    console.log(data);
     await router.push("/apply");
   };
 

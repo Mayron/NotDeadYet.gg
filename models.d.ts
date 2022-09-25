@@ -33,3 +33,34 @@ declare interface IAboutYouFormInput {
   vouch: string;
   anythingElse: string;
 }
+
+declare interface IApplication {
+  expectations: boolean;
+  availability: "full" | "partial" | "";
+  partialAvailabilityReason: string;
+
+  characterName: "";
+  characterClass: "";
+  characterMainSpec: "";
+
+  primaryProfession1: "";
+  primaryMaxLevel1: "";
+  primaryNotMaxedReason1: "";
+
+  primaryProfession2: "";
+  primaryMaxLevel2: "";
+  primaryNotMaxedReason2: "";
+
+  canTalk: "";
+  cannotTalkReason: "";
+
+  bringConsumes: "";
+  cannotBringConsumesReason: "";
+
+  wowExperience: "";
+  describeSelf: "";
+
+  discordId: "";
+  vouch: "";
+  anythingElse: "";
+}

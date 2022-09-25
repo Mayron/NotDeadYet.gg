@@ -10,6 +10,7 @@ import {
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import useFormPersist from "react-hook-form-persist";
 import { characterClasses } from "../../../data";
 import BlizzardButton from "../../blizzard-button";
 import PrimaryProfessionQuestions from "../../primary-profession-questions";
@@ -38,12 +39,15 @@ const CharacterInfoForm = () => {
     register,
     handleSubmit,
     control,
+    setValue,
+    watch,
     formState: { errors },
   } = useForm<ICharacterInfoFormInput>({ defaultValues, mode: "onBlur" });
 
-  const onSubmit = async (data: ICharacterInfoFormInput) => {
+  useFormPersist("application", { watch, setValue, storage: localStorage });
+
+  const onSubmit = async () => {
     setLoading(true);
-    console.log(data);
     await router.push("/apply/about-you");
   };
 

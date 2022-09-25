@@ -10,26 +10,27 @@ import {
   TextField,
 } from "@mui/material";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { Controller, useForm } from "react-hook-form";
+import useFormPersist from "react-hook-form-persist";
 import BlizzardButton from "../../blizzard-button";
 import Question from "../../question";
 import WhitePanel from "../../white-panel";
 
-interface IFormInput {
+interface IAttendanceFormInput {
   expectations: boolean;
   availability: "full" | "partial" | "";
   reason: string;
 }
 
-const defaultValues: IFormInput = {
+const defaultValues: IAttendanceFormInput = {
   expectations: false,
   availability: "",
   reason: "",
 };
 
-const AttendanceForm = () => {
+const RequirementsForm = () => {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
   const [reasonTextFieldShown, setReasonTextFieldShown] = useState(false);
@@ -37,14 +38,33 @@ const AttendanceForm = () => {
     register,
     handleSubmit,
     control,
+    watch,
+    setValue,
     formState: { errors },
-  } = useForm<IFormInput>({ defaultValues });
+  } = useForm<IAttendanceFormInput>({ defaultValues, mode: "onTouched" });
 
-  const onSubmit = async (data: IFormInput) => {
+  useFormPersist("application", { watch, setValue, storage: window.localStorage });
+
+  const onSubmit = async () => {
     setLoading(true);
-    console.log(data);
     await router.push("/apply/character-info");
   };
+
+  useEffect(() => {
+    const data = localStorage.getItem("attendance");
+
+    if (data) {
+      const items = JSON.parse(data) as IAttendanceFormInput;
+
+      setValue("expectations", items.expectations);
+      setValue("availability", items.availability);
+      setValue("reason", items.reason);
+
+      if (items.availability === "partial") {
+        setReasonTextFieldShown(true);
+      }
+    }
+  }, [setValue]);
 
   const handlePartialAvailabilityChange = (
     event: React.ChangeEvent<HTMLInputElement>,
@@ -142,4 +162,4 @@ const AttendanceForm = () => {
   );
 };
 
-export default AttendanceForm;
+export default RequirementsForm;
