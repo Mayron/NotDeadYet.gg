@@ -39,7 +39,7 @@ const AboutYouPage: React.FC<IAboutYouPageProps> = ({ username }) => (
         <ApplicationStepper activeStep={2} />
       </header>
 
-      <AboutYouForm />
+      <AboutYouForm username={username} />
     </section>
   </Layout>
 );

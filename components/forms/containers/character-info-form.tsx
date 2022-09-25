@@ -44,7 +44,8 @@ const CharacterInfoForm = () => {
     formState: { errors },
   } = useForm<ICharacterInfoFormInput>({ defaultValues, mode: "onBlur" });
 
-  useFormPersist("application", { watch, setValue, storage: localStorage });
+  const storage = typeof window !== "undefined" ? window.localStorage : undefined;
+  useFormPersist("application", { watch, setValue, storage });
 
   const onSubmit = async () => {
     setLoading(true);

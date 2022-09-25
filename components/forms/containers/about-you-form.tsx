@@ -11,6 +11,7 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import useFormPersist from "react-hook-form-persist";
+import { storeApplication } from "../../../firebase";
 import BlizzardButton from "../../blizzard-button";
 import Question from "../../question";
 import WhitePanel from "../../white-panel";
@@ -30,7 +31,11 @@ const defaultValues: IAboutYouFormInput = {
   anythingElse: "",
 };
 
-const AboutYouForm = () => {
+interface IAboutYouFormProps {
+  username: string;
+}
+
+const AboutYouForm: React.FC<IAboutYouFormProps> = ({ username }) => {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [cannotTalkReasonShown, setCannotTalkReasonShown] = useState(false);
@@ -45,10 +50,21 @@ const AboutYouForm = () => {
     formState: { errors },
   } = useForm<IAboutYouFormInput>({ defaultValues, mode: "onChange" });
 
-  useFormPersist("application", { watch, setValue, storage: localStorage });
+  const storage = typeof window !== "undefined" ? window.localStorage : undefined;
+  useFormPersist("application", { watch, setValue, storage });
 
   const onSubmit = async () => {
     setLoading(true);
+
+    if (storage) {
+      const data = storage.getItem("application");
+
+      if (data) {
+        const application = JSON.parse(data) as IApplication;
+        await storeApplication(username, application);
+      }
+    }
+
     await router.push("/apply");
   };
 

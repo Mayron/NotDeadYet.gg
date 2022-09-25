@@ -21,13 +21,13 @@ import WhitePanel from "../../white-panel";
 interface IAttendanceFormInput {
   expectations: boolean;
   availability: "full" | "partial" | "";
-  reason: string;
+  partialAvailabilityReason: string;
 }
 
 const defaultValues: IAttendanceFormInput = {
   expectations: false,
   availability: "",
-  reason: "",
+  partialAvailabilityReason: "",
 };
 
 const RequirementsForm = () => {
@@ -43,7 +43,8 @@ const RequirementsForm = () => {
     formState: { errors },
   } = useForm<IAttendanceFormInput>({ defaultValues, mode: "onTouched" });
 
-  useFormPersist("application", { watch, setValue, storage: window.localStorage });
+  const storage = typeof window !== "undefined" ? window.localStorage : undefined;
+  useFormPersist("application", { watch, setValue, storage });
 
   const onSubmit = async () => {
     setLoading(true);
@@ -58,7 +59,7 @@ const RequirementsForm = () => {
 
       setValue("expectations", items.expectations);
       setValue("availability", items.availability);
-      setValue("reason", items.reason);
+      setValue("partialAvailabilityReason", items.partialAvailabilityReason);
 
       if (items.availability === "partial") {
         setReasonTextFieldShown(true);
@@ -131,7 +132,7 @@ const RequirementsForm = () => {
 
             {reasonTextFieldShown && (
               <TextField
-                {...register("reason", {
+                {...register("partialAvailabilityReason", {
                   required: true,
                   minLength: { message: "Minimum characters allowed is 50", value: 50 },
                   maxLength: { message: "Maximum characters allowed is 500", value: 500 },
@@ -139,8 +140,8 @@ const RequirementsForm = () => {
                 fullWidth
                 label="Please explain why this might be a problem:"
                 variant="standard"
-                error={!!errors?.reason}
-                helperText={errors?.reason?.message}
+                error={!!errors?.partialAvailabilityReason}
+                helperText={errors?.partialAvailabilityReason?.message}
                 multiline
                 maxRows={5}
               />
