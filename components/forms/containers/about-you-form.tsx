@@ -47,11 +47,11 @@ const AboutYouForm: React.FC<IAboutYouFormProps> = ({ username }) => {
     formState: { errors },
   } = useForm<IAboutYouFormInput>({ defaultValues, mode: "onChange" });
 
-  const storage = typeof window !== "undefined" ? window.localStorage : undefined;
-  useFormPersist("application", { watch, setValue, storage });
-
   const canTalk = useWatch({ control, name: "canTalk" });
   const bringConsumes = useWatch({ control, name: "bringConsumes" });
+
+  const storage = typeof window !== "undefined" ? window.localStorage : undefined;
+  useFormPersist("application", { watch, setValue, storage });
 
   const onSubmit = async () => {
     setLoading(true);
@@ -207,9 +207,11 @@ const AboutYouForm: React.FC<IAboutYouFormProps> = ({ username }) => {
               required: "Please provider your Discord ID",
               maxLength: { message: "Maximum characters allowed is 50", value: 50 },
             })}
-            fullWidth
             label="Enter your Discord ID here"
             variant="standard"
+            css={css`
+              min-width: 300px;
+            `}
             error={!!errors?.discordId}
             helperText={errors?.discordId?.message}
           />
@@ -224,7 +226,8 @@ const AboutYouForm: React.FC<IAboutYouFormProps> = ({ username }) => {
             })}
             fullWidth
             label="If not, you can leave this empty"
-            variant="standard"
+            variant="outlined"
+            maxRows={3}
             error={!!errors?.vouch}
             helperText={errors?.vouch?.message}
           />
@@ -242,9 +245,10 @@ const AboutYouForm: React.FC<IAboutYouFormProps> = ({ username }) => {
             })}
             fullWidth
             label="If not, you can leave this empty"
-            variant="standard"
+            variant="outlined"
             multiline
             maxRows={5}
+            minRows={3}
             error={!!errors?.anythingElse}
             helperText={errors?.anythingElse?.message}
           />
