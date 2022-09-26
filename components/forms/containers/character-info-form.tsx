@@ -9,7 +9,7 @@ import {
 } from "@mui/material";
 import { useRouter } from "next/router";
 import { useState } from "react";
-import { useForm } from "react-hook-form";
+import { useForm, useWatch } from "react-hook-form";
 import useFormPersist from "react-hook-form-persist";
 import { characterClasses } from "../../../data";
 import BlizzardButton from "../../blizzard-button";
@@ -42,7 +42,9 @@ const CharacterInfoForm = () => {
     setValue,
     watch,
     formState: { errors },
-  } = useForm<ICharacterInfoFormInput>({ defaultValues, mode: "onBlur" });
+  } = useForm<ICharacterInfoFormInput>({ defaultValues, mode: "onChange" });
+
+  const characterClass = useWatch({ control, name: "characterClass" });
 
   const storage = typeof window !== "undefined" ? window.localStorage : undefined;
   useFormPersist("application", { watch, setValue, storage });
@@ -64,7 +66,6 @@ const CharacterInfoForm = () => {
               maxLength: { message: "Maximum characters allowed is 20", value: 20 },
               pattern: { value: /^\S+$/, message: "Invalid character name" },
             })}
-            fullWidth
             label="Character Name"
             variant="standard"
             error={!!errors?.characterName}
@@ -74,6 +75,7 @@ const CharacterInfoForm = () => {
 
         <Question>
           <p>What class is this character?</p>
+
           <FormControl
             css={css`
               min-width: 200px;
@@ -84,6 +86,8 @@ const CharacterInfoForm = () => {
               {...register("characterClass", {
                 required: "Please select your character",
               })}
+              value={characterClass}
+              placeholder="Class"
               labelId="characterClassLabel"
               label="Class"
             >

@@ -10,8 +10,13 @@ import {
   Radio,
   TextField,
 } from "@mui/material";
-import { useState } from "react";
-import { Controller, UseFormRegister, Control, FieldErrorsImpl } from "react-hook-form";
+import {
+  Controller,
+  UseFormRegister,
+  Control,
+  FieldErrorsImpl,
+  useWatch,
+} from "react-hook-form";
 import { professions } from "../data";
 import Question from "./question";
 
@@ -28,8 +33,6 @@ const PrimaryProfessionQuestions: React.FC<IPrimaryProfessionQuestionsProps> = (
   errors,
   id,
 }) => {
-  const [reasonShown, setReasonShown] = useState(false);
-
   const primaryErrors =
     id === 1
       ? {
@@ -43,23 +46,29 @@ const PrimaryProfessionQuestions: React.FC<IPrimaryProfessionQuestionsProps> = (
           noMaxReason: errors?.primaryNotMaxedReason2,
         };
 
-  const handleMaxLevelChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = event.currentTarget;
-    setReasonShown(value === "no");
-  };
+  const isMaxLevel = useWatch({
+    control,
+    name: id === 1 ? "primaryMaxLevel1" : "primaryMaxLevel2",
+  });
+
+  const profession = useWatch({
+    control,
+    name: id === 1 ? "primaryProfession1" : "primaryProfession2",
+  });
 
   return (
     <>
       <Question>
         <FormControl
           css={css`
-            min-width: 300px;
+            min-width: 250px;
           `}
         >
           <InputLabel id={`primaryProf${id}`}>Primary Profession #{id}</InputLabel>
           <Select
             labelId={`primaryProf${id}`}
             label={`Primary Profession #${id}`}
+            value={profession}
             {...register(id === 1 ? "primaryProfession1" : "primaryProfession2", {
               required: "Please choose a profession",
             })}
@@ -85,16 +94,8 @@ const PrimaryProfessionQuestions: React.FC<IPrimaryProfessionQuestionsProps> = (
           rules={{ required: "Please select one of these options" }}
           render={({ field }) => (
             <RadioGroup {...field}>
-              <FormControlLabel
-                value="yes"
-                label="Yes"
-                control={<Radio onChange={handleMaxLevelChange} />}
-              />
-              <FormControlLabel
-                value="no"
-                label="No"
-                control={<Radio onChange={handleMaxLevelChange} />}
-              />
+              <FormControlLabel value="yes" label="Yes" control={<Radio />} />
+              <FormControlLabel value="no" label="No" control={<Radio />} />
             </RadioGroup>
           )}
         />
@@ -103,7 +104,7 @@ const PrimaryProfessionQuestions: React.FC<IPrimaryProfessionQuestionsProps> = (
           {primaryErrors.maxLevel?.message}
         </FormHelperText>
 
-        {reasonShown && (
+        {isMaxLevel === "no" && (
           <>
             <p
               css={css`
@@ -130,6 +131,8 @@ const PrimaryProfessionQuestions: React.FC<IPrimaryProfessionQuestionsProps> = (
               helperText={primaryErrors.noMaxReason?.message}
               multiline
               maxRows={5}
+              minRows={3}
+              variant="outlined"
             />
           </>
         )}

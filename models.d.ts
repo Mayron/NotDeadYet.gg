@@ -5,25 +5,31 @@ declare interface IFormInputProps {
   setValue?: any;
 }
 
+interface IRequirementsFormInput {
+  expectations: boolean;
+  availability: "full" | "partial" | "";
+  partialAvailabilityReason: string;
+}
+
 declare interface ICharacterInfoFormInput {
   characterName: string;
   characterClass: string;
   characterMainSpec: string;
 
   primaryProfession1: string;
-  primaryMaxLevel1: string;
+  primaryMaxLevel1: "yes" | "no" | "";
   primaryNotMaxedReason1: string;
 
   primaryProfession2: string;
-  primaryMaxLevel2: string;
+  primaryMaxLevel2: "yes" | "no" | "";
   primaryNotMaxedReason2: string;
 }
 
 declare interface IAboutYouFormInput {
-  canTalk: string;
+  canTalk: "yes" | "no" | "";
   cannotTalkReason: string;
 
-  bringConsumes: string;
+  bringConsumes: "yes" | "no" | "";
   cannotBringConsumesReason: string;
 
   wowExperience: string;
@@ -34,33 +40,7 @@ declare interface IAboutYouFormInput {
   anythingElse: string;
 }
 
-declare interface IApplication {
-  expectations: boolean;
-  availability: "full" | "partial" | "";
-  partialAvailabilityReason: string;
-
-  characterName: "";
-  characterClass: "";
-  characterMainSpec: "";
-
-  primaryProfession1: "";
-  primaryMaxLevel1: "";
-  primaryNotMaxedReason1: "";
-
-  primaryProfession2: "";
-  primaryMaxLevel2: "";
-  primaryNotMaxedReason2: "";
-
-  canTalk: "";
-  cannotTalkReason: "";
-
-  bringConsumes: "";
-  cannotBringConsumesReason: "";
-
-  wowExperience: "";
-  describeSelf: "";
-
-  discordId: "";
-  vouch: "";
-  anythingElse: "";
-}
+declare interface IApplication
+  extends IRequirementsFormInput,
+    ICharacterInfoFormInput,
+    IAboutYouFormInput {}

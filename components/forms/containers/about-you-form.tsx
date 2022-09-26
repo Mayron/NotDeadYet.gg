@@ -1,6 +1,5 @@
 import {
   css,
-  FormControl,
   FormControlLabel,
   FormHelperText,
   Radio,
@@ -9,7 +8,7 @@ import {
 } from "@mui/material";
 import { useRouter } from "next/router";
 import { useState } from "react";
-import { Controller, useForm } from "react-hook-form";
+import { Controller, useForm, useWatch } from "react-hook-form";
 import useFormPersist from "react-hook-form-persist";
 import { storeApplication } from "../../../firebase";
 import BlizzardButton from "../../blizzard-button";
@@ -38,8 +37,6 @@ interface IAboutYouFormProps {
 const AboutYouForm: React.FC<IAboutYouFormProps> = ({ username }) => {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
-  const [cannotTalkReasonShown, setCannotTalkReasonShown] = useState(false);
-  const [bringConsumesReasonShown, setBringConsumesReasonShown] = useState(false);
 
   const {
     register,
@@ -52,6 +49,9 @@ const AboutYouForm: React.FC<IAboutYouFormProps> = ({ username }) => {
 
   const storage = typeof window !== "undefined" ? window.localStorage : undefined;
   useFormPersist("application", { watch, setValue, storage });
+
+  const canTalk = useWatch({ control, name: "canTalk" });
+  const bringConsumes = useWatch({ control, name: "bringConsumes" });
 
   const onSubmit = async () => {
     setLoading(true);
@@ -68,118 +68,89 @@ const AboutYouForm: React.FC<IAboutYouFormProps> = ({ username }) => {
     await router.push("/apply");
   };
 
-  const handleCanTalkChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = event.currentTarget;
-    setCannotTalkReasonShown(value === "other");
-  };
-
-  const handleBringConsumesChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = event.currentTarget;
-    setBringConsumesReasonShown(value === "other");
-  };
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <WhitePanel>
-        <FormControl>
-          <Question>
-            <p>
-              Are you able to use a microphone on discord and are happy to talk when
-              needed?
-            </p>
+        <Question>
+          <p>
+            Are you able to use a microphone on discord and are happy to talk when needed?
+          </p>
 
-            <Controller
-              name="canTalk"
-              control={control}
-              rules={{ required: "Please select one of these options" }}
-              render={({ field }) => (
-                <RadioGroup {...field}>
-                  <FormControlLabel
-                    value="yes"
-                    label="Yes"
-                    control={<Radio onChange={handleCanTalkChange} />}
-                  />
-                  <FormControlLabel
-                    value="other"
-                    label="No"
-                    control={<Radio onChange={handleCanTalkChange} />}
-                  />
-                </RadioGroup>
-              )}
-            />
-
-            <FormHelperText error={!!errors?.canTalk}>
-              {errors?.canTalk?.message}
-            </FormHelperText>
-
-            {cannotTalkReasonShown && (
-              <TextField
-                {...register("cannotTalkReason", {
-                  required: true,
-                  minLength: { message: "Minimum characters allowed is 50", value: 50 },
-                  maxLength: { message: "Maximum characters allowed is 500", value: 500 },
-                })}
-                fullWidth
-                label="Please explain why this might be a problem:"
-                variant="standard"
-                error={!!errors?.cannotTalkReason}
-                helperText={errors?.cannotTalkReason?.message}
-                multiline
-                maxRows={5}
-              />
+          <Controller
+            name="canTalk"
+            control={control}
+            rules={{ required: "Please select one of these options" }}
+            render={({ field }) => (
+              <RadioGroup {...field}>
+                <FormControlLabel value="yes" label="Yes" control={<Radio />} />
+                <FormControlLabel value="no" label="No" control={<Radio />} />
+              </RadioGroup>
             )}
-          </Question>
-        </FormControl>
+          />
 
-        <FormControl>
-          <Question>
-            <p>
-              Are you able to enough bring consumables (e.g., food, elixirs/flasks, weapon
-              enchants, etc...) for all boss attempts for each raid night per week? This
-              includes both progression and farm raid nights.
-            </p>
+          <FormHelperText error={!!errors?.canTalk}>
+            {errors?.canTalk?.message}
+          </FormHelperText>
 
-            <Controller
-              name="bringConsumes"
-              control={control}
-              rules={{ required: "Please select one of these options" }}
-              render={({ field }) => (
-                <RadioGroup {...field}>
-                  <FormControlLabel
-                    value="yes"
-                    label="Yes"
-                    control={<Radio onChange={handleBringConsumesChange} />}
-                  />
-                  <FormControlLabel
-                    value="other"
-                    label="No"
-                    control={<Radio onChange={handleBringConsumesChange} />}
-                  />
-                </RadioGroup>
-              )}
+          {canTalk === "no" && (
+            <TextField
+              {...register("cannotTalkReason", {
+                required: true,
+                minLength: { message: "Minimum characters allowed is 50", value: 50 },
+                maxLength: { message: "Maximum characters allowed is 500", value: 500 },
+              })}
+              fullWidth
+              label="Please explain why this might be a problem:"
+              variant="outlined"
+              error={!!errors?.cannotTalkReason}
+              helperText={errors?.cannotTalkReason?.message}
+              multiline
+              minRows={3}
+              maxRows={5}
             />
+          )}
+        </Question>
+        <Question>
+          <p>
+            Are you able to enough bring consumables (e.g., food, elixirs/flasks, weapon
+            enchants, etc...) for all boss attempts for each raid night per week? This
+            includes both progression and farm raid nights.
+          </p>
 
-            <FormHelperText error={!!errors?.bringConsumes}>
-              {errors?.bringConsumes?.message}
-            </FormHelperText>
-
-            {bringConsumesReasonShown && (
-              <TextField
-                {...register("cannotBringConsumesReason", {
-                  required: true,
-                  minLength: { message: "Minimum characters allowed is 50", value: 50 },
-                  maxLength: { message: "Maximum characters allowed is 500", value: 500 },
-                })}
-                fullWidth
-                label="Please explain in more detail why this might be a problem for you."
-                variant="standard"
-                error={!!errors?.cannotBringConsumesReason}
-                helperText={errors?.cannotBringConsumesReason?.message}
-                multiline
-                maxRows={5}
-              />
+          <Controller
+            name="bringConsumes"
+            control={control}
+            rules={{ required: "Please select one of these options" }}
+            render={({ field }) => (
+              <RadioGroup {...field}>
+                <FormControlLabel value="yes" label="Yes" control={<Radio />} />
+                <FormControlLabel value="no" label="No" control={<Radio />} />
+              </RadioGroup>
             )}
-          </Question>
-        </FormControl>
+          />
+
+          <FormHelperText error={!!errors?.bringConsumes}>
+            {errors?.bringConsumes?.message}
+          </FormHelperText>
+
+          {bringConsumes === "no" && (
+            <TextField
+              {...register("cannotBringConsumesReason", {
+                required: true,
+                minLength: { message: "Minimum characters allowed is 50", value: 50 },
+                maxLength: { message: "Maximum characters allowed is 500", value: 500 },
+              })}
+              fullWidth
+              label="Please explain in more detail why this might be a problem for you."
+              variant="outlined"
+              error={!!errors?.cannotBringConsumesReason}
+              helperText={errors?.cannotBringConsumesReason?.message}
+              multiline
+              minRows={3}
+              maxRows={5}
+            />
+          )}
+        </Question>
 
         <Question>
           <p>

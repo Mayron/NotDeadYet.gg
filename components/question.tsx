@@ -1,14 +1,10 @@
 import styled from "@emotion/styled";
 
-interface IQuestionProps {
-  children: React.ReactNode | React.ReactNode[];
-}
-
-const StyledQuestion = styled.div`
+const Question = styled.div`
   padding: 15px 0;
 
   p:first-child {
-    padding-bottom: 6px;
+    padding-bottom: 10px;
   }
 
   &:first-child {
@@ -23,9 +19,5 @@ const StyledQuestion = styled.div`
     margin-top: 6px;
   }
 `;
-
-const Question: React.FC<IQuestionProps> = ({ children }) => (
-  <StyledQuestion>{children}</StyledQuestion>
-);
 
 export default Question;
