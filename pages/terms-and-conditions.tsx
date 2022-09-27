@@ -32,8 +32,8 @@ const TermsAndConditionsPage: React.FC = () => (
       <p>
         These terms and conditions outline the rules and regulations for the use of Not
         Dead Yet&apos;s Website, located at{" "}
-        <a className="text" href="https://www.not-dead-yet.com">
-          https://www.not-dead-yet.com
+        <a className="text" href={process.env.NEXT_PUBLIC_WEBSITE_URL}>
+          {process.env.NEXT_PUBLIC_WEBSITE_URL}
         </a>
         .
       </p>

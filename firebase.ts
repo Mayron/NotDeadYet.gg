@@ -2,12 +2,12 @@ import { initializeApp } from "firebase/app";
 import { getFirestore, collection, getDoc, setDoc, doc } from "firebase/firestore/lite";
 
 export const firebaseConfig = {
-  apiKey: "AIzaSyDMELWLdffeqe8TAs5G7ju0vcCLy8R0zw8",
-  appId: "1:346264700309:web:a8e67d0a292616b7e8229c",
-  authDomain: "notdeadyet-69213.firebaseapp.com",
-  projectId: "notdeadyet-69213",
-  storageBucket: "notdeadyet-69213.appspot.com",
-  messagingSenderId: "346264700309",
+  apiKey: process.env.FIREBASE_API_KEY,
+  appId: process.env.FIREBASE_APP_ID,
+  authDomain: process.env.FIREBASE_AUTH_DOMAIN,
+  projectId: process.env.FIREBASE_PROJECT_ID,
+  storageBucket: process.env.FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID,
 };
 
 const app = initializeApp(firebaseConfig);

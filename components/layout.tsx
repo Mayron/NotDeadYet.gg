@@ -14,8 +14,8 @@ const jsonLinkedData = {
   "@context": "http://www.schema.org",
   "@type": "Organization",
   name: "Not Dead Yet",
-  url: "https://not-dead-yet.com",
-  logo: `https://not-dead-yet.com/images/ndy-icon-125x125.png`,
+  url: process.env.NEXT_PUBLIC_WEBSITE_URL,
+  logo: `${process.env.NEXT_PUBLIC_WEBSITE_URL || ""}/assets/ndy-icon-125x125.png`,
   description: process.env.NEXT_PUBLIC_NDY_DESCRIPTION,
 };
 
@@ -34,8 +34,7 @@ const Layout: React.FC<ILayoutProps> = ({
         name="keywords"
         content="World of Warcraft,Classic,Burning Crusade,Raiding,Guild,Gehennas,Europe,EU,Wrath,Lich King,Wotlk,Server,First,Recruitment,Not Dead Yet,NDY"
       />
-      <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
-      {/* <link rel="shortcut icon" href="/favicon32.png" type="" /> */}
+      <link rel="shortcut icon" href="/assets/ndy-icon.png" type="image/png" />
       <link rel="preconnect" href="https://fonts.gstatic.com" />
       <link
         type="text/css"
@@ -50,9 +49,11 @@ const Layout: React.FC<ILayoutProps> = ({
       <meta property="og:description" content={process.env.NEXT_PUBLIC_NDY_DESCRIPTION} />
       <meta
         property="og:image"
-        content="https://not-dead-yet.com/images/ndy-icon-125x125.png"
+        content={`${
+          process.env.NEXT_PUBLIC_WEBSITE_URL || ""
+        }/assets/ndy-icon-125x125.png`}
       />
-      <meta property="og:url" content="https://not-dead-yet.com" />
+      <meta property="og:url" content={process.env.NEXT_PUBLIC_WEBSITE_URL} />
 
       <script
         type="application/ld+json"

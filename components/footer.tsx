@@ -18,8 +18,8 @@ const Footer: React.FC = () => (
   >
     <p>
       &copy; {new Date().getFullYear()}{" "}
-      <a className="text" href="https://wwww.not-dead-yet.com">
-        Not-Dead-Yet.com
+      <a className="text" href={process.env.NEXT_PUBLIC_WEBSITE_URL}>
+        {process.env.NEXT_PUBLIC_WEBSITE_NAME}
       </a>
       , All rights reserved.
     </p>
