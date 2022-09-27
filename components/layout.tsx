@@ -46,6 +46,10 @@ const Layout: React.FC<ILayoutProps> = ({
         content={`${process.env.NEXT_PUBLIC_WEBSITE_URL || ""}/assets/ndy-125x125.png`}
       />
       <meta property="og:url" content={process.env.NEXT_PUBLIC_WEBSITE_URL} />
+      <meta
+        name="version"
+        content={process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA || "local"}
+      />
 
       <script
         type="application/ld+json"
