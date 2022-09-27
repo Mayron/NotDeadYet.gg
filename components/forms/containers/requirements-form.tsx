@@ -17,7 +17,7 @@ import Question from "../../question";
 import WhitePanel from "../../white-panel";
 
 const defaultValues: IRequirementsFormInput = {
-  expectations: true, // default value not visually showing
+  expectations: false, // default value not visually showing
   availability: "",
   partialAvailabilityReason: "",
 };
@@ -35,8 +35,8 @@ const RequirementsForm = () => {
     formState: { errors },
   } = useForm<IRequirementsFormInput>({ defaultValues, mode: "onChange" });
 
-  const availability = useWatch({ control, name: "availability" });
   const expectations = useWatch({ control, name: "expectations" });
+  const availability = useWatch({ control, name: "availability" });
 
   const storage = typeof window !== "undefined" ? window.localStorage : undefined;
   useFormPersist("application", { watch, setValue, storage });

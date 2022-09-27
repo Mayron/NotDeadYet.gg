@@ -36,12 +36,6 @@ const Layout: React.FC<ILayoutProps> = ({
       />
       <link rel="shortcut icon" href="/assets/ndy-icon.png" type="image/png" />
       <link rel="preconnect" href="https://fonts.gstatic.com" />
-      <link
-        type="text/css"
-        rel="stylesheet"
-        href="https://www.gstatic.com/firebasejs/ui/6.0.1/firebase-ui-auth.css"
-      />
-
       <meta property="og:type" content="website" />
       <meta property="og:site_name" content="Not Dead Yet" />
       <meta property="og:locale" content="en_US" />
@@ -62,7 +56,6 @@ const Layout: React.FC<ILayoutProps> = ({
 
     {!hidePageNavigation && <PageNavigation username={username} />}
     <main>{children}</main>
-    <Script src="https://www.gstatic.com/firebasejs/ui/6.0.1/firebase-ui-auth.js" />
     <Footer />
   </>
 );

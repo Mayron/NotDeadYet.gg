@@ -85,11 +85,8 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   let application: IApplication | null = null;
   let applyInfo: string | null = null;
 
-  console.log("loading apply page");
-
   if (username) {
     application = (await retrieveApplication(username)) || null;
-    console.log("hello");
   }
 
   if (!application) {
