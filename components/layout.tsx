@@ -49,9 +49,7 @@ const Layout: React.FC<ILayoutProps> = ({
       <meta property="og:description" content={process.env.NEXT_PUBLIC_NDY_DESCRIPTION} />
       <meta
         property="og:image"
-        content={`${
-          process.env.NEXT_PUBLIC_WEBSITE_URL || ""
-        }/assets/ndy-icon-125x125.png`}
+        content={`${process.env.NEXT_PUBLIC_WEBSITE_URL || ""}/assets/ndy-125x125.png`}
       />
       <meta property="og:url" content={process.env.NEXT_PUBLIC_WEBSITE_URL} />
 
