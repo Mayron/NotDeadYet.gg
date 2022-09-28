@@ -5,13 +5,14 @@ import {
   InputLabel,
   MenuItem,
   Select,
+  SelectChangeEvent,
   TextField,
 } from "@mui/material";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { useForm, useWatch } from "react-hook-form";
 import useFormPersist from "react-hook-form-persist";
-import { characterClasses } from "../../../data";
+import { characterClasses, specializations } from "../../../data";
 import BlizzardButton from "../../blizzard-button";
 import PrimaryProfessionQuestions from "../../primary-profession-questions";
 import Question from "../../question";
@@ -21,6 +22,7 @@ const defaultValues: ICharacterInfoFormInput = {
   characterName: "",
   characterClass: "",
   characterMainSpec: "",
+  characterOffSpec: "",
 
   primaryProfession1: "",
   primaryMaxLevel1: "",
@@ -45,6 +47,9 @@ const CharacterInfoForm = () => {
   } = useForm<ICharacterInfoFormInput>({ defaultValues, mode: "onChange" });
 
   const characterClass = useWatch({ control, name: "characterClass" });
+  const characterMainSpec = useWatch({ control, name: "characterMainSpec" });
+  const characterOffSpec = useWatch({ control, name: "characterOffSpec" });
+  const availableSpecs = characterClass ? specializations.get(characterClass) : undefined;
 
   const storage = typeof window !== "undefined" ? window.localStorage : undefined;
   useFormPersist("application", { watch, setValue, storage });
@@ -52,6 +57,13 @@ const CharacterInfoForm = () => {
   const onSubmit = async () => {
     setLoading(true);
     await router.push("/apply/about-you");
+  };
+
+  const handleClassChanged = (e: SelectChangeEvent<WoWClass>) => {
+    const value = e.target.value as WoWClass;
+    setValue("characterClass", value);
+    setValue("characterMainSpec", "");
+    setValue("characterOffSpec", "");
   };
 
   return (
@@ -90,6 +102,7 @@ const CharacterInfoForm = () => {
               placeholder="Class"
               labelId="characterClassLabel"
               label="Class"
+              onChange={handleClassChanged}
             >
               {characterClasses.map((c) => (
                 <MenuItem key={c} value={c}>
@@ -104,21 +117,77 @@ const CharacterInfoForm = () => {
           </FormHelperText>
         </Question>
 
-        <Question>
-          <p>Main Specialization</p>
+        {availableSpecs && (
+          <Question>
+            <p>What is this character&apos;s main and off specialization?</p>
 
-          <TextField
-            {...register("characterMainSpec", {
-              required: true,
-              maxLength: { message: "Maximum characters allowed is 100", value: 100 },
-            })}
-            fullWidth
-            label="Enter your character's main spec here"
-            variant="standard"
-            error={!!errors?.characterMainSpec}
-            helperText={errors?.characterMainSpec?.message}
-          />
-        </Question>
+            <div
+              css={css`
+                display: flex;
+              `}
+            >
+              <div>
+                <FormControl
+                  css={css`
+                    min-width: 200px;
+                    margin-right: 20px;
+                  `}
+                >
+                  <InputLabel id="characterMainSpecLabel">Main-Spec</InputLabel>
+                  <Select
+                    {...register("characterMainSpec", {
+                      required: "Please select your main-spec",
+                    })}
+                    disabled={availableSpecs === undefined}
+                    value={characterMainSpec}
+                    placeholder="Main-Spec"
+                    labelId="characterMainSpecLabel"
+                    label="Main-Spec"
+                  >
+                    {availableSpecs?.map((c) => (
+                      <MenuItem key={c} value={c}>
+                        {c}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                </FormControl>
+
+                <FormHelperText error={!!errors?.characterMainSpec}>
+                  {errors?.characterMainSpec?.message}
+                </FormHelperText>
+              </div>
+              <div>
+                <FormControl
+                  css={css`
+                    min-width: 200px;
+                  `}
+                >
+                  <InputLabel id="characterOffSpecLabel">Off-Spec</InputLabel>
+                  <Select
+                    {...register("characterOffSpec", {
+                      required: "Please select your off-spec",
+                    })}
+                    disabled={availableSpecs === undefined}
+                    value={characterOffSpec}
+                    placeholder="Off-Spec"
+                    labelId="characterOffSpecLabel"
+                    label="Off-Spec"
+                  >
+                    {availableSpecs?.map((c) => (
+                      <MenuItem key={c} value={c}>
+                        {c}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                </FormControl>
+
+                <FormHelperText error={!!errors?.characterOffSpec}>
+                  {errors?.characterOffSpec?.message}
+                </FormHelperText>
+              </div>
+            </div>
+          </Question>
+        )}
       </WhitePanel>
 
       <WhitePanel>

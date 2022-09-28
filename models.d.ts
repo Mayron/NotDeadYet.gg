@@ -1,3 +1,15 @@
+declare type WoWClass =
+  | "Death Knight"
+  | "Druid"
+  | "Hunter"
+  | "Mage"
+  | "Paladin"
+  | "Priest"
+  | "Rogue"
+  | "Shaman"
+  | "Warlock"
+  | "Warrior";
+
 declare interface IFormInputProps {
   name: string;
   control: any;
@@ -13,8 +25,9 @@ interface IRequirementsFormInput {
 
 declare interface ICharacterInfoFormInput {
   characterName: string;
-  characterClass: string;
+  characterClass: WoWClass | "";
   characterMainSpec: string;
+  characterOffSpec: string;
 
   primaryProfession1: string;
   primaryMaxLevel1: "yes" | "no" | "";

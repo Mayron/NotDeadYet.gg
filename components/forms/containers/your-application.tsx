@@ -73,7 +73,11 @@ const YourApplication: React.FC<IYourApplicationProps> = ({ application }) => {
         </StyledQuestion>
 
         <StyledQuestion>
-          <StyledLabel>Main Spec:</StyledLabel> {application.characterMainSpec}
+          <StyledLabel>Main-Spec:</StyledLabel> {application.characterMainSpec}
+        </StyledQuestion>
+
+        <StyledQuestion>
+          <StyledLabel>Off-Spec:</StyledLabel> {application.characterOffSpec}
         </StyledQuestion>
 
         <h3>Professions</h3>
