@@ -30,14 +30,14 @@ const Question = styled.div<IQuestionProps>(
           p:first-child {
             padding-bottom: 10px;
           }
-
-          .MuiFormControl-root {
-            margin-top: 15px;
-          }
         `};
 
     .MuiFormHelperText-root {
       margin-top: 0 !important;
+    }
+
+    .MuiFormControl-fullWidth {
+      margin-top: 10px;
     }
 
     &:first-child {

@@ -17,12 +17,6 @@ declare interface IFormInputProps {
   setValue?: any;
 }
 
-interface IRequirementsFormInput {
-  expectations: boolean;
-  availability: "full" | "partial" | "";
-  partialAvailabilityReason: string;
-}
-
 declare interface IProfessionInfo {
   name: string;
   maxLevel: "yes" | "no" | "";
@@ -35,6 +29,15 @@ declare interface ICharacterInfo {
   mainSpec: string;
   offSpec: string;
   professions: IProfessionInfo[];
+}
+
+//******************************** */
+// MAIN FORM INTERFACES:
+//******************************** */
+interface IRequirementsFormInput {
+  expectations: boolean;
+  availability: "full" | "partial" | "";
+  partialAvailabilityReason: string;
 }
 
 declare interface ICharacterInfoFormInput {
@@ -56,8 +59,9 @@ declare interface IAboutYouFormInput {
   vouch: string;
   anythingElse: string;
 }
-
 declare interface IApplication
   extends IRequirementsFormInput,
     ICharacterInfoFormInput,
-    IAboutYouFormInput {}
+    IAboutYouFormInput {
+  userId: string;
+}

@@ -162,6 +162,55 @@ const globalStyles = css`
   :-ms-input-placeholder {
     font-family: ${vars.font.standard.family};
   }
+
+  .death-knight {
+    font-weight: ${vars.font.standard.weights.bold};
+    color: #c41e3a;
+  }
+
+  .druid {
+    font-weight: ${vars.font.standard.weights.bold};
+    color: #ff7c0a;
+  }
+
+  .hunter {
+    font-weight: ${vars.font.standard.weights.bold};
+    color: #aad372;
+  }
+
+  .mage {
+    font-weight: ${vars.font.standard.weights.bold};
+    color: #3fc7eb;
+  }
+
+  .paladin {
+    font-weight: ${vars.font.standard.weights.bold};
+    color: #f48cba;
+  }
+
+  .priest {
+    font-weight: ${vars.font.standard.weights.bold};
+  }
+
+  .rogue {
+    font-weight: ${vars.font.standard.weights.bold};
+    color: #fff468;
+  }
+
+  .shaman {
+    font-weight: ${vars.font.standard.weights.bold};
+    color: #0070dd;
+  }
+
+  .warlock {
+    font-weight: ${vars.font.standard.weights.bold};
+    color: #8788ee;
+  }
+
+  .warrior {
+    font-weight: ${vars.font.standard.weights.bold};
+    color: #c69b6d;
+  }
 `;
 
 export default globalStyles;

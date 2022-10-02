@@ -99,7 +99,25 @@ const AboutYouForm: React.FC<IAboutYouFormProps> = ({ username }) => {
             )}
           />
         </Question>
-        {inGuild === "no" && (
+        {inGuild === "yes" ? (
+          <Question>
+            <p>Discord ID (so we can verify who you are):</p>
+
+            <TextField
+              {...register("discordId", {
+                required: "Please provider your Discord ID",
+                maxLength: { message: "Maximum characters allowed is 50", value: 50 },
+              })}
+              label="Enter your Discord ID here"
+              variant="standard"
+              css={css`
+                min-width: 300px;
+              `}
+              error={!!errors?.discordId}
+              helperText={errors?.discordId?.message}
+            />
+          </Question>
+        ) : (
           <>
             <Question>
               <p>

@@ -1,5 +1,4 @@
 import Head from "next/head";
-import Script from "next/script";
 import Footer from "./footer";
 import PageNavigation from "./page-navigation";
 
@@ -58,7 +57,7 @@ const Layout: React.FC<ILayoutProps> = ({
       />
     </Head>
 
-    {!hidePageNavigation && <PageNavigation username={username} />}
+    {!hidePageNavigation && username && <PageNavigation username={username} />}
     <main>{children}</main>
     <Footer />
   </>
