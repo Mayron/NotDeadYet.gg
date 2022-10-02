@@ -1,236 +1,113 @@
-import {
-  css,
-  FormControl,
-  FormHelperText,
-  InputLabel,
-  MenuItem,
-  Select,
-  SelectChangeEvent,
-  TextField,
-} from "@mui/material";
+import { Button, css } from "@mui/material";
 import { useRouter } from "next/router";
-import { useState } from "react";
-import { useForm, useWatch } from "react-hook-form";
+import { useCallback, useState } from "react";
+import { FormProvider, useForm, useWatch } from "react-hook-form";
 import useFormPersist from "react-hook-form-persist";
-import { characterClasses, specializations } from "../../../data";
 import BlizzardButton from "../../blizzard-button";
-import PrimaryProfessionQuestions from "../../primary-profession-questions";
-import Question from "../../question";
 import WhitePanel from "../../white-panel";
+import CharacterInfo from "../character-info";
 
 const defaultValues: ICharacterInfoFormInput = {
-  characterName: "",
-  characterClass: "",
-  characterMainSpec: "",
-  characterOffSpec: "",
+  characters: [
+    {
+      name: "",
+      class: "",
+      mainSpec: "",
+      offSpec: "",
 
-  primaryProfession1: "",
-  primaryMaxLevel1: "",
-  primaryNotMaxedReason1: "",
-
-  primaryProfession2: "",
-  primaryMaxLevel2: "",
-  primaryNotMaxedReason2: "",
+      professions: [
+        {
+          name: "",
+          maxLevel: "",
+          notMaxedReason: "",
+        },
+        {
+          name: "",
+          maxLevel: "",
+          notMaxedReason: "",
+        },
+      ],
+    },
+  ],
 };
 
 const CharacterInfoForm = () => {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
 
-  const {
-    register,
-    handleSubmit,
-    control,
-    setValue,
-    watch,
-    formState: { errors },
-  } = useForm<ICharacterInfoFormInput>({ defaultValues, mode: "onChange" });
+  const form = useForm<ICharacterInfoFormInput>({ defaultValues, mode: "onChange" });
+  const { watch, setValue, handleSubmit, control } = form;
 
-  const characterClass = useWatch({ control, name: "characterClass" });
-  const characterMainSpec = useWatch({ control, name: "characterMainSpec" });
-  const characterOffSpec = useWatch({ control, name: "characterOffSpec" });
-  const availableSpecs = characterClass ? specializations.get(characterClass) : undefined;
+  const characters = useWatch({ control, name: "characters" });
 
   const storage = typeof window !== "undefined" ? window.localStorage : undefined;
   useFormPersist("application", { watch, setValue, storage });
 
-  const onSubmit = async () => {
+  const onSubmit = useCallback(async () => {
     setLoading(true);
     await router.push("/apply/about-you");
-  };
+  }, [router]);
 
-  const handleClassChanged = (e: SelectChangeEvent<WoWClass>) => {
-    const value = e.target.value as WoWClass;
-    setValue("characterClass", value);
-    setValue("characterMainSpec", "");
-    setValue("characterOffSpec", "");
-  };
+  const addAltCharacter = useCallback(() => {
+    const altDefaults = defaultValues.characters[0];
+    const altInfo: ICharacterInfo = { ...altDefaults };
+    setValue(`characters.${characters.length}`, altInfo);
+  }, [characters.length, setValue]);
+
+  const getCharacterInfoForms = useCallback(() => {
+    const forms = [];
+
+    for (let i = 0; i < characters.length; i++) {
+      forms.push(<CharacterInfo key={i} characterId={i} />);
+    }
+
+    return forms;
+  }, [characters.length]);
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <WhitePanel>
-        <Question>
-          <p>What is the name of the character you are applying with?</p>
+    <FormProvider {...form}>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        {getCharacterInfoForms()}
 
-          <TextField
-            {...register("characterName", {
-              required: true,
-              maxLength: { message: "Maximum characters allowed is 20", value: 20 },
-              pattern: { value: /^\S+$/, message: "Invalid character name" },
-            })}
-            label="Character Name"
-            variant="standard"
-            error={!!errors?.characterName}
-            helperText={errors?.characterName?.message}
-          />
-        </Question>
-
-        <Question>
-          <p>What class is this character?</p>
-
-          <FormControl
-            css={css`
-              min-width: 200px;
-            `}
-          >
-            <InputLabel id="characterClassLabel">Class</InputLabel>
-            <Select
-              {...register("characterClass", {
-                required: "Please select your character",
-              })}
-              value={characterClass}
-              placeholder="Class"
-              labelId="characterClassLabel"
-              label="Class"
-              onChange={handleClassChanged}
-            >
-              {characterClasses.map((c) => (
-                <MenuItem key={c} value={c}>
-                  {c}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
-
-          <FormHelperText error={!!errors?.characterClass}>
-            {errors?.characterClass?.message}
-          </FormHelperText>
-        </Question>
-
-        {availableSpecs && (
-          <Question>
-            <p>What is this character&apos;s main and off specialization?</p>
-
-            <div
+        {characters.length < 4 && (
+          <WhitePanel headerBorder={false}>
+            <header
               css={css`
-                display: flex;
+                text-align: center;
+
+                p {
+                  border-bottom: none;
+                }
+
+                button {
+                  margin: 20px auto 0 auto;
+                }
               `}
             >
-              <div>
-                <FormControl
-                  css={css`
-                    min-width: 200px;
-                    margin-right: 20px;
-                  `}
-                >
-                  <InputLabel id="characterMainSpecLabel">Main-Spec</InputLabel>
-                  <Select
-                    {...register("characterMainSpec", {
-                      required: "Please select your main-spec",
-                    })}
-                    disabled={availableSpecs === undefined}
-                    value={characterMainSpec}
-                    placeholder="Main-Spec"
-                    labelId="characterMainSpecLabel"
-                    label="Main-Spec"
-                  >
-                    {availableSpecs?.map((c) => (
-                      <MenuItem key={c} value={c}>
-                        {c}
-                      </MenuItem>
-                    ))}
-                  </Select>
-                </FormControl>
+              <h3>Alt Characters</h3>
 
-                <FormHelperText error={!!errors?.characterMainSpec}>
-                  {errors?.characterMainSpec?.message}
-                </FormHelperText>
-              </div>
-              <div>
-                <FormControl
-                  css={css`
-                    min-width: 200px;
-                  `}
-                >
-                  <InputLabel id="characterOffSpecLabel">Off-Spec</InputLabel>
-                  <Select
-                    {...register("characterOffSpec", {
-                      required: "Please select your off-spec",
-                    })}
-                    disabled={availableSpecs === undefined}
-                    value={characterOffSpec}
-                    placeholder="Off-Spec"
-                    labelId="characterOffSpecLabel"
-                    label="Off-Spec"
-                  >
-                    {availableSpecs?.map((c) => (
-                      <MenuItem key={c} value={c}>
-                        {c}
-                      </MenuItem>
-                    ))}
-                  </Select>
-                </FormControl>
-
-                <FormHelperText error={!!errors?.characterOffSpec}>
-                  {errors?.characterOffSpec?.message}
-                </FormHelperText>
-              </div>
-            </div>
-          </Question>
+              <p>
+                If you have other characters (alts) that could potentially help with guild
+                raids, please add them.
+              </p>
+              <Button variant="outlined" onClick={addAltCharacter}>
+                Add Alt Character
+              </Button>
+            </header>
+          </WhitePanel>
         )}
-      </WhitePanel>
 
-      <WhitePanel>
-        <header
+        <footer
           css={css`
-            padding-top: 40px;
-            padding-bottom: 15px;
+            margin: 30px auto 0 auto;
+            display: flex;
+            justify-content: center;
           `}
         >
-          <h3>Professions</h3>
-
-          <p>
-            In the below sections, enter the name and skill level for both of your primary
-            professions (note: the maximum skill level for Burning Crusade Classic is{" "}
-            <b>375</b> and for Wrath Classic it is <b>450</b>).
-          </p>
-        </header>
-
-        <PrimaryProfessionQuestions
-          register={register}
-          control={control}
-          errors={errors}
-          id={1}
-        />
-
-        <PrimaryProfessionQuestions
-          register={register}
-          control={control}
-          errors={errors}
-          id={2}
-        />
-      </WhitePanel>
-
-      <footer
-        css={css`
-          margin: 30px auto 0 auto;
-          display: flex;
-          justify-content: center;
-        `}
-      >
-        <BlizzardButton text="Continue" submit loading={loading} />
-      </footer>
-    </form>
+          <BlizzardButton text="Continue" submit loading={loading} />
+        </footer>
+      </form>
+    </FormProvider>
   );
 };
 

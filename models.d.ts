@@ -23,19 +23,22 @@ interface IRequirementsFormInput {
   partialAvailabilityReason: string;
 }
 
+declare interface IProfessionInfo {
+  name: string;
+  maxLevel: "yes" | "no" | "";
+  notMaxedReason: string;
+}
+
+declare interface ICharacterInfo {
+  name: string;
+  class: WoWClass | "";
+  mainSpec: string;
+  offSpec: string;
+  professions: IProfessionInfo[];
+}
+
 declare interface ICharacterInfoFormInput {
-  characterName: string;
-  characterClass: WoWClass | "";
-  characterMainSpec: string;
-  characterOffSpec: string;
-
-  primaryProfession1: string;
-  primaryMaxLevel1: "yes" | "no" | "";
-  primaryNotMaxedReason1: string;
-
-  primaryProfession2: string;
-  primaryMaxLevel2: "yes" | "no" | "";
-  primaryNotMaxedReason2: string;
+  characters: ICharacterInfo[];
 }
 
 declare interface IAboutYouFormInput {

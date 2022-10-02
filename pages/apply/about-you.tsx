@@ -32,9 +32,10 @@ const AboutYouPage: React.FC<IAboutYouPageProps> = ({ username }) => (
             text-align: center;
           `}
         >
-          This last section of your application form is all about yourself, your raiding
-          experience, and your philosophy towards raiding to see if you&apos;re a good fit
-          for our guild.
+          This section consists of the main application questions for potential new
+          recruits. They allow us to better assess your play style, attitude towards
+          raiding within a guild, and your raid experience to see if you would be a good
+          fit for our core raid team.
         </p>
         <ApplicationStepper activeStep={2} />
       </header>

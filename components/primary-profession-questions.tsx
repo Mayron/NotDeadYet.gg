@@ -10,66 +10,66 @@ import {
   Radio,
   TextField,
 } from "@mui/material";
+import { memo } from "react";
 import {
   Controller,
   UseFormRegister,
   Control,
   FieldErrorsImpl,
   useWatch,
+  useFormContext,
 } from "react-hook-form";
 import { professions } from "../data";
 import Question from "./question";
 
 interface IPrimaryProfessionQuestionsProps {
-  register: UseFormRegister<ICharacterInfoFormInput>;
-  control: Control<ICharacterInfoFormInput>;
-  errors: FieldErrorsImpl<ICharacterInfoFormInput>;
-  id: number;
+  characterId: number;
+  professionId: number;
 }
 
 const PrimaryProfessionQuestions: React.FC<IPrimaryProfessionQuestionsProps> = ({
-  register,
-  control,
-  errors,
-  id,
+  characterId,
+  professionId,
 }) => {
-  const primaryErrors =
-    id === 1
-      ? {
-          profession: errors?.primaryProfession1,
-          maxLevel: errors?.primaryMaxLevel1,
-          noMaxReason: errors?.primaryNotMaxedReason1,
-        }
-      : {
-          profession: errors?.primaryProfession2,
-          maxLevel: errors?.primaryMaxLevel2,
-          noMaxReason: errors?.primaryNotMaxedReason2,
-        };
-
-  const isMaxLevel = useWatch({
+  const {
     control,
-    name: id === 1 ? "primaryMaxLevel1" : "primaryMaxLevel2",
+    register,
+    formState: { errors },
+  } = useFormContext<ICharacterInfoFormInput>();
+
+  const name = useWatch({
+    control,
+    name: `characters.${characterId}.professions.${professionId}.name`,
   });
 
-  const profession = useWatch({
+  const maxLevel = useWatch({
     control,
-    name: id === 1 ? "primaryProfession1" : "primaryProfession2",
+    name: `characters.${characterId}.professions.${professionId}.maxLevel`,
   });
+
+  const characterErrors = errors?.characters && errors.characters[characterId];
+  const professionErrors =
+    characterErrors &&
+    characterErrors.professions &&
+    characterErrors.professions[professionId];
 
   return (
     <>
-      <Question>
+      <Question horizontal>
+        <p>Primary Profession #{professionId + 1}: </p>
         <FormControl
           css={css`
             min-width: 250px;
           `}
         >
-          <InputLabel id={`primaryProf${id}`}>Primary Profession #{id}</InputLabel>
+          <InputLabel id={`profNameLabel${professionId}`}>
+            Primary Profession #{professionId + 1}
+          </InputLabel>
           <Select
-            labelId={`primaryProf${id}`}
-            label={`Primary Profession #${id}`}
-            value={profession}
-            {...register(id === 1 ? "primaryProfession1" : "primaryProfession2", {
+            labelId={`profNameLabel${professionId}`}
+            label={`Primary Profession #${professionId + 1}`}
+            value={name}
+            {...register(`characters.${characterId}.professions.${professionId}.name`, {
               required: "Please choose a profession",
             })}
           >
@@ -81,15 +81,15 @@ const PrimaryProfessionQuestions: React.FC<IPrimaryProfessionQuestionsProps> = (
           </Select>
         </FormControl>
 
-        <FormHelperText error={!!primaryErrors.profession}>
-          {primaryErrors.profession?.message}
+        <FormHelperText error={!!professionErrors?.name}>
+          {professionErrors?.name?.message}
         </FormHelperText>
       </Question>
 
       <Question>
         <p>Is the skill level of this profession maxed out for the current expansion?</p>
         <Controller
-          name={id === 1 ? "primaryMaxLevel1" : "primaryMaxLevel2"}
+          name={`characters.${characterId}.professions.${professionId}.maxLevel`}
           control={control}
           rules={{ required: "Please select one of these options" }}
           render={({ field }) => (
@@ -100,11 +100,11 @@ const PrimaryProfessionQuestions: React.FC<IPrimaryProfessionQuestionsProps> = (
           )}
         />
 
-        <FormHelperText error={!!primaryErrors.maxLevel}>
-          {primaryErrors.maxLevel?.message}
+        <FormHelperText error={!!professionErrors?.maxLevel}>
+          {professionErrors?.maxLevel?.message}
         </FormHelperText>
 
-        {isMaxLevel === "no" && (
+        {maxLevel === "no" && (
           <>
             <p
               css={css`
@@ -118,7 +118,7 @@ const PrimaryProfessionQuestions: React.FC<IPrimaryProfessionQuestionsProps> = (
             </p>
             <TextField
               {...register(
-                id === 1 ? "primaryNotMaxedReason1" : "primaryNotMaxedReason2",
+                `characters.${characterId}.professions.${professionId}.notMaxedReason`,
                 {
                   required: true,
                   minLength: { message: "Minimum characters allowed is 20", value: 20 },
@@ -127,8 +127,8 @@ const PrimaryProfessionQuestions: React.FC<IPrimaryProfessionQuestionsProps> = (
               )}
               fullWidth
               label="Please describe the situation here"
-              error={!!primaryErrors.noMaxReason}
-              helperText={primaryErrors.noMaxReason?.message}
+              error={!!professionErrors?.notMaxedReason}
+              helperText={professionErrors?.notMaxedReason?.message}
               multiline
               maxRows={5}
               minRows={3}
@@ -141,4 +141,4 @@ const PrimaryProfessionQuestions: React.FC<IPrimaryProfessionQuestionsProps> = (
   );
 };
 
-export default PrimaryProfessionQuestions;
+export default memo(PrimaryProfessionQuestions);

@@ -4,7 +4,10 @@ import { useState } from "react";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faDiscord } from "@fortawesome/free-brands-svg-icons";
+import Image from "next/image";
 import Route from "./route";
+import media, { breakpoints, useBreakpoint } from "../styles/media-queries";
+import ndyIcon from "../public/assets/ndy-icon.png";
 
 interface IPageNavigationProps {
   username?: string;
@@ -12,6 +15,7 @@ interface IPageNavigationProps {
 
 const PageNavigation: React.FC<IPageNavigationProps> = ({ username }) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const breakpoint = useBreakpoint();
 
   const open = Boolean(anchorEl);
 
@@ -39,9 +43,22 @@ const PageNavigation: React.FC<IPageNavigationProps> = ({ username }) => {
           align-items: stretch;
           text-transform: uppercase;
           min-height: 40px;
+          padding: 0 20px;
+
+          ${media.down("xs")`
+            padding: 0 6px;
+          `};
 
           li {
             user-select: none;
+
+            &.logo {
+              margin-right: 0 !important;
+
+              a {
+                min-width: 36px;
+              }
+            }
           }
 
           a {
@@ -49,21 +66,43 @@ const PageNavigation: React.FC<IPageNavigationProps> = ({ username }) => {
             display: flex;
             align-items: center;
             padding: 0 8px;
+
+            ${media.down("xs")`
+              font-size: 0.85rem;
+            `};
           }
 
           li:not(:last-of-type) {
-            margin-right: 20px;
+            ${media.up("sm")`
+              margin-right: 20px;
+            `};
+
+            ${media.down("xs")`
+              margin-right: 8px;
+            `};
           }
         `}
       >
-        <li>
-          <Route to="/" text="Home" />
-        </li>
+        {breakpoint > breakpoints.sm ? (
+          <li>
+            <Route to="/" text="Home" />
+          </li>
+        ) : (
+          <li className="logo">
+            <Route to="/">
+              <Image src={ndyIcon} alt="Home" placeholder="blur" width={20} height={26} />
+            </Route>
+          </li>
+        )}
+
         <li>
           <Route to="/news" text="News" />
         </li>
         <li>
           <Route to="/rules" text="Rules" />
+        </li>
+        <li>
+          <Route to="/apply" text="Apply" />
         </li>
         <li
           css={css`
@@ -72,7 +111,10 @@ const PageNavigation: React.FC<IPageNavigationProps> = ({ username }) => {
             }
           `}
         >
-          <Route to="/discord" text="Discord">
+          <Route
+            to={process.env.NEXT_PUBLIC_DISCORD_URL || ""}
+            text={breakpoint > breakpoints.sm ? "Discord" : undefined}
+          >
             <FontAwesomeIcon title="Discord" icon={faDiscord} />
           </Route>
         </li>

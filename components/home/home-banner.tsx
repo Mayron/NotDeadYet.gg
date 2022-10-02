@@ -9,6 +9,7 @@ import logo from "../../public/assets/logo.png";
 import vars from "../../styles/vars";
 import NavBar from "../nav-bar";
 import colors from "../../styles/colors";
+import media from "../../styles/media-queries";
 
 const HomeBanner: React.FC = () => {
   const particlesInit = useCallback(async (engine: Engine) => {
@@ -24,6 +25,7 @@ const HomeBanner: React.FC = () => {
         justify-content: center;
         position: relative;
         height: 55vh;
+        min-height: 490px;
         max-height: 1080px;
       `}
     >
@@ -90,9 +92,13 @@ const HomeBanner: React.FC = () => {
           bottom: 0;
           z-index: 10;
           display: flex;
-          justify-content: center;
           flex-direction: column;
+          align-items: center;
           box-shadow: inset 0 -8px 10px;
+
+          ${media.up("sm")`
+            justify-content: center;
+          `};
         `}
       >
         <header
@@ -109,6 +115,14 @@ const HomeBanner: React.FC = () => {
               font-size: 2rem;
               font-family: ${vars.font.header.family};
             }
+
+            ${media.down("xs")`
+              flex: 1;
+              display: flex;
+              align-items: center;
+              padding-top: 20px;
+              width: 240px;
+            `};
           `}
         >
           <Image

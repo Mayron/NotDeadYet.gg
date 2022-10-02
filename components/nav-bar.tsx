@@ -4,13 +4,13 @@ import { faDiscord } from "@fortawesome/free-brands-svg-icons";
 import colors from "../styles/colors";
 import Route from "./route";
 import vars from "../styles/vars";
+import media from "../styles/media-queries";
 
 const NavBar: React.FC = () => (
   <nav
     css={css`
       background-color: rgba(0, 0, 0, 0.5);
       color: ${colors.white};
-      height: 70px;
       max-width: 1000px;
       margin: 0 auto;
       width: 100%;
@@ -21,6 +21,10 @@ const NavBar: React.FC = () => (
         black 80%,
         transparent 100%
       );
+
+      ${media.up("sm")`
+        height: 70px;
+      `};
     `}
   >
     <ul
@@ -44,10 +48,28 @@ const NavBar: React.FC = () => (
           display: flex;
           align-items: center;
           height: 100%;
-          padding: 0 30px;
           font-family: ${vars.font.header.family};
           font-size: 1.25rem;
+
+          ${media.up("sm")`
+            padding: 0 30px;
+          `};
+
+          ${media.down("xs")`
+            padding: 15px;
+            justify-content: center;
+        `};
         }
+
+        ${media.down("xs")`
+          flex-direction: column;
+          align-items: center;
+          padding: 10px 0;
+
+          li {
+            width: 100%;
+          }
+        `};
       `}
     >
       <li>
@@ -60,7 +82,7 @@ const NavBar: React.FC = () => (
         <Route text="Apply" to="/apply" />
       </li>
       <li>
-        <Route text="Discord" to="/discord">
+        <Route to={process.env.NEXT_PUBLIC_DISCORD_URL || ""} text="Discord">
           <FontAwesomeIcon title="Discord" icon={faDiscord} />
         </Route>
       </li>

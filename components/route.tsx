@@ -3,6 +3,7 @@ import { css } from "@emotion/react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import colors from "../styles/colors";
+import vars from "../styles/vars";
 
 interface IRouteProps {
   text?: string;
@@ -13,18 +14,28 @@ interface IRouteProps {
 
 const activeStyle = css`
   color: ${colors.link.active};
+  font-weight: ${vars.font.standard.weights.bold};
 `;
 
 const Route: React.FC<IRouteProps> = ({ text, to, children, className }) => {
   const router = useRouter();
 
+  if (to?.startsWith("/")) {
+    return (
+      <Link href={to}>
+        <a className={className} css={router.pathname === to && activeStyle}>
+          {children}
+          {text}
+        </a>
+      </Link>
+    );
+  }
+
   return (
-    <Link href={to}>
-      <a className={className} css={router.pathname === to && activeStyle}>
-        {children}
-        {text}
-      </a>
-    </Link>
+    <a className={className} href={to}>
+      {children}
+      {text}
+    </a>
   );
 };
 

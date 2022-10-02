@@ -9,7 +9,7 @@ import {
   TextField,
 } from "@mui/material";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { Controller, useForm, useWatch } from "react-hook-form";
 import useFormPersist from "react-hook-form-persist";
 import BlizzardButton from "../../blizzard-button";
@@ -23,8 +23,8 @@ const defaultValues: IRequirementsFormInput = {
 };
 
 const RequirementsForm = () => {
-  const [loading, setLoading] = useState(false);
   const router = useRouter();
+  const [loading, setLoading] = useState(false);
 
   const {
     register,
@@ -41,10 +41,10 @@ const RequirementsForm = () => {
   const storage = typeof window !== "undefined" ? window.localStorage : undefined;
   useFormPersist("application", { watch, setValue, storage });
 
-  const onSubmit = async () => {
+  const onSubmit = useCallback(async () => {
     setLoading(true);
     await router.push("/apply/character-info");
-  };
+  }, [router]);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>

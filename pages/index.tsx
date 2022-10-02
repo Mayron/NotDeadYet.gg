@@ -1,7 +1,8 @@
 import { css } from "@emotion/react";
 import type { NextPage } from "next";
 import Image from "next/image";
-import { useRef } from "react";
+import { useRouter } from "next/router";
+import { useRef, useState } from "react";
 import BlizzardButton from "../components/blizzard-button";
 import HomeBanner from "../components/home/home-banner";
 import Layout from "../components/layout";
@@ -9,6 +10,8 @@ import arrowDown from "../public/assets/arrow-down.png";
 import colors from "../styles/colors";
 
 const Home: NextPage = () => {
+  const router = useRouter();
+  const [loading, setLoading] = useState(false);
   const nextSection = useRef<HTMLElement>(null);
 
   const handleArrowClick: React.MouseEventHandler = () => {
@@ -184,11 +187,7 @@ const Home: NextPage = () => {
       <div
         css={css`
           color: ${colors.blue.darkest};
-          background-color: #b3b3b3;
-          border-top: 1px solid #a5a5a5;
-          box-shadow: 0 1px 4px #0e141b87;
-          padding: 20px;
-          border-bottom: 1px solid #a5a5a5;
+          padding: 0 20px;
         `}
       >
         <section
@@ -202,7 +201,12 @@ const Home: NextPage = () => {
           <header>
             <h4>Interested in Joining Us for Wrath?</h4>
           </header>
-          <BlizzardButton text="Apply Now" href="/apply" />
+          <BlizzardButton
+            text="Apply Now"
+            href="/apply"
+            onClick={() => setLoading(true)}
+            loading={loading}
+          />
         </section>
       </div>
     </Layout>

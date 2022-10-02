@@ -154,8 +154,28 @@ const AboutYouForm: React.FC<IAboutYouFormProps> = ({ username }) => {
 
         <Question>
           <p>
-            Please provide a short summary of your previous WoW experience, focusing
-            mainly on your raiding experience and achievements.
+            Please provide a short summary of your previous WoW raiding experience:
+            <span
+              css={css`
+                padding-top: 15px;
+                display: block;
+                padding-left: 15px;
+              `}
+            >
+              <b>For example:</b>
+              <ul>
+                <li>
+                  What recent noteworthy bosses or raids have you cleared as part of a
+                  guild or pug group?
+                </li>
+                <li>How long have you been raiding or playing WoW for?</li>
+                <li>What made you leave your previous guild/s?</li>
+                <li>
+                  Do you have any warcraft logs you want share to support any claims you
+                  have made?
+                </li>
+              </ul>
+            </span>
           </p>
 
           <TextField
@@ -177,9 +197,38 @@ const AboutYouForm: React.FC<IAboutYouFormProps> = ({ username }) => {
 
         <Question>
           <p>
-            Briefly describe your approach/philosophy to raiding (e.g., are you
-            competitive, casual but effective, do you study boss tactics or world of
-            logs?).
+            Briefly describe your approach/philosophy towards raiding within a guild:
+            <span
+              css={css`
+                padding-top: 15px;
+                display: block;
+                padding-left: 15px;
+              `}
+            >
+              <b>For example:</b>
+              <ul>
+                <li>
+                  Are you competitive or casual (e.g. Do you like fast progression at the
+                  cost of a less friendly guild raiding environment or would you prefer
+                  more mistakes but more socialising?)
+                </li>
+                <li>
+                  What do you do to improve your raiding performance (e.g., how do you
+                  learn boss fights? How do you stay up to date with your class
+                  mechanics?)
+                </li>
+                <li>
+                  What is your attitude towards loot and its distribution to raid members?
+                  Would you let someone else have an item you wanted if it would benefit
+                  guild progression?
+                </li>
+                <li>
+                  How do these questions differ when asked based on progression raids
+                  versus farm raids?
+                </li>
+                <li>Why do you prefer guild raids versus joining a pug group?</li>
+              </ul>
+            </span>
           </p>
 
           <TextField
