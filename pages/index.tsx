@@ -108,80 +108,84 @@ const Home: NextPage = () => {
         `}
       >
         <section ref={nextSection}>
-          <header>
-            <h3>What You Can Expect From Us</h3>
-          </header>
-          <ul>
-            <li>
-              A competent and experienced raiding roster; Most of our players have
-              exceptional raid experience and have played in original Vanilla WoW, TBC and
-              WoTLK.
-            </li>
-            <li>
-              A &quot;semi-hardcore&quot; and enjoyable approach to raiding and personal
-              development.
-            </li>
-            <li>
-              A dedicated and friendly management team (e.g., officers and guild masters),
-              each of whom will put in the time and effort to organise raid nights with
-              optimal raid compositions, and provide resources to ensure successful
-              progression.
-            </li>
-            <li>
-              A fair and drama-free looting system that is unbiased towards favouritism.
-              Our loot system distributes loot based on maximizing the raid&apos;s
-              effectiveness as a whole to achieve our primary goal of clearing progression
-              content as quickly as possible.
-            </li>
-            <li>
-              Half price on consumables and materials from our guild bank compared to the
-              auction house price.
-            </li>
-          </ul>
+          <article>
+            <header>
+              <h3>What You Can Expect From Us</h3>
+            </header>
+            <ul>
+              <li>
+                A competent and experienced raiding roster; Most of our players have
+                exceptional raid experience and have played in original Vanilla WoW, TBC
+                and WoTLK.
+              </li>
+              <li>
+                A &quot;semi-hardcore&quot; and enjoyable approach to raiding and personal
+                development.
+              </li>
+              <li>
+                A dedicated and friendly management team (e.g., officers and guild
+                masters), each of whom will put in the time and effort to organise raid
+                nights with optimal raid compositions, and provide resources to ensure
+                successful progression.
+              </li>
+              <li>
+                A fair and drama-free looting system that is unbiased towards favouritism.
+                Our loot system distributes loot based on maximizing the raid&apos;s
+                effectiveness as a whole to achieve our primary goal of clearing
+                progression content as quickly as possible.
+              </li>
+              <li>
+                Half price on consumables and materials from our guild bank compared to
+                the auction house price.
+              </li>
+            </ul>
+          </article>
         </section>
       </div>
 
       <section>
-        <header>
-          <h3>What we expect from you</h3>
-        </header>
-        <ul>
-          <li>
-            Be over 18 years old with good English skills as we are predominantly an
-            English-speaking guild.
-          </li>
-          <li>
-            Be able to communicate with mature etiquette towards your fellow guild members
-            and listen out to important instructions during raid nights.
-          </li>
-          <li>Show high attendance for each of our mandatory raid nights.</li>
-          <li>
-            Signup at least a week in advance, or let the management team know if you will
-            be absent. This allows us to plan and confirm the raiding roster before each
-            event and avoid wasting people&apos;s time.
-          </li>
-          <li>
-            Be ready inside the instance at 19:30 (server time) ready for us to start
-            clearly trash.
-          </li>
-          <li>
-            Come prepared for raids by having a thorough understanding of the tactics for
-            each boss fight, having any required addon/s installed and up to date, having
-            the most appropriate enchants, and bringing enough consumables to last the
-            full raid night.
-          </li>
-        </ul>
-        <p
-          css={css`
-            font-size: 1.2rem;
-            padding-top: 10px;
-            line-height: 27px;
-          `}
-        >
-          We do not expect flawless gameplay but there is an expectation to learn from
-          mistakes and come prepared to raids not to waste other people&apos;s time. We
-          respect your time and expect the same in return.
-        </p>
+        <article>
+          <header>
+            <h3>What we expect from you</h3>
+          </header>
+          <ul>
+            <li>
+              Be over 18 years old with good English skills as we are predominantly an
+              English-speaking guild.
+            </li>
+            <li>
+              Be able to communicate with mature etiquette towards your fellow guild
+              members and listen out to important instructions during raid nights.
+            </li>
+            <li>Show high attendance for each of our mandatory raid nights.</li>
+            <li>
+              Signup at least a week in advance, or let the management team know if you
+              will be absent. This allows us to plan and confirm the raiding roster before
+              each event and avoid wasting people&apos;s time.
+            </li>
+            <li>
+              Be ready inside the instance at 19:30 (server time) ready for us to start
+              clearly trash.
+            </li>
+            <li>
+              Come prepared for raids by having a thorough understanding of the tactics
+              for each boss fight, having any required addon/s installed and up to date,
+              having the most appropriate enchants, and bringing enough consumables to
+              last the full raid night.
+            </li>
+          </ul>
+          <p
+            css={css`
+              font-size: 1.2rem;
+              padding-top: 10px;
+              line-height: 27px;
+            `}
+          >
+            We do not expect flawless gameplay but there is an expectation to learn from
+            mistakes and come prepared to raids not to waste other people&apos;s time. We
+            respect your time and expect the same in return.
+          </p>
+        </article>
       </section>
 
       <div

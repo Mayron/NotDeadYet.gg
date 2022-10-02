@@ -117,9 +117,14 @@ const globalStyles = css`
     max-width: ${vars.maxContentSize};
     margin: 0 auto;
     padding: ${vars.sectionPadding};
+
+    ${media.down("xs")`
+      padding: ${vars.sectionMobilePadding};
+    `};
   }
 
   article {
+    padding: 0 15px;
     ul,
     p {
       &:not(:last-child) {
@@ -131,7 +136,11 @@ const globalStyles = css`
       padding-bottom: 10px;
     }
 
-    h3 {
+    header {
+      padding: 0 40px;
+    }
+
+    h3:not(:first-child) {
       margin-top: 20px;
     }
 

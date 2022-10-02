@@ -44,6 +44,10 @@ const NavBar: React.FC = () => (
           margin-right: 8px;
         }
 
+        li {
+          padding-bottom: 0;
+        }
+
         a {
           display: flex;
           align-items: center;

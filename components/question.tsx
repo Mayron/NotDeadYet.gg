@@ -14,32 +14,40 @@ const Question = styled.div<IQuestionProps>(
           display: flex;
           align-items: center;
 
+          p:first-child {
+            padding-right: 20px;
+          }
+
+          p.Mui-error {
+            padding-left: 10px;
+          }
+
           .MuiTextField-root {
             margin-bottom: 12px;
           }
         `
       : css`
+          p:first-child {
+            padding-bottom: 10px;
+          }
+
           .MuiFormControl-root {
-            margin-top: 6px;
+            margin-top: 15px;
           }
         `};
 
-    & > * {
-      ${horizontal
-        ? css`
-            padding-right: 20px;
-          `
-        : css`
-            padding-bottom: 10px;
-          `};
+    .MuiFormHelperText-root {
+      margin-top: 0 !important;
     }
 
     &:first-child {
       margin-top: 0;
+      padding-top: 0;
     }
 
     &:last-child {
       margin-bottom: 0;
+      padding-bottom: 0;
     }
   `,
 );
