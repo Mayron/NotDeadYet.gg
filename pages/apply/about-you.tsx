@@ -16,7 +16,17 @@ const AboutYouPage: React.FC<IAboutYouPageProps> = ({ username }) => (
   <Layout title="Apply | Not Dead Yet" username={username}>
     <BackgroundPattern />
     <section>
-      <header>
+      <header
+        css={css`
+          margin-bottom: 50px;
+
+          p {
+            font-size: 1.125rem;
+            text-align: center;
+            padding-bottom: 30px;
+          }
+        `}
+      >
         <h1
           css={css`
             font-size: 2rem;
@@ -25,18 +35,13 @@ const AboutYouPage: React.FC<IAboutYouPageProps> = ({ username }) => (
           Tell Us About Yourself
         </h1>
 
-        <p
-          css={css`
-            margin-bottom: 60px;
-            font-size: 1.125rem;
-            text-align: center;
-          `}
-        >
+        <p>
           This section consists of the main application questions for potential new
           recruits. They allow us to better assess your play style, attitude towards
           raiding within a guild, and your raid experience to see if you would be a good
           fit for our core raid team.
         </p>
+
         <ApplicationStepper activeStep={2} />
       </header>
 

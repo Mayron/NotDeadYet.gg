@@ -42,6 +42,7 @@ declare interface ICharacterInfoFormInput {
 }
 
 declare interface IAboutYouFormInput {
+  inGuild: "yes" | "no" | "";
   canTalk: "yes" | "no" | "";
   cannotTalkReason: string;
 
