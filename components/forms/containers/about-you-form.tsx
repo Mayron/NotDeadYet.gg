@@ -162,7 +162,7 @@ const AboutYouForm: React.FC = () => {
             </Question>
             <Question>
               <p>
-                Are you able to enough bring consumables (e.g., food, elixirs/flasks,
+                Are you able to bring enough consumables (e.g., food, elixirs/flasks,
                 weapon enchants, etc...) for all boss attempts for each raid night per
                 week? This includes both progression and farm raid nights.
               </p>
