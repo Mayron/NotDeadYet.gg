@@ -2,10 +2,10 @@ import { css } from "@emotion/react";
 import { Button } from "@mui/material";
 import { GetServerSidePropsContext } from "next";
 import { unstable_getServerSession } from "next-auth";
+import ApplicationOverview from "../../../components/application-overview";
 import BackgroundPattern from "../../../components/background-pattern";
 import GoBackButton from "../../../components/go-back-button";
 import Layout from "../../../components/layout";
-import WhitePanel from "../../../components/white-panel";
 import { retrieveApplication } from "../../../firebase";
 import { authOptions } from "../../api/auth/[...nextauth]";
 
@@ -35,7 +35,7 @@ const AdminApplicantPage: React.FC<IAdminApplicantPageProps> = ({ application })
   return (
     <Layout title="Admin | Not Dead Yet">
       <BackgroundPattern />
-      <section style={{ maxWidth: 1200 }}>
+      <section>
         <header>
           <h1
             css={css`
@@ -46,7 +46,7 @@ const AdminApplicantPage: React.FC<IAdminApplicantPageProps> = ({ application })
           </h1>
         </header>
 
-        <WhitePanel>{JSON.stringify(application)}</WhitePanel>
+        <ApplicationOverview application={application} />
         <footer
           css={css`
             display: flex;

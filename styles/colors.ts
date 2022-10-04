@@ -23,5 +23,7 @@ export default {
 
   grey: {
     dark: "#757575",
+    light: "#cdcdcd",
+    lightBg: "#f4f4f4",
   },
 };

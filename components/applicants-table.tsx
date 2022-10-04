@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { css } from "@emotion/react";
 import { Button } from "@mui/material";
 import {
   DataGrid,
@@ -41,7 +42,7 @@ const columns: GridColDef[] = [
   {
     field: "mainSpec",
     headerName: "Main-Spec",
-    width: 150,
+    width: 120,
     valueGetter: ({ row }: GridValueGetterParams) => {
       if (row.characterMainSpec) {
         return row.characterMainSpec as string;
@@ -53,7 +54,7 @@ const columns: GridColDef[] = [
   {
     field: "offSpec",
     headerName: "Off-Spec",
-    width: 150,
+    width: 120,
     valueGetter: ({ row }: GridValueGetterParams) => {
       if (row.characterOffSpec) {
         return row.characterOffSpec as string;
@@ -71,7 +72,7 @@ const columns: GridColDef[] = [
     field: "professions",
     headerName: "Professions",
     filterable: false,
-    width: 150,
+    width: 170,
     valueGetter: ({ row }) => {
       let prof1Name = "";
       let prof2Name = "";
@@ -129,7 +130,8 @@ const columns: GridColDef[] = [
     field: "alts",
     headerName: "Alts",
     sortable: false,
-    width: 200,
+    minWidth: 200,
+    flex: 1,
     valueGetter: ({ row }) => {
       const application = row as IApplication;
 
@@ -170,9 +172,10 @@ const columns: GridColDef[] = [
   {
     field: "view",
     headerName: "",
+    align: "right",
     disableColumnMenu: true,
-
     hideSortIcons: true,
+    width: 86,
     renderCell: ({ row }) => {
       const app = row as IApplication;
       const userId = encodeURIComponent(app.userId);
@@ -203,7 +206,23 @@ const ApplicantsTable: React.FC<IApplicantsTableProps> = ({ data }) => {
   const rows = data.map((app, index) => ({ id: index, ...app }));
 
   return (
-    <div style={{ width: "100%", height: 500 }}>
+    <div
+      css={css`
+        width: 100%;
+        height: 500px;
+
+        .MuiDataGrid-cell:focus,
+        .MuiDataGrid-columnHeader:focus {
+          outline: none !important;
+        }
+
+        div[role="row"] {
+          div:last-child .MuiDataGrid-columnSeparator--sideRight {
+            display: none;
+          }
+        }
+      `}
+    >
       <DataGrid
         isRowSelectable={() => false}
         rows={rows}

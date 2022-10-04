@@ -1,5 +1,6 @@
 import { css } from "@emotion/react";
 import { useEffect } from "react";
+import ApplicationOverview from "../../application-overview";
 
 interface IYourApplicationProps {
   application: IApplication;
@@ -20,9 +21,14 @@ const YourApplication: React.FC<IYourApplicationProps> = ({ application }) => {
           margin-bottom: 40px;
         `}
       >
-        <h1>Thank You!</h1>
-        <p>Your application has been submitted successfully. We will be in touch soon!</p>
+        <h1>Your Application</h1>
+        <p>
+          Your application has been submitted successfully and is being reviewed. We will
+          be in touch soon!
+        </p>
       </header>
+
+      <ApplicationOverview application={application} />
     </section>
   );
 };

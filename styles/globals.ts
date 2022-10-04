@@ -211,6 +211,27 @@ const globalStyles = css`
     font-weight: ${vars.font.standard.weights.bold};
     color: #c69b6d;
   }
+
+  dt {
+    text-transform: uppercase;
+    color: ${colors.text.secondary};
+    font-size: 0.85rem;
+  }
+
+  dd {
+    font-weight: ${vars.font.standard.weights.medium};
+  }
+
+  dl {
+    list-style-type: none;
+    li {
+      padding-bottom: 20px;
+    }
+
+    li:last-child {
+      padding-bottom: 0;
+    }
+  }
 `;
 
 export default globalStyles;
