@@ -8,6 +8,7 @@ interface IWhitePanelProps {
 
 const WhitePanel = styled.div<IWhitePanelProps>(
   ({ headerBorder = true }) => css`
+    overflow-wrap: anywhere;
     background-color: ${colors.white};
     padding: 25px;
     border: 1px solid #cfcfcf;

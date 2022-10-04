@@ -1,4 +1,5 @@
 import { css } from "@emotion/react";
+import { Button } from "@mui/material";
 import { GetServerSidePropsContext } from "next";
 import { unstable_getServerSession } from "next-auth";
 import BackgroundPattern from "../../../components/background-pattern";
@@ -12,25 +13,55 @@ interface IAdminApplicantPageProps {
   application: IApplication;
 }
 
-const AdminApplicantPage: React.FC<IAdminApplicantPageProps> = ({ application }) => (
-  <Layout title="Admin | Not Dead Yet">
-    <BackgroundPattern />
-    <section style={{ maxWidth: 1200 }}>
-      <header>
-        <h1
+const AdminApplicantPage: React.FC<IAdminApplicantPageProps> = ({ application }) => {
+  const characterName = application.characterName || application.characters[0].name;
+
+  const downloadJson = () => {
+    const json = JSON.stringify(application);
+    const blob = new Blob([json], { type: "json" });
+
+    const a = document.createElement("a");
+    a.download = `${characterName}-application.json`;
+    a.href = window.URL.createObjectURL(blob);
+    const clickEvt = new MouseEvent("click", {
+      view: window,
+      bubbles: true,
+      cancelable: true,
+    });
+    a.dispatchEvent(clickEvt);
+    a.remove();
+  };
+
+  return (
+    <Layout title="Admin | Not Dead Yet">
+      <BackgroundPattern />
+      <section style={{ maxWidth: 1200 }}>
+        <header>
+          <h1
+            css={css`
+              font-size: 2rem;
+            `}
+          >
+            Application for {characterName}
+          </h1>
+        </header>
+
+        <WhitePanel>{JSON.stringify(application)}</WhitePanel>
+        <footer
           css={css`
-            font-size: 2rem;
+            display: flex;
+            justify-content: space-between;
           `}
         >
-          Application for {application.characterName || application.characters[0].name}
-        </h1>
-      </header>
-
-      <WhitePanel>{JSON.stringify(application)}</WhitePanel>
-      <GoBackButton to="/admin" text="Go Back" />
-    </section>
-  </Layout>
-);
+          <GoBackButton to="/admin" text="Go Back" />
+          <Button variant="contained" onClick={downloadJson}>
+            Download as JSON
+          </Button>
+        </footer>
+      </section>
+    </Layout>
+  );
+};
 
 export default AdminApplicantPage;
 
