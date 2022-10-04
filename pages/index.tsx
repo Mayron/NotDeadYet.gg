@@ -148,7 +148,11 @@ const Home: NextPage = () => {
         </section>
       </div>
 
-      <section>
+      <section
+        css={css`
+          padding-bottom: 10px;
+        `}
+      >
         <article>
           <header>
             <h3>What we expect from you</h3>
@@ -193,31 +197,29 @@ const Home: NextPage = () => {
         </article>
       </section>
 
-      <div
+      <section
         css={css`
+          text-align: center;
           color: ${colors.blue.darkest};
-          padding: 0 20px;
+          padding-top: 10px;
+          padding-bottom: 40px;
+
+          button {
+            margin: auto;
+          }
         `}
       >
-        <section
-          css={css`
-            text-align: center;
-            button {
-              margin: auto;
-            }
-          `}
-        >
-          <header>
-            <h4>Interested in Joining Us for Wrath?</h4>
-          </header>
-          <BlizzardButton
-            text="Apply Now"
-            href="/apply"
-            onClick={() => setLoading(true)}
-            loading={loading}
-          />
-        </section>
-      </div>
+        <hr />
+        <header>
+          <h4>Interested in Joining Us for Wrath?</h4>
+        </header>
+        <BlizzardButton
+          text="Apply Now"
+          href="/apply"
+          onClick={() => setLoading(true)}
+          loading={loading}
+        />
+      </section>
     </Layout>
   );
 };

@@ -28,7 +28,7 @@ const Footer: React.FC = () => (
         <Route to="/terms-and-conditions" text="Terms and Conditions" />
       </li>
       <li>
-        <Route to="/terms-and-conditions" text="Privacy Policy" />
+        <Route to="/privacy-policy" text="Privacy Policy" />
       </li>
       <li></li>
       <li></li>
