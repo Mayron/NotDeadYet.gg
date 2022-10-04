@@ -24,6 +24,12 @@ const PageNavigation: React.FC = () => {
     setAnchorEl(null);
   };
 
+  let username = session?.user?.name;
+
+  if (username) {
+    username = username.split("#")[0];
+  }
+
   return (
     <nav
       css={css`
@@ -116,7 +122,7 @@ const PageNavigation: React.FC = () => {
           </Route>
         </li>
 
-        {session?.user?.name && (
+        {username && (
           <li
             css={css`
               margin-left: auto;
@@ -130,7 +136,7 @@ const PageNavigation: React.FC = () => {
               onClick={handleClick}
               endIcon={<KeyboardArrowDownIcon />}
             >
-              {session.user.name}
+              {username}
             </Button>
             <Menu
               id="userMenu"
