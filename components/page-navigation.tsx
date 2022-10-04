@@ -1,5 +1,5 @@
 import { Button, css, Menu, MenuItem } from "@mui/material";
-import { signOut } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import { useState } from "react";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -9,11 +9,8 @@ import Route from "./route";
 import media, { breakpoints, useBreakpoint } from "../styles/media-queries";
 import ndyIcon from "../public/assets/ndy-icon.png";
 
-interface IPageNavigationProps {
-  username?: string;
-}
-
-const PageNavigation: React.FC<IPageNavigationProps> = ({ username }) => {
+const PageNavigation: React.FC = () => {
+  const { data: session } = useSession();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const breakpoint = useBreakpoint();
 
@@ -119,7 +116,7 @@ const PageNavigation: React.FC<IPageNavigationProps> = ({ username }) => {
           </Route>
         </li>
 
-        {username && (
+        {session?.user?.name && (
           <li
             css={css`
               margin-left: auto;
@@ -133,7 +130,7 @@ const PageNavigation: React.FC<IPageNavigationProps> = ({ username }) => {
               onClick={handleClick}
               endIcon={<KeyboardArrowDownIcon />}
             >
-              {username}
+              {session.user.name}
             </Button>
             <Menu
               id="userMenu"

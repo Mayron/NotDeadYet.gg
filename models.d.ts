@@ -19,8 +19,7 @@ declare interface IFormInputProps {
 
 declare interface IProfessionInfo {
   name: string;
-  maxLevel: "yes" | "no" | "";
-  notMaxedReason: string;
+  level: number;
 }
 
 declare interface ICharacterInfo {
@@ -64,4 +63,9 @@ declare interface IApplication
     ICharacterInfoFormInput,
     IAboutYouFormInput {
   userId: string;
+
+  /**
+   * @deprecated Use characters array instead
+   */
+  characterName: string;
 }

@@ -1,19 +1,12 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import { css } from "@emotion/react";
-import { unstable_getServerSession } from "next-auth";
-import type { GetServerSidePropsContext } from "next";
 import Layout from "../../components/layout";
-import { authOptions } from "../api/auth/[...nextauth]";
 import BackgroundPattern from "../../components/background-pattern";
 import CharacterInfoForm from "../../components/forms/containers/character-info-form";
 import ApplicationStepper from "../../components/application-stepper";
 
-interface ICharacterInfoPageProps {
-  username: string;
-}
-
-const CharacterInfoPage: React.FC<ICharacterInfoPageProps> = ({ username }) => (
-  <Layout title="Apply | Not Dead Yet" username={username}>
+const CharacterInfoPage: React.FC = () => (
+  <Layout title="Apply | Not Dead Yet">
     <BackgroundPattern />
     <section>
       <header>
@@ -44,21 +37,3 @@ const CharacterInfoPage: React.FC<ICharacterInfoPageProps> = ({ username }) => (
 );
 
 export default CharacterInfoPage;
-
-export async function getServerSideProps(context: GetServerSidePropsContext) {
-  const session = await unstable_getServerSession(context.req, context.res, authOptions);
-  const username = session?.user?.name || null;
-
-  if (!username) {
-    return {
-      redirect: {
-        destination: "/",
-        permanent: false,
-      },
-    };
-  }
-
-  return {
-    props: { username },
-  };
-}

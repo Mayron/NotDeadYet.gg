@@ -65,7 +65,7 @@ interface IApplyPageProps {
 }
 
 const ApplyPage: React.FC<IApplyPageProps> = ({ applyInfo, username, application }) => (
-  <Layout title="Apply | Not Dead Yet" username={username}>
+  <Layout title="Apply | Not Dead Yet">
     <BackgroundPattern />
 
     {application ? (

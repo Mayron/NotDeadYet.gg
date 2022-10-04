@@ -1,12 +1,5 @@
-import { marked } from "marked";
 import BackgroundPattern from "../components/background-pattern";
 import Layout from "../components/layout";
-import WhitePanel from "../components/white-panel";
-import { getAllRules } from "../contentful";
-
-// interface INewsPageProps {
-//   rules: Rule[];
-// }
 
 const NewsPage: React.FC = () => (
   <Layout title="News | Not Dead Yet">
@@ -22,9 +15,3 @@ const NewsPage: React.FC = () => (
 );
 
 export default NewsPage;
-
-// export function getStaticProps() {
-//   return {
-//     props: { rules: [] },
-//   };
-// }

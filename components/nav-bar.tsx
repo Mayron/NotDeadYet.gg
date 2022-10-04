@@ -83,7 +83,7 @@ const NavBar: React.FC = () => (
         <Route text="Rules" to="/rules" />
       </li>
       <li>
-        <Route text="Apply" to="/apply" />
+        <a href={`${process.env.NEXT_PUBLIC_WEBSITE_URL || ""}/apply`}>Apply</a>
       </li>
       <li>
         <Route to={process.env.NEXT_PUBLIC_DISCORD_URL || ""} text="Discord">

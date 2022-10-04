@@ -1,5 +1,6 @@
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
+import media from "../styles/media-queries";
 
 interface IQuestionProps {
   horizontal?: boolean;
@@ -11,20 +12,27 @@ const Question = styled.div<IQuestionProps>(
 
     ${horizontal
       ? css`
-          display: flex;
-          align-items: center;
+          ${media.up("sm")`display: flex;
+            align-items: center;
 
-          p:first-child {
-            padding-right: 20px;
-          }
+            p:first-child {
+              padding-right: 20px;
+            }
 
-          p.Mui-error {
-            padding-left: 10px;
-          }
+            p.Mui-error {
+              padding-left: 10px;
+            }
 
-          .MuiTextField-root {
-            margin-bottom: 12px;
-          }
+            .MuiInput-underline {
+              margin-bottom: 12px;
+            }
+          `};
+
+          ${media.down("xs")`
+            p:first-child {
+              padding-bottom: 10px;
+            }
+          `};
         `
       : css`
           p:first-child {

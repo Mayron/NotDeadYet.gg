@@ -2,11 +2,16 @@ import { css } from "@emotion/react";
 import BackButton from "../svgs/back-button.svg";
 import Route from "./route";
 
-const GoBackHome: React.FC = () => (
+interface IGoBackButtonProps {
+  text: string;
+  to: string;
+}
+
+const GoBackButton: React.FC<IGoBackButtonProps> = ({ text, to }) => (
   // eslint-disable-next-line react/jsx-no-undef
   <Route
-    to="/"
-    text="Go Back to Home Page"
+    to={to}
+    text={text}
     css={css`
       display: flex;
       align-items: center;
@@ -29,4 +34,4 @@ const GoBackHome: React.FC = () => (
   </Route>
 );
 
-export default GoBackHome;
+export default GoBackButton;

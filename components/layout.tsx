@@ -5,7 +5,6 @@ import PageNavigation from "./page-navigation";
 interface ILayoutProps {
   children: React.ReactNode | React.ReactNode[];
   title: string;
-  username?: string;
   hidePageNavigation?: boolean;
 }
 
@@ -18,12 +17,7 @@ const jsonLinkedData = {
   description: process.env.NEXT_PUBLIC_NDY_DESCRIPTION,
 };
 
-const Layout: React.FC<ILayoutProps> = ({
-  children,
-  title,
-  username,
-  hidePageNavigation,
-}) => (
+const Layout: React.FC<ILayoutProps> = ({ children, title, hidePageNavigation }) => (
   <>
     <Head>
       <title>{title}</title>
@@ -57,7 +51,7 @@ const Layout: React.FC<ILayoutProps> = ({
       />
     </Head>
 
-    {!hidePageNavigation && username && <PageNavigation username={username} />}
+    {!hidePageNavigation && <PageNavigation />}
     <main>{children}</main>
     <Footer />
   </>

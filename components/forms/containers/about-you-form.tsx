@@ -6,6 +6,7 @@ import {
   RadioGroup,
   TextField,
 } from "@mui/material";
+import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { Controller, useForm, useWatch } from "react-hook-form";
@@ -31,13 +32,10 @@ const defaultValues: IAboutYouFormInput = {
   anythingElse: "",
 };
 
-interface IAboutYouFormProps {
-  username: string;
-}
-
-const AboutYouForm: React.FC<IAboutYouFormProps> = ({ username }) => {
+const AboutYouForm: React.FC = () => {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
+  const { data: session } = useSession();
 
   const {
     register,
@@ -58,12 +56,12 @@ const AboutYouForm: React.FC<IAboutYouFormProps> = ({ username }) => {
   const onSubmit = async () => {
     setLoading(true);
 
-    if (storage) {
+    if (storage && session?.user?.name) {
       const data = storage.getItem("application");
 
       if (data) {
         const application = JSON.parse(data) as IApplication;
-        await storeApplication(username, application);
+        await storeApplication(session.user.name, application);
       }
     }
 

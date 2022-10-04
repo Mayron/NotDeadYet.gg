@@ -18,13 +18,11 @@ const defaultValues: ICharacterInfoFormInput = {
       professions: [
         {
           name: "",
-          maxLevel: "",
-          notMaxedReason: "",
+          level: 0,
         },
         {
           name: "",
-          maxLevel: "",
-          notMaxedReason: "",
+          level: 0,
         },
       ],
     },

@@ -1,5 +1,5 @@
 import { css } from "@emotion/react";
-import GoBackHome from "../components/go-back-home";
+import GoBackButton from "../components/go-back-button";
 import Layout from "../components/layout";
 import Route from "../components/route";
 
@@ -16,7 +16,7 @@ const TermsAndConditionsPage: React.FC = () => (
         }
       `}
     >
-      <GoBackHome />
+      <GoBackButton to="/" text="Go Back to Home Page" />
 
       <header>
         <h1

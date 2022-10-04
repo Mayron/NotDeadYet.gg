@@ -199,8 +199,9 @@ const CharacterInfo: React.FC<ICharacterInfoProps> = ({ characterId }) => {
 
         <p>
           In the below sections, enter the name and skill level for both of your primary
-          professions (note: the maximum skill level for Burning Crusade Classic is{" "}
-          <b>375</b> and for Wrath Classic it is <b>450</b>).
+          professions
+          <br />
+          (Note: the maximum skill level for Wrath Classic is <b>450</b>).
         </p>
       </header>
       <PrimaryProfessionQuestions characterId={characterId} professionId={0} />
