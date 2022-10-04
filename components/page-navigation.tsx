@@ -99,7 +99,7 @@ const PageNavigation: React.FC = () => {
           <Route to="/rules" text="Rules" />
         </li>
         <li>
-          <Route to="/apply" text="Apply" />
+          <a href={`${process.env.NEXT_PUBLIC_WEBSITE_URL || ""}/apply`}>Apply</a>
         </li>
         <li
           css={css`
