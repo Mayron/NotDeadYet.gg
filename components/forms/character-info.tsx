@@ -173,6 +173,7 @@ const CharacterInfo: React.FC<ICharacterInfoProps> = ({ characterId }) => {
                   labelId={`offSpecLabel${characterId}`}
                   label="Off-Spec"
                 >
+                  <MenuItem value="None">None</MenuItem>
                   {availableSpecs?.map((c) => (
                     <MenuItem key={c} value={c}>
                       {c}

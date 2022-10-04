@@ -96,7 +96,7 @@ const ApplicationOverview: React.FC<IApplicationOverviewProps> = ({ application 
               <p>
                 {application.bringConsumes === "yes"
                   ? "Yes"
-                  : application.cannotBringConsumesReason}
+                  : application.cannotBringConsumesReason || "No reason given"}
               </p>
             </StyledQuestion>
 

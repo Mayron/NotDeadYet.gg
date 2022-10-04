@@ -1,4 +1,5 @@
 export const professions: string[] = [
+  "None",
   "Alchemy",
   "Blacksmithing",
   "Enchanting",

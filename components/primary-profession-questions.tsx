@@ -94,14 +94,9 @@ const PrimaryProfessionQuestions: React.FC<IPrimaryProfessionQuestionsProps> = (
             }
           `}
           {...register(`characters.${characterId}.professions.${professionId}.level`, {
-            required: true,
             max: {
               value: 450,
               message: "For Wrath Classic, the max skill level is 450.",
-            },
-            min: {
-              value: 1,
-              message: "This field is required.",
             },
           })}
           variant="outlined"
