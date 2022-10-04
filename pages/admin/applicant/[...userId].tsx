@@ -65,7 +65,7 @@ const AdminApplicantPage: React.FC<IAdminApplicantPageProps> = ({ application })
         >
           <GoBackButton to="/admin" text="Go Back" />
           <div>
-            {application.status !== "Guild Member" && (
+            {!application.status && (
               <Button
                 size="large"
                 style={{ marginRight: 20 }}
