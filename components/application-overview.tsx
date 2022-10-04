@@ -73,65 +73,61 @@ const ApplicationOverview: React.FC<IApplicationOverviewProps> = ({ application 
           </p>
         </StyledQuestion>
 
-        {application.describeSelf ||
-          (application.wowExperience && (
-            <>
-              <StyledQuestion>
-                <p>
-                  Are you able to use a microphone on discord and are happy to talk when
-                  needed?
-                </p>
-                <p>
-                  {application.canTalk === "yes"
-                    ? "Yes"
-                    : application.cannotTalkReason || "No reason given"}
-                </p>
-              </StyledQuestion>
+        {(application.describeSelf || application.wowExperience) && (
+          <>
+            <StyledQuestion>
+              <p>
+                Are you able to use a microphone on discord and are happy to talk when
+                needed?
+              </p>
+              <p>
+                {application.canTalk === "yes"
+                  ? "Yes"
+                  : application.cannotTalkReason || "No reason given"}
+              </p>
+            </StyledQuestion>
 
-              <StyledQuestion>
-                <p>
-                  Are you able to bring enough consumables (e.g., food, elixirs/flasks,
-                  weapon enchants, etc...) for all boss attempts for each raid night per
-                  week? This includes both progression and farm raid nights.
-                </p>
-                <p>
-                  {application.bringConsumes === "yes"
-                    ? "Yes"
-                    : application.cannotBringConsumesReason}
-                </p>
-              </StyledQuestion>
+            <StyledQuestion>
+              <p>
+                Are you able to bring enough consumables (e.g., food, elixirs/flasks,
+                weapon enchants, etc...) for all boss attempts for each raid night per
+                week? This includes both progression and farm raid nights.
+              </p>
+              <p>
+                {application.bringConsumes === "yes"
+                  ? "Yes"
+                  : application.cannotBringConsumesReason}
+              </p>
+            </StyledQuestion>
 
-              <StyledQuestion>
-                <p>
-                  Please provide a short summary of your previous WoW raiding experience:
-                </p>
-                <p>{application.wowExperience || "Not answered"}</p>
-              </StyledQuestion>
+            <StyledQuestion>
+              <p>
+                Please provide a short summary of your previous WoW raiding experience:
+              </p>
+              <p>{application.wowExperience || "Not answered"}</p>
+            </StyledQuestion>
 
-              <StyledQuestion>
-                <p>
-                  Briefly describe your approach/philosophy towards raiding within a
-                  guild:
-                </p>
-                <p>{application.describeSelf || "Not answered"}</p>
-              </StyledQuestion>
+            <StyledQuestion>
+              <p>
+                Briefly describe your approach/philosophy towards raiding within a guild:
+              </p>
+              <p>{application.describeSelf || "Not answered"}</p>
+            </StyledQuestion>
 
-              <StyledQuestion>
-                <p>
-                  (Optional) Do you know anyone in the guild that could vouch for you?
-                </p>
-                <p>{application.vouch || "No"}</p>
-              </StyledQuestion>
+            <StyledQuestion>
+              <p>(Optional) Do you know anyone in the guild that could vouch for you?</p>
+              <p>{application.vouch || "No"}</p>
+            </StyledQuestion>
 
-              <StyledQuestion>
-                <p>
-                  (Optional) Is there something we should know? Travelling, demanding
-                  family or career that could get in the way of raiding etc.
-                </p>
-                <p>{application.anythingElse || "No"}</p>
-              </StyledQuestion>
-            </>
-          ))}
+            <StyledQuestion>
+              <p>
+                (Optional) Is there something we should know? Travelling, demanding family
+                or career that could get in the way of raiding etc.
+              </p>
+              <p>{application.anythingElse || "No"}</p>
+            </StyledQuestion>
+          </>
+        )}
       </>
     )}
   </WhitePanel>
