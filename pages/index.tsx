@@ -8,6 +8,7 @@ import HomeBanner from "../components/home/home-banner";
 import Layout from "../components/layout";
 import arrowDown from "../public/assets/arrow-down.png";
 import colors from "../styles/colors";
+import media from "../styles/media-queries";
 
 const Home: NextPage = () => {
   const router = useRouter();
@@ -46,7 +47,7 @@ const Home: NextPage = () => {
       >
         <section
           css={css`
-            padding: 40px;
+            ${media.up("sm")`padding-top: 40px;`};
 
             p {
               max-width: 800px;
@@ -58,6 +59,10 @@ const Home: NextPage = () => {
           <header
             css={css`
               padding-bottom: 30px;
+
+              p:last-of-type {
+                padding-top: 15px;
+              }
             `}
           >
             <h2>Onwards to Wrath!</h2>
