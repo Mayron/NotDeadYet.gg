@@ -16,6 +16,7 @@ export const authOptions: NextAuthOptions = {
     session({ session, user }) {
       if (session?.user) {
         session.user.admin = user.admin as boolean;
+        session.user.member = user.member as boolean;
       }
       return session;
     },

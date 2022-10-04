@@ -22,7 +22,12 @@ const StyledAlts = styled.div`
 `;
 
 const columns: GridColDef[] = [
-  { field: "discordId", headerName: "Discord ID", width: 150 },
+  {
+    field: "discordId",
+    headerName: "Discord ID",
+    width: 200,
+    cellClassName: "discordId",
+  },
   {
     field: "character",
     headerName: "Main Character",
@@ -212,7 +217,9 @@ const ApplicantsTable: React.FC<IApplicantsTableProps> = ({ data }) => {
         height: 500px;
 
         .MuiDataGrid-cell:focus,
-        .MuiDataGrid-columnHeader:focus {
+        .MuiDataGrid-cell:focus-within,
+        .MuiDataGrid-columnHeader:focus,
+        .MuiDataGrid-columnHeader:focus-within {
           outline: none !important;
         }
 
@@ -221,9 +228,14 @@ const ApplicantsTable: React.FC<IApplicantsTableProps> = ({ data }) => {
             display: none;
           }
         }
+
+        .discordId {
+          font-size: 0.8rem;
+        }
       `}
     >
       <DataGrid
+        style={{ border: "none" }}
         isRowSelectable={() => false}
         rows={rows}
         columns={columns}

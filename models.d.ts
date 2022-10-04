@@ -68,4 +68,6 @@ declare interface IApplication
    * @deprecated Use characters array instead
    */
   characterName?: string;
+
+  status?: string;
 }

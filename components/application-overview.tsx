@@ -43,10 +43,19 @@ const ApplicationOverview: React.FC<IApplicationOverviewProps> = ({ application 
             <dd>{application.discordId}</dd>
           </li>
 
-          <li>
-            {" "}
+          <li
+            css={css`
+              text-align: right;
+            `}
+          >
             <dt>Status</dt>
-            <dd>{application.inGuild ? "In Guild" : "New Applicant"}</dd>
+            {application.status ? (
+              <dd>{application.status}</dd>
+            ) : (
+              <dd>
+                {application.inGuild ? "Unconfirmed Guild Member" : "New Applicant"}
+              </dd>
+            )}
           </li>
         </dl>
         {application.characters.map((c, i) => (

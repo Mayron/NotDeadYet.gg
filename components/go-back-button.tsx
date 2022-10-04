@@ -17,7 +17,6 @@ const GoBackButton: React.FC<IGoBackButtonProps> = ({ text, to }) => (
       align-items: center;
       font-weight: 500;
       font-size: 1.2rem;
-      margin-bottom: 20px;
 
       &:hover {
         circle {

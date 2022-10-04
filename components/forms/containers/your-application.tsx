@@ -1,4 +1,5 @@
 import { css } from "@emotion/react";
+import { Button } from "@mui/material";
 import { useEffect } from "react";
 import ApplicationOverview from "../../application-overview";
 
@@ -13,6 +14,15 @@ const YourApplication: React.FC<IYourApplicationProps> = ({ application }) => {
     }
   }, []);
 
+  const acceptGuildInvite = async () => {
+    await fetch(`/api/applicant/accept`, {
+      method: "POST",
+      body: JSON.stringify({
+        userId: application.userId,
+      }),
+    }).then(() => window.location.reload());
+  };
+
   return (
     <section>
       <header
@@ -22,10 +32,30 @@ const YourApplication: React.FC<IYourApplicationProps> = ({ application }) => {
         `}
       >
         <h1>Your Application</h1>
-        <p>
-          Your application has been submitted successfully and is being reviewed. We will
-          be in touch soon!
-        </p>
+
+        {application.status === "Pending Invite" && (
+          <>
+            <p>
+              Congratulations, Your application has been accepted!
+              <br />
+              Please click the button below to accept your invitation:
+            </p>
+            <Button
+              size="large"
+              style={{ marginTop: 30 }}
+              variant="contained"
+              onClick={acceptGuildInvite}
+            >
+              Accept Guild Invite
+            </Button>
+          </>
+        )}
+        {!application.status && (
+          <p>
+            Your application has been submitted successfully and is being reviewed. We
+            will be in touch soon!
+          </p>
+        )}
       </header>
 
       <ApplicationOverview application={application} />

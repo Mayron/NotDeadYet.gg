@@ -27,7 +27,11 @@ const AdminPage: React.FC<IAdminPageProps> = ({ applications }) => (
         </h1>
       </header>
 
-      <WhitePanel>
+      <WhitePanel
+        css={css`
+          padding: 0;
+        `}
+      >
         <ApplicantsTable data={applications} />
       </WhitePanel>
     </section>

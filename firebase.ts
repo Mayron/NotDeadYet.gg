@@ -6,6 +6,7 @@ import {
   setDoc,
   doc,
   getDocs,
+  updateDoc,
 } from "firebase/firestore";
 
 export const firebaseConfig = {
@@ -63,4 +64,16 @@ export const retrieveAllApplications = async () => {
   }
 
   return applications;
+};
+
+export const updateApplicationStatus = async (userId: string, status: string) => {
+  try {
+    const applicationsCollection = collection(firestore, "applications");
+    const docRef = doc(applicationsCollection, userId);
+    await updateDoc(docRef, { status });
+  } catch (err) {
+    console.error("updateApplicationStatus error: %s.", err);
+  }
+
+  return undefined;
 };

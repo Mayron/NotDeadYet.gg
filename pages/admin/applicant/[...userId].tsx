@@ -32,6 +32,15 @@ const AdminApplicantPage: React.FC<IAdminApplicantPageProps> = ({ application })
     a.remove();
   };
 
+  const sendGuildInvite = async () => {
+    await fetch(`/api/applicant/invite`, {
+      method: "POST",
+      body: JSON.stringify({
+        userId: application.userId,
+      }),
+    }).then(() => window.location.reload());
+  };
+
   return (
     <Layout title="Admin | Not Dead Yet">
       <BackgroundPattern />
@@ -51,12 +60,26 @@ const AdminApplicantPage: React.FC<IAdminApplicantPageProps> = ({ application })
           css={css`
             display: flex;
             justify-content: space-between;
+            align-items: center;
           `}
         >
           <GoBackButton to="/admin" text="Go Back" />
-          <Button variant="contained" onClick={downloadJson}>
-            Download as JSON
-          </Button>
+          <div>
+            {application.status !== "Guild Member" && (
+              <Button
+                size="large"
+                style={{ marginRight: 20 }}
+                variant="contained"
+                onClick={sendGuildInvite}
+              >
+                Send Guild Invite
+              </Button>
+            )}
+
+            <Button size="large" variant="outlined" onClick={downloadJson}>
+              Download as JSON
+            </Button>
+          </div>
         </footer>
       </section>
     </Layout>
