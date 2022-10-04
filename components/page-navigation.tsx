@@ -27,7 +27,7 @@ const PageNavigation: React.FC = () => {
   let username = session?.user?.name;
 
   if (username) {
-    username = username.split("#")[0];
+    [username] = username.split("#");
   }
 
   return (
