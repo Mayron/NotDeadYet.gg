@@ -20,6 +20,7 @@ const StyledDetails = styled.dl`
 
   li {
     flex: 1;
+    max-width: 240px;
   }
 `;
 
