@@ -67,5 +67,5 @@ declare interface IApplication
   /**
    * @deprecated Use characters array instead
    */
-  characterName: string;
+  characterName?: string;
 }

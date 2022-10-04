@@ -112,8 +112,8 @@ const columns: GridColDef[] = [
         }
 
         const mainCharacter = application.characters[0];
-        prof1Name = mainCharacter.professions[0].name;
-        prof2Name = mainCharacter.professions[1].name;
+        prof1Name = `${mainCharacter.professions[0].name} (${mainCharacter.professions[0].level})`;
+        prof2Name = `${mainCharacter.professions[1].name} (${mainCharacter.professions[1].level})`;
       }
 
       return (
