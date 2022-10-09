@@ -14,7 +14,9 @@ export const breakpoints: { [index: string]: number } = {
 };
 
 export const useBreakpoint = () => {
-  const [breakpoint, setBreakpoint] = useState<number>(0);
+  const [breakpoint, setBreakpoint] = useState<number>(
+    typeof window !== "undefined" ? window.innerWidth : 0,
+  );
 
   useEffect(() => {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
