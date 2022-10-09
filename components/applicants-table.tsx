@@ -7,6 +7,7 @@ import {
   type GridColDef,
   GridCellParams,
 } from "@mui/x-data-grid";
+import moment from "moment";
 import Route from "./route";
 
 const StyledAlts = styled.div`
@@ -22,12 +23,6 @@ const StyledAlts = styled.div`
 `;
 
 const columns: GridColDef[] = [
-  {
-    field: "discordId",
-    headerName: "Discord ID",
-    width: 200,
-    cellClassName: "discordId",
-  },
   {
     field: "character",
     headerName: "Main Character",
@@ -175,6 +170,22 @@ const columns: GridColDef[] = [
     },
   },
   {
+    field: "age",
+    headerName: "Created",
+    width: 150,
+    valueGetter: ({ row }: GridValueGetterParams) => {
+      const application = row as IApplication;
+
+      if (application.createdAt) {
+        const date = new Date(application.createdAt);
+        const value = moment(date).fromNow();
+        return value;
+      }
+
+      return "";
+    },
+  },
+  {
     field: "view",
     headerName: "",
     align: "right",
@@ -214,7 +225,7 @@ const ApplicantsTable: React.FC<IApplicantsTableProps> = ({ data }) => {
     <div
       css={css`
         width: 100%;
-        height: 500px;
+        height: 577px;
 
         .MuiDataGrid-cell:focus,
         .MuiDataGrid-cell:focus-within,

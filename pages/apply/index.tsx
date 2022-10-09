@@ -17,11 +17,11 @@ import { retrieveApplication } from "../../firebase";
 import YourApplication from "../../components/forms/containers/your-application";
 
 interface INotSubmitted {
+  loggedIn: boolean;
   applyInfo: string;
-  username?: string;
 }
 
-const NotSubmitted: React.FC<INotSubmitted> = ({ username, applyInfo }) => (
+const NotSubmitted: React.FC<INotSubmitted> = ({ loggedIn, applyInfo }) => (
   <section>
     <header>
       <h1
@@ -33,7 +33,7 @@ const NotSubmitted: React.FC<INotSubmitted> = ({ username, applyInfo }) => (
         Apply to Not Dead Yet
       </h1>
 
-      {username && <ApplicationStepper activeStep={0} />}
+      {loggedIn && <ApplicationStepper activeStep={0} />}
     </header>
     <WhitePanel>
       <article dangerouslySetInnerHTML={{ __html: marked.parse(applyInfo) }}></article>
@@ -41,7 +41,7 @@ const NotSubmitted: React.FC<INotSubmitted> = ({ username, applyInfo }) => (
 
     <hr />
 
-    {username ? (
+    {loggedIn ? (
       <RequirementsForm />
     ) : (
       <Panel>
@@ -61,17 +61,17 @@ const NotSubmitted: React.FC<INotSubmitted> = ({ username, applyInfo }) => (
 interface IApplyPageProps {
   application?: IApplication;
   applyInfo: string;
-  username?: string;
+  loggedIn: boolean;
 }
 
-const ApplyPage: React.FC<IApplyPageProps> = ({ applyInfo, username, application }) => (
+const ApplyPage: React.FC<IApplyPageProps> = ({ applyInfo, loggedIn, application }) => (
   <Layout title="Apply | Not Dead Yet">
     <BackgroundPattern />
 
     {application ? (
       <YourApplication application={application} />
     ) : (
-      <NotSubmitted applyInfo={applyInfo} username={username} />
+      <NotSubmitted applyInfo={applyInfo} loggedIn={loggedIn} />
     )}
   </Layout>
 );
@@ -80,13 +80,21 @@ export default ApplyPage;
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const session = await unstable_getServerSession(context.req, context.res, authOptions);
-  const username = session?.user?.name || null;
 
   let application: IApplication | null = null;
   let applyInfo: string | null = null;
 
-  if (username) {
-    application = (await retrieveApplication(username)) || null;
+  if (session) {
+    const userId = session?.user?.userId || null;
+
+    if (userId) {
+      application = (await retrieveApplication(userId)) || null;
+    }
+
+    if (!application && session.user.name) {
+      // revert to old method:
+      application = (await retrieveApplication(session.user.name)) || null;
+    }
   }
 
   if (!application) {
@@ -94,6 +102,6 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   }
 
   return {
-    props: { applyInfo, username, application },
+    props: { applyInfo, loggedIn: session?.user?.userId !== undefined, application },
   };
 }

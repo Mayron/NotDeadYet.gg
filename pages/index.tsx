@@ -1,4 +1,5 @@
 import { css } from "@emotion/react";
+import { marked } from "marked";
 import type { NextPage } from "next";
 import Image from "next/image";
 import { useRouter } from "next/router";
@@ -6,12 +7,16 @@ import { useRef, useState } from "react";
 import BlizzardButton from "../components/blizzard-button";
 import HomeBanner from "../components/home/home-banner";
 import Layout from "../components/layout";
+import { getGuildSummary } from "../contentful";
 import arrowDown from "../public/assets/arrow-down.png";
 import colors from "../styles/colors";
 import media from "../styles/media-queries";
 
-const Home: NextPage = () => {
-  const router = useRouter();
+interface IHomePageProps {
+  guildSummary: string;
+}
+
+const HomePage: NextPage<IHomePageProps> = ({ guildSummary }) => {
   const [loading, setLoading] = useState(false);
   const nextSection = useRef<HTMLElement>(null);
 
@@ -64,19 +69,8 @@ const Home: NextPage = () => {
                 padding-top: 15px;
               }
             `}
-          >
-            <h2>Onwards to Wrath!</h2>
-            <p>
-              Not Dead Yet has been around since WoW Classic&apos;s release. We have
-              cleared every boss in Burning Crusade Classic up to Sunwell. We cleared 4/6
-              bosses in Sunwell with the help of pugs due to a number of our core raiders
-              wanting to take breaks before Wrath.
-            </p>
-            <p>
-              Our philosophy is to support and encourage top-tier gameplay while also
-              maintaining a friendly and enjoyable environment for all of our members.
-            </p>
-          </header>
+            dangerouslySetInnerHTML={{ __html: marked.parse(guildSummary) }}
+          ></header>
           <button
             type="button"
             title="Continue Reading"
@@ -224,4 +218,12 @@ const Home: NextPage = () => {
   );
 };
 
-export default Home;
+export default HomePage;
+
+export async function getStaticProps() {
+  const guildSummary = await getGuildSummary();
+
+  return {
+    props: { guildSummary },
+  };
+}

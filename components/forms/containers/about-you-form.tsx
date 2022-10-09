@@ -61,7 +61,7 @@ const AboutYouForm: React.FC = () => {
 
       if (data) {
         const application = JSON.parse(data) as IApplication;
-        await storeApplication(session.user.name, application);
+        await storeApplication(session.user.userId, application);
       }
     }
 
@@ -97,7 +97,7 @@ const AboutYouForm: React.FC = () => {
             )}
           />
         </Question>
-        {inGuild === "yes" ? (
+        {inGuild === "yes" && (
           <Question>
             <p>Discord ID (so we can verify who you are):</p>
 
@@ -115,7 +115,8 @@ const AboutYouForm: React.FC = () => {
               helperText={errors?.discordId?.message}
             />
           </Question>
-        ) : (
+        )}
+        {inGuild === "no" && (
           <>
             <Question>
               <p>

@@ -194,7 +194,7 @@ const globalStyles = css`
 
   .rogue {
     font-weight: ${vars.font.standard.weights.bold};
-    color: #fff468;
+    color: #9f9200;
   }
 
   .shaman {

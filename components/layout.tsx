@@ -51,7 +51,7 @@ const Layout: React.FC<ILayoutProps> = ({ children, title, hidePageNavigation })
       />
     </Head>
 
-    {!hidePageNavigation && <PageNavigation />}
+    {process.env.NODE_ENV !== "development" && !hidePageNavigation && <PageNavigation />}
     <main>{children}</main>
     <Footer />
   </>

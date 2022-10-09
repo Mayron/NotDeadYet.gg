@@ -9,6 +9,7 @@ declare module "next-auth" {
       /** The user's postal address. */
       admin?: boolean;
       member?: boolean;
+      userId: string; // user document ID
     } & DefaultSession["user"];
   }
 }

@@ -1,3 +1,5 @@
+import { string } from "yup";
+
 const fetchGraphQL = async <T>(query: string): Promise<T> => {
   const spaceId = process.env.CONTENTFUL_SPACE_ID || "";
   const token = process.env.CONTENTFUL_ACCESS_TOKEN || "";
@@ -36,6 +38,64 @@ export const getAllRules = async (): Promise<Rule[]> => {
 
   const response = await fetchGraphQL<IRulesResponse>(query);
   return response.data.rulesCollection.items;
+};
+
+interface IGuildSummaryResponse {
+  data: {
+    guildSummary: {
+      text: string;
+    };
+  };
+}
+
+export const getGuildSummary = async (): Promise<string> => {
+  const query = `#graphql    
+    query {
+      guildSummary(id: "5eWzQ0i23PV80UYgKXfgZr") {
+        text 
+      }
+    }
+  `;
+
+  const response = await fetchGraphQL<IGuildSummaryResponse>(query);
+  return response.data.guildSummary.text;
+};
+
+interface INewsResponse {
+  data: {
+    newsCollection: {
+      items: NewsArticle[];
+    };
+  };
+}
+
+export const getAllNews = async (): Promise<NewsArticle[]> => {
+  const query = `#graphql    
+    query {
+      newsCollection(order: sys_publishedAt_DESC) {
+        items {
+          title
+          excerpt
+          sys {
+            publishedAt
+          }
+          author {
+            name
+            bio
+            profilePicture {
+              title
+              url
+              width
+              height
+            }
+          }          
+        }
+      }
+    }
+  `;
+
+  const response = await fetchGraphQL<INewsResponse>(query);
+  return response.data.newsCollection.items;
 };
 
 interface IApplyInfoResponse {

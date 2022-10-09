@@ -19,11 +19,12 @@ const activeStyle = css`
 
 const Route: React.FC<IRouteProps> = ({ text, to, children, className }) => {
   const router = useRouter();
+  const isMatch = router.asPath === to;
 
   if (to?.startsWith("/")) {
     return (
       <Link href={to}>
-        <a className={className} css={router.pathname === to && activeStyle}>
+        <a className={className} css={isMatch && activeStyle}>
           {children}
           {text}
         </a>

@@ -70,4 +70,5 @@ declare interface IApplication
   characterName?: string;
 
   status?: string;
+  createdAt: string;
 }

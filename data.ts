@@ -37,3 +37,10 @@ specializations.set("Rogue", ["Assassination", "Combat", "Subtlety"]);
 specializations.set("Shaman", ["Elemental", "Enhancement", "Restoration"]);
 specializations.set("Warlock", ["Affliction", "Demonology", "Destruction"]);
 specializations.set("Warrior", ["Arms", "Fury", "Protection"]);
+
+export const Status = {
+  NewApplicant: "New Applicant",
+  UnconfirmedMember: "Unconfirmed Member",
+  PendingInvite: "Pending Invite",
+  GuildMember: "Guild Member",
+};
