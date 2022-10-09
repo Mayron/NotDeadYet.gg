@@ -6,6 +6,7 @@ import ApplicationOverview from "../../../components/application-overview";
 import BackgroundPattern from "../../../components/background-pattern";
 import GoBackButton from "../../../components/go-back-button";
 import Layout from "../../../components/layout";
+import { Status } from "../../../data";
 import { retrieveApplication } from "../../../firebase";
 import { authOptions } from "../../api/auth/[...nextauth]";
 
@@ -65,7 +66,7 @@ const AdminApplicantPage: React.FC<IAdminApplicantPageProps> = ({ application })
         >
           <GoBackButton to="/admin" text="Go Back" />
           <div>
-            {!application.status && (
+            {application.status !== Status.GuildMember && (
               <Button
                 size="large"
                 style={{ marginRight: 20 }}
