@@ -232,10 +232,18 @@ const getCellClassName = (params: GridCellParams) => {
 
 interface IApplicantsTableProps {
   data: IApplication[];
+  hiddenColumns?: string[];
 }
 
-const ApplicantsTable: React.FC<IApplicantsTableProps> = ({ data }) => {
+const ApplicantsTable: React.FC<IApplicantsTableProps> = ({ data, hiddenColumns }) => {
   const rows = data.map((app, index) => ({ id: index, ...app }));
+  let columnsToShow = [...columns];
+
+  if (hiddenColumns) {
+    hiddenColumns.forEach((hidden) => {
+      columnsToShow = columnsToShow.filter((v) => v.field !== hidden);
+    });
+  }
 
   return (
     <div
@@ -265,7 +273,7 @@ const ApplicantsTable: React.FC<IApplicantsTableProps> = ({ data }) => {
         style={{ border: "none" }}
         isRowSelectable={() => false}
         rows={rows}
-        columns={columns}
+        columns={columnsToShow}
         pageSize={25}
         getCellClassName={(params) => getCellClassName(params)}
       />

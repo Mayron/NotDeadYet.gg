@@ -57,7 +57,10 @@ const AdminPage: React.FC<IAdminPageProps> = ({ applications, status }) => (
           padding: 0;
         `}
       >
-        <ApplicantsTable data={applications} />
+        <ApplicantsTable
+          data={applications}
+          hiddenColumns={status === Status.GuildMember ? ["age"] : undefined}
+        />
       </WhitePanel>
     </section>
   </Layout>
