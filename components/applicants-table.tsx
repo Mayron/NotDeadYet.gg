@@ -38,6 +38,22 @@ const columns: GridColDef[] = [
 
       return characterName;
     },
+    renderCell: ({ row }) => {
+      const application = row as IApplication;
+
+      if (application.characterName) {
+        return application.characterName;
+      }
+
+      const characterName = application.characters[0].name;
+
+      return (
+        <div>
+          <span>{characterName}</span>
+          <span className="user-id">{application.userId}</span>
+        </div>
+      );
+    },
   },
   {
     field: "mainSpec",

@@ -212,6 +212,13 @@ const globalStyles = css`
     color: #c69b6d;
   }
 
+  .user-id {
+    display: block;
+    font-size: 11px;
+    color: #9d9d9d;
+    font-weight: 400;
+  }
+
   dt {
     text-transform: uppercase;
     color: ${colors.text.secondary};
