@@ -19,6 +19,7 @@
     "@mui/material": "^5.10.6",
     "@mui/x-data-grid": "^5.17.5",
     "@next-auth/firebase-adapter": "^1.0.1",
+    "dompurify": "^2.4.0",
     "firebase": "^9.10.0",
     "lodash": "^4.17.21",
     "marked": "^4.1.0",
@@ -37,6 +38,7 @@
   "devDependencies": {
     "@emotion/eslint-plugin": "^11.7.0",
     "@svgr/webpack": "^6.3.1",
+    "@types/dompurify": "^2.3.4",
     "@types/lodash": "^4.14.184",
     "@types/marked": "^4.0.7",
     "@types/node": "^18.7.13",
