@@ -2,7 +2,6 @@ import { css } from "@emotion/react";
 import { marked } from "marked";
 import type { NextPage } from "next";
 import Image from "next/image";
-import { useRouter } from "next/router";
 import { useRef, useState } from "react";
 import BlizzardButton from "../components/blizzard-button";
 import HomeBanner from "../components/home/home-banner";

@@ -2,7 +2,6 @@ import React, { type MouseEventHandler } from "react";
 import { css } from "@emotion/react";
 import { useRouter } from "next/router";
 import { CircularProgress } from "@mui/material";
-import Image from "next/image";
 import blizBtnHover from "../public/assets/bliz-btn-hover.png";
 import blizBtnNormal from "../public/assets/bliz-btn-normal.png";
 import blizBtnActive from "../public/assets/bliz-btn-active.png";
