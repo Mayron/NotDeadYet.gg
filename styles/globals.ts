@@ -151,7 +151,7 @@ const globalStyles = css`
     }
 
     h5 {
-      margin-top: 20px;
+      margin-top: 10px;
       font-size: 1.275rem;
       margin-bottom: 5px;
     }
