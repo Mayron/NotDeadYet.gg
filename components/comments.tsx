@@ -57,7 +57,7 @@ const Comments: React.FC<ICommentsProps> = ({ data }) => {
     formState: { errors },
   } = form;
 
-  const onSubmit = useCallback(async () => {
+  const onSubmit = useCallback(() => {
     setLoading(true);
     // await router.push("/apply");
   }, []);
