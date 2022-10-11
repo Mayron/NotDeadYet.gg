@@ -15,7 +15,7 @@ interface IAdminApplicantPageProps {
 }
 
 const AdminApplicantPage: React.FC<IAdminApplicantPageProps> = ({ application }) => {
-  const characterName = application.characterName || application.characters[0].name;
+  const characterName = application.characters[0].name;
 
   const downloadJson = () => {
     const json = JSON.stringify(application);
@@ -31,6 +31,15 @@ const AdminApplicantPage: React.FC<IAdminApplicantPageProps> = ({ application })
     });
     a.dispatchEvent(clickEvt);
     a.remove();
+  };
+
+  const declineApplicant = async () => {
+    await fetch(`/api/applicant/decline`, {
+      method: "POST",
+      body: JSON.stringify({
+        userId: application.userId,
+      }),
+    }).then(() => window.location.reload());
   };
 
   const sendGuildInvite = async () => {
@@ -66,16 +75,25 @@ const AdminApplicantPage: React.FC<IAdminApplicantPageProps> = ({ application })
         >
           <GoBackButton to="/admin" text="Go Back" />
           <div>
-            {(application.status === Status.NewApplicant ||
-              application.status === Status.UnconfirmedMember) && (
-              <Button
-                size="large"
-                style={{ marginRight: 20 }}
-                variant="contained"
-                onClick={sendGuildInvite}
-              >
-                Send Guild Invite
-              </Button>
+            {application.status < Status.Declined && (
+              <>
+                <Button
+                  size="large"
+                  style={{ marginRight: 20 }}
+                  variant="contained"
+                  onClick={declineApplicant}
+                >
+                  Decline
+                </Button>
+                <Button
+                  size="large"
+                  style={{ marginRight: 20 }}
+                  variant="contained"
+                  onClick={sendGuildInvite}
+                >
+                  Accept & Send Invite
+                </Button>
+              </>
             )}
 
             <Button size="large" variant="outlined" onClick={downloadJson}>

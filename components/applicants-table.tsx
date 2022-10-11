@@ -29,22 +29,11 @@ const columns: GridColDef[] = [
     width: 150,
     valueGetter: ({ row }: GridValueGetterParams) => {
       const application = row as IApplication;
-
-      if (row.characterName) {
-        return row.characterName as string;
-      }
-
       const characterName = application.characters[0].name;
-
       return characterName;
     },
     renderCell: ({ row }) => {
       const application = row as IApplication;
-
-      if (application.characterName) {
-        return application.characterName;
-      }
-
       const characterName = application.characters[0].name;
 
       return (
@@ -212,9 +201,9 @@ const columns: GridColDef[] = [
       const app = row as IApplication;
       const userId = encodeURIComponent(app.userId);
       return (
-        <Route to={`/admin/applicant/${userId}`}>
+        <a href={`/admin/applicant/${userId}`}>
           <Button variant="outlined">View</Button>
-        </Route>
+        </a>
       );
     },
   },

@@ -39,8 +39,17 @@ specializations.set("Warlock", ["Affliction", "Demonology", "Destruction"]);
 specializations.set("Warrior", ["Arms", "Fury", "Protection"]);
 
 export const Status = {
-  NewApplicant: "New Applicant",
-  UnconfirmedMember: "Unconfirmed Member",
-  PendingInvite: "Pending Invite",
-  GuildMember: "Guild Member",
+  NewApplicant: 0,
+  UnconfirmedMember: 1,
+  Declined: 2,
+  PendingInvite: 3,
+  GuildMember: 4,
 };
+
+export const StatusLabels = [
+  "New Applicants",
+  "Unconfirmed Guild Members",
+  "Declined Applicants",
+  "Pending Guild Invites",
+  "Guild Members",
+];

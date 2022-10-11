@@ -6,13 +6,13 @@ import BackgroundPattern from "../../components/background-pattern";
 import Layout from "../../components/layout";
 import Route from "../../components/route";
 import WhitePanel from "../../components/white-panel";
-import { Status } from "../../data";
+import { Status, StatusLabels } from "../../data";
 import { retrieveApplicantsByStatus } from "../../firebase";
 import { authOptions } from "../api/auth/[...nextauth]";
 
 interface IAdminPageProps {
   applications: IApplication[];
-  status: string;
+  status: number;
 }
 
 const AdminPage: React.FC<IAdminPageProps> = ({ applications, status }) => (
@@ -25,7 +25,7 @@ const AdminPage: React.FC<IAdminPageProps> = ({ applications, status }) => (
             font-size: 2rem;
           `}
         >
-          {status}s
+          {StatusLabels[status]}
         </h1>
       </header>
 
@@ -43,7 +43,10 @@ const AdminPage: React.FC<IAdminPageProps> = ({ applications, status }) => (
           <Route text="New Applicants" to="/admin" />
         </li>
         <li>
-          <Route text="Unconfirmed Member" to="/admin?s=unconfirmed" />
+          <Route text="Unconfirmed Members" to="/admin?s=unconfirmed" />
+        </li>
+        <li>
+          <Route text="Declined" to="/admin?s=declined" />
         </li>
         <li>
           <Route text="Pending Invites" to="/admin?s=pending" />
@@ -81,16 +84,16 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     };
   }
 
-  let status = context.query.s as string;
+  let status = Status.NewApplicant;
 
-  if (status === "unconfirmed") {
+  if (context.query.s === "unconfirmed") {
     status = Status.UnconfirmedMember;
-  } else if (status === "pending") {
+  } else if (context.query.s === "declined") {
+    status = Status.Declined;
+  } else if (context.query.s === "pending") {
     status = Status.PendingInvite;
-  } else if (status === "members") {
+  } else if (context.query.s === "members") {
     status = Status.GuildMember;
-  } else {
-    status = Status.NewApplicant;
   }
 
   const applications = await retrieveApplicantsByStatus(status);

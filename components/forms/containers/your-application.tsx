@@ -1,6 +1,7 @@
 import { css } from "@emotion/react";
 import { Button } from "@mui/material";
 import { useEffect } from "react";
+import { Status } from "../../../data";
 import ApplicationOverview from "../../application-overview";
 import Comments from "../../comments";
 
@@ -34,7 +35,7 @@ const YourApplication: React.FC<IYourApplicationProps> = ({ application }) => {
       >
         <h1>Your Application</h1>
 
-        {application.status === "Pending Invite" && (
+        {application.status === Status.PendingInvite && (
           <>
             <p>
               Congratulations, Your application has been accepted!

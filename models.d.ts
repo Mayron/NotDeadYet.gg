@@ -63,12 +63,6 @@ declare interface IApplication
     ICharacterInfoFormInput,
     IAboutYouFormInput {
   userId: string;
-
-  /**
-   * @deprecated Use characters array instead
-   */
-  characterName?: string;
-
-  status?: string;
+  status: number;
   createdAt: string;
 }

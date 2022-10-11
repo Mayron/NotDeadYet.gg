@@ -54,7 +54,7 @@ export const retrieveApplication = async (userId: string) => {
   return undefined;
 };
 
-export const retrieveApplicantsByStatus = async (status: string) => {
+export const retrieveApplicantsByStatus = async (status: number) => {
   const results: IApplication[] = [];
 
   try {
@@ -72,7 +72,7 @@ export const retrieveApplicantsByStatus = async (status: string) => {
   return results;
 };
 
-export const updateApplicationStatus = async (userId: string, status: string) => {
+export const updateApplicationStatus = async (userId: string, status: number) => {
   try {
     const docRef = doc(applications, userId);
     await updateDoc(docRef, { status });

@@ -10,6 +10,7 @@ interface IRouteProps {
   to: string;
   children?: React.ReactNode;
   className?: string;
+  ssr?: boolean;
 }
 
 const activeStyle = css`
@@ -17,11 +18,11 @@ const activeStyle = css`
   font-weight: ${vars.font.standard.weights.bold};
 `;
 
-const Route: React.FC<IRouteProps> = ({ text, to, children, className }) => {
+const Route: React.FC<IRouteProps> = ({ text, to, children, className, ssr = false }) => {
   const router = useRouter();
   const isMatch = router.asPath === to;
 
-  if (to?.startsWith("/")) {
+  if (!ssr && to?.startsWith("/")) {
     return (
       <Link href={to}>
         <a className={className} css={isMatch && activeStyle}>
@@ -33,7 +34,7 @@ const Route: React.FC<IRouteProps> = ({ text, to, children, className }) => {
   }
 
   return (
-    <a className={className} href={to}>
+    <a className={className} css={isMatch && activeStyle} href={to}>
       {children}
       {text}
     </a>
