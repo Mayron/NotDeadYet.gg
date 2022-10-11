@@ -1,5 +1,6 @@
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
+import { StatusLabels } from "../data";
 import colors from "../styles/colors";
 import CharacterDetails from "./character-details";
 import WhitePanel from "./white-panel";
@@ -39,11 +40,7 @@ const ApplicationOverview: React.FC<IApplicationOverviewProps> = ({ application 
         `}
       >
         <dt>Status</dt>
-        {application.status ? (
-          <dd>{application.status}</dd>
-        ) : (
-          <dd>{application.inGuild ? "Unconfirmed Guild Member" : "New Applicant"}</dd>
-        )}
+        <dd>{StatusLabels[application.status]}</dd>
       </li>
     </dl>
     {application.characters.map((c, i) => (

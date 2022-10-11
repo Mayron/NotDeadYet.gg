@@ -6,7 +6,7 @@ import BackgroundPattern from "../../components/background-pattern";
 import Layout from "../../components/layout";
 import Route from "../../components/route";
 import WhitePanel from "../../components/white-panel";
-import { Status, StatusLabels } from "../../data";
+import { Status, StatusHeaders } from "../../data";
 import { retrieveApplicantsByStatus } from "../../firebase";
 import { authOptions } from "../api/auth/[...nextauth]";
 
@@ -25,7 +25,7 @@ const AdminPage: React.FC<IAdminPageProps> = ({ applications, status }) => (
             font-size: 2rem;
           `}
         >
-          {StatusLabels[status]}
+          {StatusHeaders[status]}
         </h1>
       </header>
 

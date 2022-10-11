@@ -46,10 +46,18 @@ export const Status = {
   GuildMember: 4,
 };
 
-export const StatusLabels = [
+export const StatusHeaders = [
   "New Applicants",
   "Unconfirmed Guild Members",
   "Declined Applicants",
   "Pending Guild Invites",
   "Guild Members",
+];
+
+export const StatusLabels = [
+  "New Applicant",
+  "Unconfirmed Guild Member",
+  "Declined",
+  "Pending Guild Invites",
+  "Guild Member",
 ];
