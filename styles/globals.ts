@@ -147,11 +147,13 @@ const globalStyles = css`
     h4 {
       margin-top: 30px;
       font-size: 1.75rem;
+      margin-bottom: 10px;
     }
 
     h5 {
       margin-top: 20px;
       font-size: 1.275rem;
+      margin-bottom: 5px;
     }
   }
 
