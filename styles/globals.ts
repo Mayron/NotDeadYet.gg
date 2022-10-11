@@ -145,7 +145,7 @@ const globalStyles = css`
     }
 
     h4 {
-      margin-top: 30px;
+      margin-top: 20px;
       font-size: 1.75rem;
       margin-bottom: 10px;
     }
