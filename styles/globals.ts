@@ -145,7 +145,12 @@ const globalStyles = css`
     }
 
     h4 {
-      font-size: 1.4rem;
+      padding-top: 30px;
+      font-size: 1.75rem;
+    }
+
+    h5 {
+      font-size: 1.275rem;
     }
   }
 
