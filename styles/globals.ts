@@ -247,6 +247,13 @@ const globalStyles = css`
       padding-bottom: 0;
     }
   }
+
+  .grey-box {
+    border: 1px solid #e1e1e1;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border-radius: 2px;
+  }
 `;
 
 export default globalStyles;
