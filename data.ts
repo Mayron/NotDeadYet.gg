@@ -58,6 +58,6 @@ export const StatusLabels = [
   "New Applicant",
   "Unconfirmed Guild Member",
   "Declined",
-  "Pending Guild Invites",
+  "Pending Guild Invite",
   "Guild Member",
 ];
