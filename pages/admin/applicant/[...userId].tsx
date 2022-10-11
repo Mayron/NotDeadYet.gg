@@ -79,6 +79,7 @@ const AdminApplicantPage: React.FC<IAdminApplicantPageProps> = ({ application })
               <>
                 <Button
                   size="large"
+                  color="error"
                   style={{ marginRight: 20 }}
                   variant="contained"
                   onClick={declineApplicant}
@@ -87,6 +88,7 @@ const AdminApplicantPage: React.FC<IAdminApplicantPageProps> = ({ application })
                 </Button>
                 <Button
                   size="large"
+                  color="success"
                   style={{ marginRight: 20 }}
                   variant="contained"
                   onClick={sendGuildInvite}
