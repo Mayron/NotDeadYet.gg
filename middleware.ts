@@ -1,7 +1,7 @@
 import { withAuth } from "next-auth/middleware";
 
 export default withAuth({
-  secret: process.env.NEXTAUTH_SECRET,
+  secret: "E7mzcqtSzysJKnEu",
   callbacks: {
     authorized: ({ token }) => {
       if (token?.admin) {
