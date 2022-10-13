@@ -237,7 +237,10 @@ const ApplicantsTable: React.FC<IApplicantsTableProps> = ({
   data,
   hiddenColumns = ["status"],
 }) => {
-  const rows = data.map((app, index) => ({ id: index, ...app }));
+  const rows = data
+    .sort((a, b) => (a.characters[0].name < b.characters[0].name ? -1 : 1))
+    .map((app, index) => ({ id: index, ...app }));
+
   let columnsToShow = [...columns];
 
   if (hiddenColumns) {
