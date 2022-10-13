@@ -21,7 +21,7 @@ const AdminAcceptedPage: React.FC<IAdminPageProps> = ({ applications }) => (
             font-size: 2rem;
           `}
         >
-          Pending Guild Invites
+          Accepted Applicants
         </h1>
       </header>
       <AdminNav />
