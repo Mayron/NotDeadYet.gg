@@ -13,7 +13,6 @@ export const authOptions: NextAuthOptions = {
   ],
   adapter: FirestoreAdapter(firebaseConfig),
   session: { strategy: "jwt" },
-  secret: process.env.NEXTAUTH_SECRET,
   callbacks: {
     jwt: ({ token, user }) => {
       if (user) {
