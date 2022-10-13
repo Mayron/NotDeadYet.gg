@@ -1,6 +1,4 @@
 import { css } from "@emotion/react";
-import { GetServerSidePropsContext } from "next";
-import { unstable_getServerSession } from "next-auth";
 import AdminNav from "../../components/admin/admin-nav";
 import ApplicantsTable from "../../components/applicants-table";
 import BackgroundPattern from "../../components/background-pattern";
@@ -8,7 +6,6 @@ import Layout from "../../components/layout";
 import WhitePanel from "../../components/white-panel";
 import { Status } from "../../data";
 import { retrieveApplicantsByStatus } from "../../firebase";
-import { authOptions } from "../api/auth/[...nextauth]";
 
 interface IAdminPageProps {
   applications: IApplication[];

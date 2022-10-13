@@ -1,6 +1,4 @@
 import { css } from "@emotion/react";
-import { GetServerSidePropsContext } from "next";
-import { unstable_getServerSession } from "next-auth";
 import AdminNav from "../../components/admin/admin-nav";
 import ApplicantsTable from "../../components/applicants-table";
 import BackgroundPattern from "../../components/background-pattern";
@@ -8,13 +6,12 @@ import Layout from "../../components/layout";
 import WhitePanel from "../../components/white-panel";
 import { Status } from "../../data";
 import { retrieveApplicantsByStatus } from "../../firebase";
-import { authOptions } from "../api/auth/[...nextauth]";
 
 interface IAdminPageProps {
   applications: IApplication[];
 }
 
-const AdminPage: React.FC<IAdminPageProps> = ({ applications }) => (
+const AdminAcceptedPage: React.FC<IAdminPageProps> = ({ applications }) => (
   <Layout title="Admin | Not Dead Yet">
     <BackgroundPattern />
     <section style={{ maxWidth: 1200 }}>
@@ -24,7 +21,7 @@ const AdminPage: React.FC<IAdminPageProps> = ({ applications }) => (
             font-size: 2rem;
           `}
         >
-          Guild Members
+          Pending Guild Invites
         </h1>
       </header>
       <AdminNav />
@@ -39,13 +36,14 @@ const AdminPage: React.FC<IAdminPageProps> = ({ applications }) => (
   </Layout>
 );
 
-export default AdminPage;
+export default AdminAcceptedPage;
 
 export async function getStaticProps() {
-  const applications = await retrieveApplicantsByStatus(Status.GuildMember);
+  const pending = await retrieveApplicantsByStatus(Status.PendingInvite);
+  const members = await retrieveApplicantsByStatus(Status.GuildMember);
 
   return {
-    props: { applications },
+    props: { applications: [...pending, ...members] },
     revalidate: 60 * 5,
   };
 }

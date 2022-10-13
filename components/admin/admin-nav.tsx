@@ -22,10 +22,7 @@ const AdminNav: React.FC = () => (
       <Route text="Declined" to="/admin/declined" />
     </li>
     <li>
-      <Route text="Pending Invites" to="/admin/pending" />
-    </li>
-    <li>
-      <Route text="Guild Members" to="/admin/members" />
+      <Route text="Accepted" to="/admin/accepted" />
     </li>
   </ul>
 );

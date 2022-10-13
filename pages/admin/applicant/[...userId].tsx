@@ -1,14 +1,12 @@
 import { css } from "@emotion/react";
 import { Button } from "@mui/material";
 import { GetServerSidePropsContext } from "next";
-import { unstable_getServerSession } from "next-auth";
 import ApplicationOverview from "../../../components/application-overview";
 import BackgroundPattern from "../../../components/background-pattern";
 import GoBackButton from "../../../components/go-back-button";
 import Layout from "../../../components/layout";
 import { Status } from "../../../data";
 import { retrieveApplication } from "../../../firebase";
-import { authOptions } from "../../api/auth/[...nextauth]";
 
 interface IAdminApplicantPageProps {
   application: IApplication;
@@ -73,7 +71,7 @@ const AdminApplicantPage: React.FC<IAdminApplicantPageProps> = ({ application })
             align-items: center;
           `}
         >
-          <GoBackButton to="/admin" text="Go Back" />
+          <GoBackButton text="Go Back" />
           <div>
             {application.status < Status.Declined && (
               <>
@@ -110,19 +108,8 @@ const AdminApplicantPage: React.FC<IAdminApplicantPageProps> = ({ application })
 
 export default AdminApplicantPage;
 
+// TODO: Change to getStaticPaths
 export async function getServerSideProps(context: GetServerSidePropsContext) {
-  const session = await unstable_getServerSession(context.req, context.res, authOptions);
-  const user = session?.user || null;
-
-  if (!user?.admin) {
-    return {
-      redirect: {
-        destination: "/",
-        permanent: false,
-      },
-    };
-  }
-
   if (!context.query.userId) {
     return {
       redirect: {

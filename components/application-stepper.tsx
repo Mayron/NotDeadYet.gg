@@ -4,7 +4,6 @@ import StepLabel from "@mui/material/StepLabel";
 import { css } from "@emotion/react";
 import { StepButton } from "@mui/material";
 import { useRouter } from "next/router";
-import Route from "./route";
 
 const steps = ["Requirements", "Character Info", "About You"];
 const urls = ["/apply", "/apply/character-info", "/apply/about-you"];

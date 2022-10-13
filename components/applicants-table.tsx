@@ -8,6 +8,7 @@ import {
   GridCellParams,
 } from "@mui/x-data-grid";
 import moment from "moment";
+import { Status } from "../data";
 
 const StyledAlts = styled.div`
   display: flex;
@@ -190,6 +191,16 @@ const columns: GridColDef[] = [
     },
   },
   {
+    field: "status",
+    headerName: "Pending Invite?",
+    align: "center",
+    width: 160,
+    valueGetter: ({ row }: GridValueGetterParams) => {
+      const application = row as IApplication;
+      return application.status === Status.PendingInvite ? "Yes" : "";
+    },
+  },
+  {
     field: "view",
     headerName: "",
     align: "right",
@@ -223,7 +234,10 @@ interface IApplicantsTableProps {
   hiddenColumns?: string[];
 }
 
-const ApplicantsTable: React.FC<IApplicantsTableProps> = ({ data, hiddenColumns }) => {
+const ApplicantsTable: React.FC<IApplicantsTableProps> = ({
+  data,
+  hiddenColumns = ["status"],
+}) => {
   const rows = data.map((app, index) => ({ id: index, ...app }));
   let columnsToShow = [...columns];
 
