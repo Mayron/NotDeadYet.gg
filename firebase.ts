@@ -29,9 +29,8 @@ export const storeApplication = async (userId: string, application: IApplication
   try {
     application.userId = userId;
     application.createdAt = new Date().toISOString();
-    application.status = application.inGuild
-      ? Status.UnconfirmedMember
-      : Status.NewApplicant;
+    application.status =
+      application.inGuild === "yes" ? Status.UnconfirmedMember : Status.NewApplicant;
     await setDoc(doc(applications, userId), application);
   } catch (err) {
     console.error("storeApplication error: %s.", err);

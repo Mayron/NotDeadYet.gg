@@ -44,6 +44,6 @@ export async function getStaticProps() {
 
   return {
     props: { applications: [...pending, ...members] },
-    revalidate: 60 * 5,
+    revalidate: 120,
   };
 }

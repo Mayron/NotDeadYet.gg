@@ -43,6 +43,6 @@ export async function getStaticProps() {
 
   return {
     props: { applications },
-    revalidate: 60 * 5,
+    revalidate: 120,
   };
 }
