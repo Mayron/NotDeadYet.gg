@@ -14,14 +14,14 @@ export const authOptions: NextAuthOptions = {
   adapter: FirestoreAdapter(firebaseConfig),
   session: { strategy: "jwt" },
   callbacks: {
-    jwt: async ({ token, user }) => {
+    jwt: ({ token, user }) => {
       if (user) {
         token.admin = user.admin;
       }
 
       return token;
     },
-    session: async ({ session, token }) => {
+    session: ({ session, token }) => {
       if (session?.user && token) {
         session.user.admin = token.admin as boolean;
         session.user.userId = token.sub as string;
