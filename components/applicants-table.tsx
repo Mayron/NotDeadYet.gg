@@ -182,8 +182,7 @@ const columns: GridColDef[] = [
       const application = row as IApplication;
 
       if (application.createdAt) {
-        const date = new Date(application.createdAt);
-        const value = moment(date).fromNow();
+        const value = moment(application.createdAt).fromNow();
         return value;
       }
 

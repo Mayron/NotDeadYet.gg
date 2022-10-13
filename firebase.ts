@@ -28,7 +28,7 @@ const applications = collection(firestore, "applications");
 export const storeApplication = async (userId: string, application: IApplication) => {
   try {
     application.userId = userId;
-    application.createdAt = new Date().toISOString();
+    application.createdAt = new Date().toUTCString();
     application.status =
       application.inGuild === "yes" ? Status.UnconfirmedMember : Status.NewApplicant;
     await setDoc(doc(applications, userId), application);
