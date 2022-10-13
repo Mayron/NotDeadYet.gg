@@ -12,10 +12,7 @@ export const authOptions: NextAuthOptions = {
     }),
   ],
   adapter: FirestoreAdapter(firebaseConfig),
-  session: { strategy: "jwt" },
-  jwt: {
-    secret: process.env.NEXTAUTH_SECRET,
-  },
+  session: { strategy: "jwt", maxAge: 90 * 24 * 60 * 60 }, // 90 days, change it as you like },
   callbacks: {
     jwt: ({ token, user }) => {
       if (user) {
