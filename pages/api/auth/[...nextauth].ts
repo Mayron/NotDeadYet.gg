@@ -12,16 +12,16 @@ export const authOptions: NextAuthOptions = {
     }),
   ],
   adapter: FirestoreAdapter(firebaseConfig),
-  session: { strategy: "jwt", maxAge: 90 * 24 * 60 * 60 }, // 90 days, change it as you like },
+  session: { strategy: "jwt" },
   callbacks: {
-    jwt: ({ token, user }) => {
+    jwt: async ({ token, user }) => {
       if (user) {
         token.admin = user.admin;
       }
 
       return token;
     },
-    session: ({ session, token }) => {
+    session: async ({ session, token }) => {
       if (session?.user && token) {
         session.user.admin = token.admin as boolean;
         session.user.userId = token.sub as string;
