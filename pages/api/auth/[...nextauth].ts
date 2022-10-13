@@ -12,13 +12,21 @@ export const authOptions: NextAuthOptions = {
     }),
   ],
   adapter: FirestoreAdapter(firebaseConfig),
+  session: { strategy: "jwt" },
   callbacks: {
-    session({ session, user }) {
-      if (session?.user) {
-        session.user.admin = user.admin as boolean;
-        session.user.member = user.member as boolean;
-        session.user.userId = user.id;
+    jwt: ({ token, user }) => {
+      if (user) {
+        token.admin = user.admin;
       }
+
+      return token;
+    },
+    session: ({ session, token }) => {
+      if (session?.user && token) {
+        session.user.admin = token.admin as boolean;
+        session.user.userId = token.sub as string;
+      }
+
       return session;
     },
   },

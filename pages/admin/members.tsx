@@ -12,7 +12,6 @@ import { authOptions } from "../api/auth/[...nextauth]";
 
 interface IAdminPageProps {
   applications: IApplication[];
-  status: number;
 }
 
 const AdminPage: React.FC<IAdminPageProps> = ({ applications }) => (
@@ -25,7 +24,7 @@ const AdminPage: React.FC<IAdminPageProps> = ({ applications }) => (
             font-size: 2rem;
           `}
         >
-          New Applicants
+          Guild Members
         </h1>
       </header>
       <AdminNav />
@@ -34,7 +33,7 @@ const AdminPage: React.FC<IAdminPageProps> = ({ applications }) => (
           padding: 0;
         `}
       >
-        <ApplicantsTable data={applications} />
+        <ApplicantsTable data={applications} hiddenColumns={["age"]} />
       </WhitePanel>
     </section>
   </Layout>
@@ -43,7 +42,7 @@ const AdminPage: React.FC<IAdminPageProps> = ({ applications }) => (
 export default AdminPage;
 
 export async function getStaticProps() {
-  const applications = await retrieveApplicantsByStatus(Status.NewApplicant);
+  const applications = await retrieveApplicantsByStatus(Status.GuildMember);
 
   return {
     props: { applications },

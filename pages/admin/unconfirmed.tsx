@@ -12,10 +12,9 @@ import { authOptions } from "../api/auth/[...nextauth]";
 
 interface IAdminPageProps {
   applications: IApplication[];
-  status: number;
 }
 
-const AdminPage: React.FC<IAdminPageProps> = ({ applications }) => (
+const AdminUnconfirmedPage: React.FC<IAdminPageProps> = ({ applications }) => (
   <Layout title="Admin | Not Dead Yet">
     <BackgroundPattern />
     <section style={{ maxWidth: 1200 }}>
@@ -25,7 +24,7 @@ const AdminPage: React.FC<IAdminPageProps> = ({ applications }) => (
             font-size: 2rem;
           `}
         >
-          New Applicants
+          Unconfirmed Guild Members
         </h1>
       </header>
       <AdminNav />
@@ -40,10 +39,10 @@ const AdminPage: React.FC<IAdminPageProps> = ({ applications }) => (
   </Layout>
 );
 
-export default AdminPage;
+export default AdminUnconfirmedPage;
 
 export async function getStaticProps() {
-  const applications = await retrieveApplicantsByStatus(Status.NewApplicant);
+  const applications = await retrieveApplicantsByStatus(Status.UnconfirmedMember);
 
   return {
     props: { applications },
