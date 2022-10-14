@@ -37,16 +37,31 @@ const AdminApplicantPage: React.FC<IAdminApplicantPageProps> = ({ application })
       body: JSON.stringify({
         userId: application.userId,
       }),
-    }).then(() => window.location.reload());
+    }).then(async () => {
+      await fetch(
+        `/api/revalidate?token=${
+          process.env.NEXT_PUBLIC_REVALIDATE_TOKEN ?? ""
+        }&type=admin&status=declined`,
+      );
+      return window.location.reload();
+    });
   };
 
-  const sendGuildInvite = async () => {
+  const acceptAndSendInvite = async () => {
     await fetch(`/api/applicant/invite`, {
       method: "POST",
       body: JSON.stringify({
         userId: application.userId,
       }),
-    }).then(() => window.location.reload());
+    }).then(async () => {
+      await fetch(
+        `/api/revalidate?token=${
+          process.env.NEXT_PUBLIC_REVALIDATE_TOKEN ?? ""
+        }&type=admin&status=accepted`,
+      );
+
+      return window.location.reload();
+    });
   };
 
   return (
@@ -89,7 +104,7 @@ const AdminApplicantPage: React.FC<IAdminApplicantPageProps> = ({ application })
                   color="success"
                   style={{ marginRight: 20 }}
                   variant="contained"
-                  onClick={sendGuildInvite}
+                  onClick={acceptAndSendInvite}
                 >
                   Accept & Send Invite
                 </Button>
