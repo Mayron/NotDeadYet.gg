@@ -7,6 +7,7 @@ import GoBackButton from "../../../components/go-back-button";
 import Layout from "../../../components/layout";
 import { Status } from "../../../data";
 import { retrieveApplication } from "../../../firebase";
+import media from "../../../styles/media-queries";
 
 interface IAdminApplicantPageProps {
   application: IApplication;
@@ -67,39 +68,65 @@ const AdminApplicantPage: React.FC<IAdminApplicantPageProps> = ({ application })
         <footer
           css={css`
             display: flex;
-            justify-content: space-between;
+            flex-direction: column;
             align-items: center;
           `}
         >
-          <GoBackButton text="Go Back" />
-          <div>
+          <div
+            css={css`
+              margin-bottom: 60px;
+              display: flex;
+              justify-content: space-between;
+              width: 100%;
+
+              button {
+                min-width: 180px;
+              }
+
+              ${media.down(`sm`)`    
+                margin-bottom: 30px;    
+                display: flex;                
+                align-items: center;
+                width: 100%;
+                flex-direction: column;
+
+                button {
+                  margin-right: 0;
+                  height: 50px;
+                  margin-bottom: 20px;
+                  width: 360px;
+                  min-width: 360px;
+                }
+              `};
+            `}
+          >
             {application.status < Status.Declined && (
-              <>
-                <Button
-                  size="large"
-                  color="error"
-                  style={{ marginRight: 20 }}
-                  variant="contained"
-                  onClick={declineApplicant}
-                >
-                  Decline
-                </Button>
-                <Button
-                  size="large"
-                  color="success"
-                  style={{ marginRight: 20 }}
-                  variant="contained"
-                  onClick={acceptAndSendInvite}
-                >
-                  Accept & Send Invite
-                </Button>
-              </>
+              <Button
+                size="large"
+                color="error"
+                variant="contained"
+                onClick={declineApplicant}
+              >
+                Decline
+              </Button>
             )}
 
             <Button size="large" variant="outlined" onClick={downloadJson}>
               Download as JSON
             </Button>
+
+            {application.status < Status.Declined && (
+              <Button
+                size="large"
+                color="success"
+                variant="contained"
+                onClick={acceptAndSendInvite}
+              >
+                Accept & Send Invite
+              </Button>
+            )}
           </div>
+          <GoBackButton text="Back to Admin Dashboard" to="/admin" />
         </footer>
       </section>
     </Layout>
