@@ -88,7 +88,7 @@ const AdminApplicantPage: React.FC<IAdminApplicantPageProps> = ({ application })
                 display: flex;                
                 align-items: center;
                 width: 100%;
-                flex-direction: column;
+                flex-direction: column-reverse;
 
                 button {
                   margin-right: 0;
