@@ -18,7 +18,7 @@ const declineHandler = async (req: NextApiRequest, res: NextApiResponse) => {
   await updateApplicationStatus(payload.userId, Status.Declined);
 
   await res.revalidate("/admin", { unstable_onlyGenerated: true });
-  await res.revalidate("/admin/declined", { unstable_onlyGenerated: true });
+  await res.revalidate("/admin/declined");
   console.info(`Revalidating admin paths for declined applicant.`);
 
   res.status(200).end();

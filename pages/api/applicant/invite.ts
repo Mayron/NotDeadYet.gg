@@ -18,7 +18,7 @@ const inviteHandler = async (req: NextApiRequest, res: NextApiResponse) => {
   await updateApplicationStatus(payload.userId, Status.PendingInvite);
 
   await res.revalidate("/admin", { unstable_onlyGenerated: true });
-  await res.revalidate("/admin/accepted", { unstable_onlyGenerated: true });
+  await res.revalidate("/admin/accepted");
   console.info(`Revalidating admin paths for accepted applicant with pending invite.`);
 
   res.status(200).end();
