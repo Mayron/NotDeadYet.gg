@@ -37,14 +37,7 @@ const AdminApplicantPage: React.FC<IAdminApplicantPageProps> = ({ application })
       body: JSON.stringify({
         userId: application.userId,
       }),
-    }).then(async () => {
-      await fetch(
-        `/api/revalidate?token=${
-          process.env.NEXT_PUBLIC_REVALIDATE_TOKEN ?? ""
-        }&type=admin&status=declined`,
-      );
-      return window.location.reload();
-    });
+    }).then(() => window.location.reload());
   };
 
   const acceptAndSendInvite = async () => {
@@ -53,15 +46,7 @@ const AdminApplicantPage: React.FC<IAdminApplicantPageProps> = ({ application })
       body: JSON.stringify({
         userId: application.userId,
       }),
-    }).then(async () => {
-      await fetch(
-        `/api/revalidate?token=${
-          process.env.NEXT_PUBLIC_REVALIDATE_TOKEN ?? ""
-        }&type=admin&status=accepted`,
-      );
-
-      return window.location.reload();
-    });
+    }).then(() => window.location.reload());
   };
 
   return (

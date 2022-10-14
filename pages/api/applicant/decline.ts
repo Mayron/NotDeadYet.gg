@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import type { NextApiRequest, NextApiResponse } from "next";
 import { unstable_getServerSession } from "next-auth";
 import { Status } from "../../../data";
@@ -15,6 +16,11 @@ const declineHandler = async (req: NextApiRequest, res: NextApiResponse) => {
 
   const payload = JSON.parse(req.body as string) as { userId: string };
   await updateApplicationStatus(payload.userId, Status.Declined);
+
+  await res.revalidate("/admin");
+  await res.revalidate("/admin/declined");
+  console.info(`Revalidating admin paths for declined applicant.`);
+
   res.status(200).end();
 };
 

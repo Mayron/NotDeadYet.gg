@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import type { NextApiRequest, NextApiResponse } from "next";
 import { unstable_getServerSession } from "next-auth";
 import { Status } from "../../../data";
@@ -15,6 +16,11 @@ const inviteHandler = async (req: NextApiRequest, res: NextApiResponse) => {
 
   const payload = JSON.parse(req.body as string) as { userId: string };
   await updateApplicationStatus(payload.userId, Status.PendingInvite);
+
+  await res.revalidate("/admin");
+  await res.revalidate("/admin/accepted");
+  console.info(`Revalidating admin paths for accepted applicant with pending invite.`);
+
   res.status(200).end();
 };
 
