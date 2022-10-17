@@ -5,7 +5,7 @@ import BackgroundPattern from "../../components/background-pattern";
 import Layout from "../../components/layout";
 import WhitePanel from "../../components/white-panel";
 import { Status } from "../../data";
-import { retrieveApplicantsByStatus } from "../../firebase";
+import { getAllApplicationsByStatus } from "../../firebase";
 
 interface IAdminPageProps {
   applications: IApplication[];
@@ -39,8 +39,8 @@ const AdminAcceptedPage: React.FC<IAdminPageProps> = ({ applications }) => (
 export default AdminAcceptedPage;
 
 export async function getStaticProps() {
-  const pending = await retrieveApplicantsByStatus(Status.PendingInvite);
-  const members = await retrieveApplicantsByStatus(Status.GuildMember);
+  const pending = await getAllApplicationsByStatus(Status.PendingInvite);
+  const members = await getAllApplicationsByStatus(Status.GuildMember);
 
   return {
     props: { applications: [...pending, ...members] },

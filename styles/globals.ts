@@ -20,7 +20,8 @@ const globalStyles = css`
     position: relative;
   }
 
-  ul {
+  ul,
+  ol {
     margin-left: 18px;
 
     &.no-markers {
@@ -100,9 +101,21 @@ const globalStyles = css`
     user-select: none;
     display: block;
     border: none;
+  }
 
+  button,
+  input:not([type="text"]),
+  input:not([type="number"]) {
     &:hover {
       cursor: pointer;
+    }
+  }
+
+  input[type="text"],
+  textarea {
+    &:focus,
+    &:hover {
+      cursor: text;
     }
   }
 
@@ -160,7 +173,7 @@ const globalStyles = css`
   hr {
     margin: 40px auto;
     border: none;
-    background-color: #c1c1c1;
+    background-color: ${colors.grey.border};
     height: 1px;
   }
 
@@ -223,7 +236,7 @@ const globalStyles = css`
   .user-id {
     display: block;
     font-size: 11px;
-    color: #9d9d9d;
+    color: ${colors.grey.font};
     font-weight: 400;
   }
 

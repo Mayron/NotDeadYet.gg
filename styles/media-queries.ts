@@ -13,26 +13,6 @@ export const breakpoints: { [index: string]: number } = {
   xxxl: 1600,
 };
 
-export const useBreakpoint = () => {
-  const [breakpoint, setBreakpoint] = useState<number>(
-    typeof window !== "undefined" ? window.innerWidth : 0,
-  );
-
-  useEffect(() => {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
-    const calcInnerWidth = throttle(() => {
-      setBreakpoint(window.innerWidth);
-    }, 200);
-
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-    window.addEventListener("resize", calcInnerWidth);
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-    return () => window.removeEventListener("resize", calcInnerWidth);
-  }, []);
-
-  return breakpoint;
-};
-
 export type BreakPoints = "xs" | "sm" | "md" | "lg" | "xl" | "xxl" | "xxxl";
 type MediaQueryFunc = (
   name: BreakPoints,

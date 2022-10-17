@@ -17,6 +17,7 @@ export const authOptions: NextAuthOptions = {
     jwt: ({ token, user }) => {
       if (user) {
         token.admin = user.admin;
+        token.username = user.username;
       }
 
       return token;
@@ -25,6 +26,7 @@ export const authOptions: NextAuthOptions = {
       if (session?.user && token) {
         session.user.admin = token.admin as boolean;
         session.user.userId = token.sub as string;
+        session.user.username = token.username as string;
       }
 
       return session;

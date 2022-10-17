@@ -17,13 +17,18 @@ export default {
   blue: {
     glow: "#54f0f8",
     faint: "#9eccfa",
-    dark: "#053361",
-    darkest: "#0b1828",
+    medium: "#053361",
+    dark: "#0b1828",
+    darkest: "#15181d",
   },
 
   grey: {
-    dark: "#757575",
-    light: "#cdcdcd",
-    lightBg: "#f4f4f4",
+    font: "#757575",
+    border: "#cdcdcd",
+
+    background: {
+      light: "#f4f4f4",
+      medium: "#ebebeb",
+    },
   },
 };

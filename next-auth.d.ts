@@ -9,6 +9,7 @@ declare module "next-auth" {
       /** The user's postal address. */
       admin?: boolean;
       userId: string; // user document ID
+      username?: string; // our custom username (user.name is the battle.net username)
     } & DefaultSession["user"];
   }
 }

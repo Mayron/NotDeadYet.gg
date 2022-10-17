@@ -13,8 +13,9 @@ import { authOptions } from "../api/auth/[...nextauth]";
 import BackgroundPattern from "../../components/background-pattern";
 import WhitePanel from "../../components/white-panel";
 import ApplicationStepper from "../../components/application-stepper";
-import { retrieveApplication } from "../../firebase";
+import { getDocument } from "../../firebase";
 import YourApplication from "../../components/forms/containers/your-application";
+import { Collections } from "../../data";
 
 interface INotSubmitted {
   loggedIn: boolean;
@@ -88,12 +89,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     const userId = session?.user?.userId || null;
 
     if (userId) {
-      application = (await retrieveApplication(userId)) || null;
-    }
-
-    if (!application && session.user.name) {
-      // revert to old method:
-      application = (await retrieveApplication(session.user.name)) || null;
+      application = await getDocument<IApplication>(userId, Collections.Applications);
     }
   }
 

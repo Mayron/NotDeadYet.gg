@@ -5,7 +5,7 @@ import BackgroundPattern from "../../components/background-pattern";
 import Layout from "../../components/layout";
 import WhitePanel from "../../components/white-panel";
 import { Status } from "../../data";
-import { retrieveApplicantsByStatus } from "../../firebase";
+import { getAllApplicationsByStatus } from "../../firebase";
 
 interface IAdminPageProps {
   applications: IApplication[];
@@ -39,7 +39,7 @@ const AdminDeclinedPage: React.FC<IAdminPageProps> = ({ applications }) => (
 export default AdminDeclinedPage;
 
 export async function getStaticProps() {
-  const applications = await retrieveApplicantsByStatus(Status.Declined);
+  const applications = await getAllApplicationsByStatus(Status.Declined);
 
   return {
     props: { applications },

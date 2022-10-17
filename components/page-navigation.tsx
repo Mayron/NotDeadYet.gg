@@ -6,14 +6,16 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faDiscord } from "@fortawesome/free-brands-svg-icons";
 import Image from "next/image";
 import Route from "./route";
-import media, { breakpoints, useBreakpoint } from "../styles/media-queries";
+import media from "../styles/media-queries";
 import ndyIcon from "../public/assets/ndy-icon.png";
+import { getUsername } from "../utils";
+import colors from "../styles/colors";
 
 const PageNavigation: React.FC = () => {
   const { data: session } = useSession();
-  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const breakpoint = useBreakpoint();
+  const username = getUsername(session);
 
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -24,16 +26,10 @@ const PageNavigation: React.FC = () => {
     setAnchorEl(null);
   };
 
-  let username = session?.user?.name;
-
-  if (username) {
-    [username] = username.split("#");
-  }
-
   return (
     <nav
       css={css`
-        background-color: #15181d;
+        background-color: ${colors.blue.darkest};
       `}
     >
       <ul
@@ -41,7 +37,7 @@ const PageNavigation: React.FC = () => {
           max-width: 900px;
           margin: auto;
           list-style-type: none;
-          color: white;
+          color: ${colors.white};
           display: flex;
           align-items: stretch;
           text-transform: uppercase;
@@ -86,17 +82,15 @@ const PageNavigation: React.FC = () => {
           }
         `}
       >
-        {breakpoint > breakpoints.sm ? (
-          <li>
-            <Route to="/" text="Home" />
-          </li>
-        ) : (
-          <li className="logo">
-            <Route to="/">
-              <Image src={ndyIcon} alt="Home" placeholder="blur" width={20} height={26} />
-            </Route>
-          </li>
-        )}
+        <li className="md-up">
+          <Route to="/" text="Home" />
+        </li>
+
+        <li className="logo sm-down">
+          <Route to="/">
+            <Image src={ndyIcon} alt="Home" placeholder="blur" width={20} height={26} />
+          </Route>
+        </li>
 
         <li>
           <Route to="/news" text="News" />
@@ -114,11 +108,9 @@ const PageNavigation: React.FC = () => {
             }
           `}
         >
-          <Route
-            to={process.env.NEXT_PUBLIC_DISCORD_URL || ""}
-            text={breakpoint > breakpoints.sm ? "Discord" : undefined}
-          >
+          <Route to={process.env.NEXT_PUBLIC_DISCORD_URL || ""}>
             <FontAwesomeIcon title="Discord" icon={faDiscord} />
+            <span className="sm-up">Discord</span>
           </Route>
         </li>
 

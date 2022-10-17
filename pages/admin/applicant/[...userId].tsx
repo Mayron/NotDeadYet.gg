@@ -5,8 +5,9 @@ import ApplicationOverview from "../../../components/application-overview";
 import BackgroundPattern from "../../../components/background-pattern";
 import GoBackButton from "../../../components/go-back-button";
 import Layout from "../../../components/layout";
-import { Status } from "../../../data";
-import { retrieveApplication } from "../../../firebase";
+import { Collections, Status } from "../../../data";
+import { getDocument } from "../../../firebase";
+import colors from "../../../styles/colors";
 import media from "../../../styles/media-queries";
 
 interface IAdminApplicantPageProps {
@@ -65,16 +66,22 @@ const AdminApplicantPage: React.FC<IAdminApplicantPageProps> = ({ application })
         </header>
 
         <ApplicationOverview application={application} />
+
         <footer
           css={css`
             display: flex;
             flex-direction: column;
             align-items: center;
+            padding: 20px;
+            border-radius: 2px;
+            margin-top: 60px;
+            border: 1px solid ${colors.grey.border};
+            background-color: ${colors.grey.background.medium};
           `}
         >
           <div
             css={css`
-              margin-bottom: 60px;
+              margin-bottom: 40px;
               display: flex;
               justify-content: space-between;
               width: 100%;
@@ -148,7 +155,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 
   const userIdQuery = context.query.userId[0];
   const userId = decodeURIComponent(userIdQuery);
-  const application = await retrieveApplication(userId);
+  const application = await getDocument<IApplication>(userId, Collections.Applications);
 
   return {
     props: { application },

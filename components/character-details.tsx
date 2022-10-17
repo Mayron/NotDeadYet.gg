@@ -7,9 +7,9 @@ interface ICharacterDetailsProps {
 }
 
 const StyledDetails = styled.dl`
-  border: 1px solid ${colors.grey.light};
+  border: 1px solid ${colors.grey.border};
   border-radius: 4px;
-  background-color: ${colors.grey.lightBg};
+  background-color: ${colors.grey.background.light};
   padding: 15px;
   display: flex;
   margin-bottom: 15px;

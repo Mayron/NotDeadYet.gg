@@ -11,7 +11,6 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import { Controller, useForm, useWatch } from "react-hook-form";
 import useFormPersist from "react-hook-form-persist";
-import { storeApplication } from "../../../firebase";
 import BlizzardButton from "../../blizzard-button";
 import Question from "../../question";
 import WhitePanel from "../../white-panel";
@@ -58,10 +57,14 @@ const AboutYouForm: React.FC = () => {
 
     if (storage && session?.user?.name) {
       const data = storage.getItem("application");
+      const { userId } = session.user;
 
       if (data) {
         const application = JSON.parse(data) as IApplication;
-        await storeApplication(session.user.userId, application);
+        await fetch(`/api/applicant/${userId}`, {
+          method: "POST",
+          body: JSON.stringify(application),
+        }).then(() => window.location.reload());
       }
     }
 

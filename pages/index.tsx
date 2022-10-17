@@ -100,7 +100,7 @@ const HomePage: NextPage<IHomePageProps> = ({ guildSummary }) => {
       <div
         css={css`
           color: ${colors.white};
-          background-color: ${colors.blue.darkest};
+          background-color: ${colors.blue.dark};
           border: 2px solid #252f3c;
           box-shadow: 0 1px 4px #0e141b;
         `}
@@ -193,7 +193,7 @@ const HomePage: NextPage<IHomePageProps> = ({ guildSummary }) => {
       <section
         css={css`
           text-align: center;
-          color: ${colors.blue.darkest};
+          color: ${colors.blue.dark};
           padding-top: 10px;
           padding-bottom: 40px;
 

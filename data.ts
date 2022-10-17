@@ -53,3 +53,9 @@ export const StatusLabels = [
   "Pending Guild Invite",
   "Guild Member",
 ];
+
+export const Collections = {
+  Users: "users",
+  Applications: "applications",
+  Comments: "comments",
+};

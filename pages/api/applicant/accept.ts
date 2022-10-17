@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { unstable_getServerSession } from "next-auth";
-import { Status } from "../../../data";
-import { updateApplicationStatus } from "../../../firebase";
+import { Collections, Status } from "../../../data";
+import { updateDocument } from "../../../firebase";
 import { authOptions } from "../auth/[...nextauth]";
 
 const acceptHandler = async (req: NextApiRequest, res: NextApiResponse) => {
@@ -13,8 +13,14 @@ const acceptHandler = async (req: NextApiRequest, res: NextApiResponse) => {
     return;
   }
 
-  const payload = JSON.parse(req.body as string) as { userId: string };
-  await updateApplicationStatus(payload.userId, Status.GuildMember);
+  const { userId } = JSON.parse(req.body as string) as { userId: string };
+
+  await updateDocument(userId, Collections.Applications, {
+    status: Status.GuildMember,
+  });
+
+  await res.revalidate("/admin/accepted");
+
   res.status(200).end();
 };
 

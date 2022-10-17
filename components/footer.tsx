@@ -5,7 +5,7 @@ import Route from "./route";
 const Footer: React.FC = () => (
   <footer
     css={css`
-      background-color: ${colors.blue.darkest};
+      background-color: ${colors.blue.dark};
       color: ${colors.white};
       padding: 30px;
       text-align: center;

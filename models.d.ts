@@ -58,11 +58,19 @@ declare interface IAboutYouFormInput {
   vouch: string;
   anythingElse: string;
 }
+
 declare interface IApplication
   extends IRequirementsFormInput,
     ICharacterInfoFormInput,
     IAboutYouFormInput {
   userId: string;
   status: number;
+  createdAt: string;
+}
+
+declare interface IComment {
+  postId: string;
+  userId: string;
+  body: string;
   createdAt: string;
 }

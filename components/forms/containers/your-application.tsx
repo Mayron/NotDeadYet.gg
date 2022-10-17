@@ -3,7 +3,6 @@ import { Button } from "@mui/material";
 import { useEffect } from "react";
 import { Status } from "../../../data";
 import ApplicationOverview from "../../application-overview";
-import Comments from "../../comments";
 
 interface IYourApplicationProps {
   application: IApplication;
@@ -61,7 +60,6 @@ const YourApplication: React.FC<IYourApplicationProps> = ({ application }) => {
       </header>
 
       <ApplicationOverview application={application} />
-      {process.env.NODE_ENV === "development" && <Comments />}
     </section>
   );
 };

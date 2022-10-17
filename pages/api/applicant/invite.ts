@@ -1,8 +1,8 @@
 /* eslint-disable no-console */
 import type { NextApiRequest, NextApiResponse } from "next";
 import { unstable_getServerSession } from "next-auth";
-import { Status } from "../../../data";
-import { updateApplicationStatus } from "../../../firebase";
+import { Collections, Status } from "../../../data";
+import { updateDocument } from "../../../firebase";
 import { authOptions } from "../auth/[...nextauth]";
 
 const inviteHandler = async (req: NextApiRequest, res: NextApiResponse) => {
@@ -14,8 +14,11 @@ const inviteHandler = async (req: NextApiRequest, res: NextApiResponse) => {
     return;
   }
 
-  const payload = JSON.parse(req.body as string) as { userId: string };
-  await updateApplicationStatus(payload.userId, Status.PendingInvite);
+  const { userId } = JSON.parse(req.body as string) as { userId: string };
+
+  await updateDocument(userId, Collections.Applications, {
+    status: Status.PendingInvite,
+  });
 
   await res.revalidate("/admin", { unstable_onlyGenerated: true });
   await res.revalidate("/admin/accepted");
