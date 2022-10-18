@@ -61,10 +61,11 @@ const AboutYouForm: React.FC = () => {
 
       if (data) {
         const application = JSON.parse(data) as IApplication;
+
         await fetch(`/api/applicant/${userId}`, {
           method: "POST",
           body: JSON.stringify(application),
-        }).then(() => window.location.reload());
+        });
       }
     }
 
