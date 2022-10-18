@@ -33,8 +33,10 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const session = await unstable_getServerSession(req, res, authOptions);
   const user = session?.user;
 
+  console.info("Hit applicant default handler with request method %s.", req.method);
+
   if (!user) {
-    res.status(400);
+    res.status(400).end();
     return;
   }
 
@@ -42,15 +44,24 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     // new applicant:
     const { userId } = req.query;
 
+    console.info(
+      "User ID from query is %s and session user ID is %s.",
+      userId,
+      user.userId,
+    );
+
     if (userId !== user.userId) {
-      res.status(400);
+      res.status(400).end();
       return;
     }
 
+    console.log("Attempting to store application %s.", req.body);
     const application = JSON.parse(req.body as string) as IApplication;
+
     await storeApplication(userId, application);
   }
 
+  console.log("Finished storing application from default applicant handler");
   res.status(200).end();
 };
 
