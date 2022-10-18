@@ -42,7 +42,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
   if (req.method === "POST") {
     // new applicant:
-    const { userId } = req.query;
+    const userId = req.query.userId as string;
 
     console.info(
       "User ID from query is %s and session user ID is %s.",
@@ -50,7 +50,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       user.userId,
     );
 
-    if (userId !== user.userId) {
+    if (!userId || userId !== user.userId) {
       res.status(400).end();
       return;
     }
