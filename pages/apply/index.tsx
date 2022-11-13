@@ -7,7 +7,7 @@ import type { GetServerSidePropsContext } from "next";
 import Layout from "../../components/layout";
 import { getApplyInfo } from "../../contentful";
 import RequirementsForm from "../../components/forms/containers/requirements-form";
-import Panel from "../../components/panel";
+import BattleNetSignInPanel from "../../components/panel";
 import BattleNet from "../../svgs/battle-net.svg";
 import { authOptions } from "../api/auth/[...nextauth]";
 import BackgroundPattern from "../../components/background-pattern";
@@ -16,6 +16,7 @@ import ApplicationStepper from "../../components/application-stepper";
 import { getDocument } from "../../firebase";
 import YourApplication from "../../components/forms/containers/your-application";
 import { Collections } from "../../data";
+import media from "../../styles/media-queries";
 
 interface INotSubmitted {
   loggedIn: boolean;
@@ -29,6 +30,11 @@ const NotSubmitted: React.FC<INotSubmitted> = ({ loggedIn, applyInfo }) => (
         css={css`
           font-size: 4rem;
           margin-bottom: 50px;
+
+          ${media.down("sm")`
+            font-size: 2.4rem;
+            margin-bottom: 1rem;
+          `};
         `}
       >
         Apply to Not Dead Yet
@@ -45,7 +51,7 @@ const NotSubmitted: React.FC<INotSubmitted> = ({ loggedIn, applyInfo }) => (
     {loggedIn ? (
       <RequirementsForm />
     ) : (
-      <Panel>
+      <BattleNetSignInPanel>
         <p>
           To submit and check the progress of your application you&apos;ll first need to
           sign in with your Battle.net account.
@@ -54,7 +60,7 @@ const NotSubmitted: React.FC<INotSubmitted> = ({ loggedIn, applyInfo }) => (
           <BattleNet />
           <span>Sign In with Battle.net</span>
         </button>
-      </Panel>
+      </BattleNetSignInPanel>
     )}
   </section>
 );

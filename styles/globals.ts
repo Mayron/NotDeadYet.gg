@@ -53,10 +53,14 @@ const globalStyles = css`
       ${tag} {
         font-family: ${vars.font.header.family};
         font-weight: ${vars.font.header.weight};
-        font-size: ${fontSize};
+        font-size: ${fontSize}rem;
         line-height: normal;
         text-transform: uppercase;
         margin-bottom: 20px;
+
+        ${media.down("sm")`
+          font-size: ${fontSize * 0.85}rem;
+        `};
       }
     `;
   })}
@@ -138,6 +142,11 @@ const globalStyles = css`
 
   article {
     padding: 0 15px;
+
+    ${media.down("xs")`
+      padding: 0;
+    `};
+
     ul,
     p {
       &:not(:last-child) {
@@ -150,7 +159,9 @@ const globalStyles = css`
     }
 
     header {
-      padding: 0 40px;
+      padding: 0 2rem;
+
+      ${media.down("sm")`padding: 0;`};
     }
 
     h3:not(:first-child) {
@@ -175,6 +186,10 @@ const globalStyles = css`
     border: none;
     background-color: ${colors.grey.border};
     height: 1px;
+
+    ${media.down("sm")`
+      margin: 20px auto;
+    `};
   }
 
   ::-webkit-input-placeholder,

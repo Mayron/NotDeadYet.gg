@@ -167,7 +167,7 @@ const HomePage: NextPage<IHomePageProps> = ({ guildSummary }) => {
             </li>
             <li>
               Be ready inside the instance at 19:30 (server time) ready for us to start
-              clearly trash.
+              clearing trash.
             </li>
             <li>
               Come prepared for raids by having a thorough understanding of the tactics

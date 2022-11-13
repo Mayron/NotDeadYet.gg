@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import media from "../styles/media-queries";
 
 interface IPanelProps {
   children: React.ReactNode | React.ReactNode[];
@@ -43,10 +44,26 @@ const StyledPanel = styled.div`
     padding-bottom: 0;
     padding-right: 20px;
   }
+
+  ${media.down("sm")`
+    flex-direction: column;
+    align-items: center;
+    margin: 20px 0 0 0;
+
+    p {
+      padding-bottom: 20px;
+      padding-right: 0;
+    }
+
+    button {
+      padding: 15px 30px;
+    }
+  
+  `};
 `;
 
-const Panel: React.FC<IPanelProps> = ({ children }) => (
+const BattleNetSignInPanel: React.FC<IPanelProps> = ({ children }) => (
   <StyledPanel>{children}</StyledPanel>
 );
 
-export default Panel;
+export default BattleNetSignInPanel;

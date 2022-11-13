@@ -4,7 +4,7 @@ const font = {
   header: {
     family: "'Rajdhani', sans-serif",
     weight: 700,
-    sizes: ["4rem", "2.5rem", "2rem", "1.75rem", "1.5rem"],
+    sizes: [4, 2.5, 2, 1.75, 1.5],
   },
   standard: {
     family: "Roboto, sans-serif",
@@ -26,7 +26,7 @@ const vars = {
   font,
   maxContentSize: "900px",
   sectionPadding: "60px 30px",
-  sectionMobilePadding: "30px 5px",
+  sectionMobilePadding: "30px 8px",
   navHeight: "40px",
 };
 

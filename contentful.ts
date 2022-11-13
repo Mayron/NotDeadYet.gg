@@ -1,5 +1,3 @@
-import { string } from "yup";
-
 const fetchGraphQL = async <T>(query: string): Promise<T> => {
   const spaceId = process.env.CONTENTFUL_SPACE_ID || "";
   const token = process.env.CONTENTFUL_ACCESS_TOKEN || "";
