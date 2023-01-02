@@ -8,7 +8,7 @@ import {
   GridCellParams,
 } from "@mui/x-data-grid";
 import moment from "moment";
-import { Status } from "../data";
+import { ChangeEventHandler, useState } from "react";
 
 const StyledAlts = styled.div`
   display: flex;
@@ -22,6 +22,38 @@ const StyledAlts = styled.div`
   }
 `;
 
+interface ICanViewLootStandingsCheckButtonProps {
+  app: IApplication;
+  defaultValue: boolean;
+}
+
+const CanViewLootStandingsCheckButton: React.FC<
+  ICanViewLootStandingsCheckButtonProps
+> = ({ app, defaultValue }) => {
+  const [checked, setChecked] = useState(defaultValue);
+
+  const handleOnChange: ChangeEventHandler<HTMLInputElement> = async (e) => {
+    setChecked(e.currentTarget.checked);
+
+    await fetch(`/api/applicant/loot`, {
+      method: "POST",
+      body: JSON.stringify({
+        userId: app.userId,
+        loot: e.currentTarget.checked,
+      }),
+    });
+  };
+
+  return (
+    <input
+      type="checkbox"
+      style={{ width: 20, height: 20 }}
+      checked={checked}
+      onChange={handleOnChange}
+    ></input>
+  );
+};
+
 const columns: GridColDef[] = [
   {
     field: "character",
@@ -33,13 +65,16 @@ const columns: GridColDef[] = [
       return characterName;
     },
     renderCell: ({ row }) => {
-      const application = row as IApplication;
-      const characterName = application.characters[0].name;
+      const app = row as IApplication;
+      const characterName = app.characters[0].name;
+      const userIdUrlSegment = encodeURIComponent(app.userId);
 
       return (
         <div>
-          <span>{characterName}</span>
-          <span className="user-id">{application.userId}</span>
+          <a href={`/admin/applicant/${userIdUrlSegment}`}>
+            <span style={{ textDecoration: "underline" }}>{characterName}</span>
+          </a>
+          <span className="user-id">{app.userId}</span>
         </div>
       );
     },
@@ -191,32 +226,17 @@ const columns: GridColDef[] = [
   },
   {
     field: "status",
-    headerName: "Pending Invite?",
+    headerName: "Can View Loot Standings?",
     align: "center",
-    width: 160,
-    valueGetter: ({ row }: GridValueGetterParams) => {
-      const application = row as IApplication;
-      return application.status === Status.PendingInvite ? "Yes" : "";
-    },
-  },
-  {
-    field: "view",
-    headerName: "",
-    align: "right",
-    disableColumnMenu: true,
-    hideSortIcons: true,
-    width: 86,
+    width: 200,
     renderCell: ({ row }) => {
       const app = row as IApplication;
-      const userId = encodeURIComponent(app.userId);
-      return (
-        <a href={`/admin/applicant/${userId}`}>
-          <Button variant="outlined">View</Button>
-        </a>
-      );
+      const checked = !!app.loot;
+      return <CanViewLootStandingsCheckButton app={app} defaultValue={checked} />;
     },
   },
 ];
+
 const getCellClassName = (params: GridCellParams) => {
   const app = params.row as IApplication;
 

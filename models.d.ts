@@ -66,6 +66,7 @@ declare interface IApplication
   userId: string;
   status: number;
   createdAt: string;
+  loot?: boolean;
 }
 
 declare interface IComment {

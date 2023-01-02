@@ -76,8 +76,10 @@ export const updateDocument = async (
   try {
     const docRef = getDocRef(documentId, collectionName);
     await updateDoc(docRef, data);
+    return true;
   } catch (err) {
     console.error("updateDocument error: %s.", err);
+    return false;
   }
 };
 

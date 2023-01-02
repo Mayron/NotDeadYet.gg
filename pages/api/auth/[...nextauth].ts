@@ -24,6 +24,7 @@ export const authOptions: NextAuthOptions = {
         token.admin = user.admin;
         token.username = user.username;
         token.member = user.member;
+        token.loot = user.loot;
       }
 
       return token;
@@ -34,6 +35,7 @@ export const authOptions: NextAuthOptions = {
         session.user.userId = token.sub as string;
         session.user.username = token.username as string;
         session.user.member = token.member as boolean;
+        session.user.loot = token.loot as boolean;
       }
 
       return session;

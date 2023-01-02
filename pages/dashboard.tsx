@@ -67,10 +67,10 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   const session = await unstable_getServerSession(context.req, context.res, authOptions);
 
   if (session?.user) {
-    const { member } = session.user;
+    const { member, loot } = session.user;
 
     if (member) {
-      const content = await getDashboardContent();
+      const content = await getDashboardContent(loot);
 
       return {
         props: { content },

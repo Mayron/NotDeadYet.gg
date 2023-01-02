@@ -67,10 +67,14 @@ interface IDashboardContentResponse {
   };
 }
 
-export const getDashboardContent = async (): Promise<string> => {
+export const getDashboardContent = async (
+  canViewLootStandings?: boolean,
+): Promise<string> => {
+  const id = canViewLootStandings ? "48oyrMdaXNIeeFVrVFdnyD" : "31A1AXAWDqKrZO02tkZFPw";
+
   const query = `#graphql    
     query {
-      dashboard(id: "48oyrMdaXNIeeFVrVFdnyD") {
+      dashboard(id: "${id}") {
         text 
       }
     }
