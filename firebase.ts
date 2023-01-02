@@ -44,7 +44,7 @@ export const getDocument = async <T>(documentId: string, collectionName: string)
     console.error("getDocument error: %s.", err);
   }
 
-  return null;
+  return undefined;
 };
 
 export const getDocumentField = async <T>(

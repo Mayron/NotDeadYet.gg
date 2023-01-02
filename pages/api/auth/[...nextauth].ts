@@ -1,7 +1,8 @@
-import NextAuth, { type NextAuthOptions } from "next-auth";
+import NextAuth, { User, type NextAuthOptions } from "next-auth";
 import BattleNetProvider from "next-auth/providers/battlenet";
 import { FirestoreAdapter } from "@next-auth/firebase-adapter";
-import { firebaseConfig } from "../../../firebase";
+import { firebaseConfig, getDocument } from "../../../firebase";
+import { Collections } from "../../../data";
 
 export const authOptions: NextAuthOptions = {
   providers: [
@@ -14,7 +15,11 @@ export const authOptions: NextAuthOptions = {
   adapter: FirestoreAdapter(firebaseConfig),
   session: { strategy: "jwt" },
   callbacks: {
-    jwt: ({ token, user }) => {
+    jwt: async ({ token, user }) => {
+      if (!user && token.sub) {
+        user = await getDocument<User>(token.sub, Collections.Users);
+      }
+
       if (user) {
         token.admin = user.admin;
         token.username = user.username;
@@ -24,6 +29,7 @@ export const authOptions: NextAuthOptions = {
       return token;
     },
     session: ({ session, token }) => {
+      console.info("session callback triggered");
       if (session?.user && token) {
         session.user.admin = token.admin as boolean;
         session.user.userId = token.sub as string;

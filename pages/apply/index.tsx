@@ -88,7 +88,7 @@ export default ApplyPage;
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const session = await unstable_getServerSession(context.req, context.res, authOptions);
 
-  let application: IApplication | null = null;
+  let application: IApplication | undefined;
   let applyInfo: string | null = null;
 
   if (session?.user) {
