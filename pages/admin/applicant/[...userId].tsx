@@ -53,7 +53,7 @@ const AdminApplicantPage: React.FC<IAdminApplicantPageProps> = ({ application })
     }).then(() => window.location.reload());
   };
 
-  const removeMember = async () => {
+  const deleteApplication = async () => {
     const confirmMessage =
       "This will permanently remove the user's application and they will need to re-apply. Are you sure you want to do this?";
     if (
@@ -150,12 +150,22 @@ const AdminApplicantPage: React.FC<IAdminApplicantPageProps> = ({ application })
                 Accept &amp; Invite to Guild
               </Button>
             )}
+            {application.status === Status.Declined && (
+              <Button
+                size="large"
+                color="error"
+                variant="contained"
+                onClick={deleteApplication}
+              >
+                Delete Application
+              </Button>
+            )}
             {application.status > Status.Declined && (
               <Button
                 size="large"
                 color="error"
                 variant="contained"
-                onClick={removeMember}
+                onClick={deleteApplication}
               >
                 Remove from Guild
               </Button>
