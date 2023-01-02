@@ -1,5 +1,6 @@
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
+import { marked } from "marked";
 import { unstable_getServerSession } from "next-auth";
 import { GetServerSidePropsContext } from "next/types";
 import Layout from "../components/layout";
@@ -51,10 +52,10 @@ const DashboardPage: React.FC<IDashboardPageProps> = ({ content }) => (
               font-size: 1.7rem;
             `}
           >
-            Loot Rankings
+            Loot Standings
           </h1>
         </header>
-        <div dangerouslySetInnerHTML={{ __html: content }}></div>
+        <div dangerouslySetInnerHTML={{ __html: marked.parse(content) }}></div>
       </DashboardMainSection>
     </div>
   </Layout>

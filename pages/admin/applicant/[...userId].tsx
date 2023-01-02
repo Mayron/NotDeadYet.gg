@@ -1,6 +1,7 @@
 import { css } from "@emotion/react";
 import { Button } from "@mui/material";
 import { GetServerSidePropsContext } from "next";
+import { useRouter } from "next/router";
 import ApplicationOverview from "../../../components/application-overview";
 import BackgroundPattern from "../../../components/background-pattern";
 import GoBackButton from "../../../components/go-back-button";
@@ -16,6 +17,7 @@ interface IAdminApplicantPageProps {
 
 const AdminApplicantPage: React.FC<IAdminApplicantPageProps> = ({ application }) => {
   const characterName = application.characters[0].name;
+  const router = useRouter();
 
   const downloadJson = () => {
     const json = JSON.stringify(application);
@@ -42,13 +44,29 @@ const AdminApplicantPage: React.FC<IAdminApplicantPageProps> = ({ application })
     }).then(() => window.location.reload());
   };
 
-  const acceptAndSendInvite = async () => {
+  const acceptAndInvite = async () => {
     await fetch(`/api/applicant/invite`, {
       method: "POST",
       body: JSON.stringify({
         userId: application.userId,
       }),
     }).then(() => window.location.reload());
+  };
+
+  const removeMember = async () => {
+    const confirmMessage =
+      "This will permanently remove the user's application and they will need to re-apply. Are you sure you want to do this?";
+    if (
+      // eslint-disable-next-line no-alert
+      window.confirm(confirmMessage)
+    ) {
+      await fetch(`/api/applicant/remove`, {
+        method: "POST",
+        body: JSON.stringify({
+          userId: application.userId,
+        }),
+      }).then(() => router.push("/admin"));
+    }
   };
 
   return (
@@ -127,9 +145,19 @@ const AdminApplicantPage: React.FC<IAdminApplicantPageProps> = ({ application })
                 size="large"
                 color="success"
                 variant="contained"
-                onClick={acceptAndSendInvite}
+                onClick={acceptAndInvite}
               >
-                Accept & Send Invite
+                Accept &amp; Invite to Guild
+              </Button>
+            )}
+            {application.status > Status.Declined && (
+              <Button
+                size="large"
+                color="error"
+                variant="contained"
+                onClick={removeMember}
+              >
+                Remove from Guild
               </Button>
             )}
           </div>

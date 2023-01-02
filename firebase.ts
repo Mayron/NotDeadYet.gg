@@ -9,6 +9,7 @@ import {
   where,
   getDocs,
   updateDoc,
+  deleteDoc,
   collection,
   CollectionReference,
   DocumentReference,
@@ -77,6 +78,15 @@ export const updateDocument = async (
     await updateDoc(docRef, data);
   } catch (err) {
     console.error("updateDocument error: %s.", err);
+  }
+};
+
+export const removeDocument = async (documentId: string, collectionName: string) => {
+  try {
+    const docRef = getDocRef(documentId, collectionName);
+    await deleteDoc(docRef);
+  } catch (err) {
+    console.error("removeDocument error: %s.", err);
   }
 };
 

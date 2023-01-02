@@ -29,7 +29,6 @@ export const authOptions: NextAuthOptions = {
       return token;
     },
     session: ({ session, token }) => {
-      console.info("session callback triggered");
       if (session?.user && token) {
         session.user.admin = token.admin as boolean;
         session.user.userId = token.sub as string;
