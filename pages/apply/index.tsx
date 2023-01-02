@@ -91,8 +91,17 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   let application: IApplication | null = null;
   let applyInfo: string | null = null;
 
-  if (session) {
-    const userId = session?.user?.userId || null;
+  if (session?.user) {
+    const userId = session.user.userId || null;
+
+    if (session.user.member) {
+      return {
+        redirect: {
+          destination: "/dashboard",
+          permanent: false,
+        },
+      };
+    }
 
     if (userId) {
       application = await getDocument<IApplication>(userId, Collections.Applications);

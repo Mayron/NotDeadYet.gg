@@ -19,6 +19,10 @@ const acceptHandler = async (req: NextApiRequest, res: NextApiResponse) => {
     status: Status.GuildMember,
   });
 
+  await updateDocument(userId, Collections.Users, {
+    member: true,
+  });
+
   await res.revalidate("/admin/accepted");
 
   res.status(200).end();

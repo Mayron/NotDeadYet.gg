@@ -10,6 +10,7 @@ declare module "next-auth" {
       admin?: boolean;
       userId: string; // user document ID
       username?: string; // our custom username (user.name is the battle.net username)
+      member?: boolean; // if true, they're in the guild
     } & DefaultSession["user"];
   }
 }

@@ -59,6 +59,27 @@ export const getGuildSummary = async (): Promise<string> => {
   return response.data.guildSummary.text;
 };
 
+interface IDashboardContentResponse {
+  data: {
+    dashboard: {
+      text: string;
+    };
+  };
+}
+
+export const getDashboardContent = async (): Promise<string> => {
+  const query = `#graphql    
+    query {
+      dashboard(id: "48oyrMdaXNIeeFVrVFdnyD") {
+        text 
+      }
+    }
+  `;
+
+  const response = await fetchGraphQL<IDashboardContentResponse>(query);
+  return response.data.dashboard.text;
+};
+
 interface INewsResponse {
   data: {
     newsCollection: {

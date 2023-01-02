@@ -14,6 +14,7 @@ import colors from "../styles/colors";
 const PageNavigation: React.FC = () => {
   const { data: session } = useSession();
   const username = getUsername(session);
+  const member = session?.user?.member;
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
@@ -99,7 +100,13 @@ const PageNavigation: React.FC = () => {
           <Route to="/rules" text="Rules" />
         </li>
         <li>
-          <a href={`${process.env.NEXT_PUBLIC_WEBSITE_URL || ""}/apply`}>Apply</a>
+          {member ? (
+            <a href={`${process.env.NEXT_PUBLIC_WEBSITE_URL || ""}/dashboard`}>
+              Dashboard
+            </a>
+          ) : (
+            <a href={`${process.env.NEXT_PUBLIC_WEBSITE_URL || ""}/apply`}>Apply</a>
+          )}
         </li>
         <li
           css={css`
