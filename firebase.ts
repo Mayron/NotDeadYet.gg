@@ -125,8 +125,15 @@ export const getAllApplicationsByStatus = async (status: number) => {
     const q = query(applications, where("status", "==", status));
     const querySnapshot = await getDocs(q);
 
-    querySnapshot.forEach((docSnap) => {
+    querySnapshot.forEach(async (docSnap) => {
       const application = docSnap.data();
+
+      if (docSnap.id !== application.userId) {
+        console.info("Does not equal!", docSnap.id, application.userId);
+        await storeDocument(application.userId, Collections.Applications, application);
+        await deleteDoc(docSnap.ref);
+      }
+
       results.push(application);
     });
   } catch (err) {
