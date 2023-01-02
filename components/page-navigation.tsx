@@ -5,6 +5,7 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faDiscord } from "@fortawesome/free-brands-svg-icons";
 import Image from "next/image";
+import { useRouter } from "next/router";
 import Route from "./route";
 import media from "../styles/media-queries";
 import ndyIcon from "../public/assets/ndy-icon.png";
@@ -15,6 +16,7 @@ const PageNavigation: React.FC = () => {
   const { data: session } = useSession();
   const username = getUsername(session);
   const member = session?.user?.member;
+  const router = useRouter();
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
@@ -147,6 +149,16 @@ const PageNavigation: React.FC = () => {
               }}
             >
               <MenuItem onClick={() => signOut()}>Sign Out</MenuItem>
+              {session?.user?.admin && (
+                <MenuItem
+                  onClick={async () => {
+                    await router.push("/admin");
+                    handleClose();
+                  }}
+                >
+                  Admin
+                </MenuItem>
+              )}
             </Menu>
           </li>
         )}
