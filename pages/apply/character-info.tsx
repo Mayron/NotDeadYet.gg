@@ -3,6 +3,7 @@ import { css } from "@emotion/react";
 import Layout from "../../components/layout";
 import CharacterInfoForm from "../../components/forms/containers/character-info-form";
 import ApplicationStepper from "../../components/application-stepper";
+import media from "../../styles/media-queries";
 
 const CharacterInfoPage: React.FC = () => (
   <Layout title="Apply | Not Dead Yet">
@@ -18,9 +19,14 @@ const CharacterInfoPage: React.FC = () => (
 
         <p
           css={css`
-            margin-bottom: 60px;
+            margin-bottom: 40px;
             font-size: 1.125rem;
             text-align: center;
+
+            ${media.down("sm")`
+              margin-bottom: 20px;
+              font-size: 1rem;
+            `};
           `}
         >
           Please provide the following basic character details for the character you are

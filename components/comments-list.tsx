@@ -108,15 +108,13 @@ const CommentsList: React.FC<ICommentsListProps> = ({ postId }) => {
 
   return (
     <>
-      <h4>Comments ({comments.length})</h4>
+      <h6 style={{ marginTop: "40px" }}>Comments ({comments.length})</h6>
       {comments.length > 0 &&
         comments.map((c) => (
           <CommentBox key={c.createdAt} userId={c.userId} createdAt={c.createdAt}>
             {c.body}
           </CommentBox>
         ))}
-
-      <hr />
 
       <form onSubmit={handleSubmit(onSubmit)}>
         {previewing ? (

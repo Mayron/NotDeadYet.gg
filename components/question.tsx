@@ -1,6 +1,7 @@
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 import media from "../styles/media-queries";
+import vars from "../styles/vars";
 
 interface IQuestionProps {
   horizontal?: boolean;
@@ -12,11 +13,13 @@ const Question = styled.div<IQuestionProps>(
 
     ${horizontal
       ? css`
-          ${media.up("sm")`display: flex;
+          ${media.up("sm")`
+            display: flex;
             align-items: center;
 
             p:first-child {
               padding-right: 20px;
+              padding-bottom: 0;
             }
 
             p.Mui-error {
@@ -31,6 +34,7 @@ const Question = styled.div<IQuestionProps>(
           ${media.down("xs")`
             p:first-child {
               padding-bottom: 10px;
+              
             }
           `};
         `
@@ -46,6 +50,15 @@ const Question = styled.div<IQuestionProps>(
 
     .MuiFormControl-fullWidth {
       margin-top: 10px;
+    }
+
+    & > p {
+      font-weight: ${vars.font.standard.weights.medium};
+    }
+
+    ul,
+    li {
+      font-weight: ${vars.font.standard.weights.regular};
     }
 
     &:first-child {

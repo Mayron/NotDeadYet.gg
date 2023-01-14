@@ -1,14 +1,16 @@
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 import colors from "../styles/colors";
+import { contentfulStyles } from "../styles/fonts";
 import media from "../styles/media-queries";
 
 interface IWhitePanelProps {
   headerBorder?: boolean;
 }
 
-const WhitePanel = styled.div<IWhitePanelProps>(
+const WhitePanel = styled.article<IWhitePanelProps>(
   ({ headerBorder = true }) => css`
+    ${contentfulStyles};
     overflow-wrap: anywhere;
     background-color: ${colors.white};
     border-radius: 2px;
@@ -27,11 +29,19 @@ const WhitePanel = styled.div<IWhitePanelProps>(
     `};
 
     & > header {
-      padding: 10px 0 15px 0;
-      text-align: center;
+      padding: 0 0 ${headerBorder ? "15px" : "0"} 0;
+
+      &:not(:first-child) {
+        padding-top: 20px;
+      }
+
+      h2,
+      h3,
+      p {
+        text-align: center;
+      }
 
       p {
-        margin: 0 15px;
         padding-bottom: 15px;
         border-bottom: ${headerBorder ? "1px solid #cfcfcf" : "none"};
       }

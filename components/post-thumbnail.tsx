@@ -25,10 +25,12 @@ const PostThumbnail: React.FC<IPostThumbnailProps> = ({
 }) => (
   <Card
     css={css`
-      margin-bottom: 15px;
+      margin: 15px;
+      margin-top: 0;
 
       ${body &&
       css`
+        margin: 0;
         border: none;
         border-radius: 0;
         box-shadow: none;
@@ -38,9 +40,11 @@ const PostThumbnail: React.FC<IPostThumbnailProps> = ({
         margin-bottom: 0;
       }
 
-      ${media.down("sm")`
+      ${excerpt &&
+      media.down("sm")`
+        margin-left: 8px;
+        margin-right: 8px;
         margin-bottom: 10px;
-        font-size: 0.9rem;
       `};
     `}
   >

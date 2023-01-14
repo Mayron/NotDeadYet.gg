@@ -33,14 +33,12 @@ const RulesPage: React.FC<IRulesPageProps> = ({ rules }) => (
         <p>Members should read and follow our guild rules before raiding with us.</p>
       </header>
 
-      <article css={contentfulStyles}>
-        {rules.map((rule) => (
-          <WhitePanel key={rule.title}>
-            <h2>{rule.title}</h2>
-            <p dangerouslySetInnerHTML={{ __html: marked.parse(rule.content) }}></p>
-          </WhitePanel>
-        ))}
-      </article>
+      {rules.map((rule) => (
+        <WhitePanel key={rule.title}>
+          <h2>{rule.title}</h2>
+          <p dangerouslySetInnerHTML={{ __html: marked.parse(rule.content) }}></p>
+        </WhitePanel>
+      ))}
     </section>
   </Layout>
 );

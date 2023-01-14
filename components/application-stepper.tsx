@@ -4,6 +4,7 @@ import StepLabel from "@mui/material/StepLabel";
 import { css } from "@emotion/react";
 import { StepButton } from "@mui/material";
 import { useRouter } from "next/router";
+import media from "../styles/media-queries";
 
 const steps = ["Requirements", "Character Info", "About You"];
 const urls = ["/apply", "/apply/character-info", "/apply/about-you"];
@@ -32,6 +33,26 @@ const ApplicationStepper: React.FC<IApplicationStepperProps> = ({ activeStep }) 
     <div
       css={css`
         margin-bottom: 30px;
+
+        ${media.down("sm")`
+          margin-bottom: 20px;
+
+          .MuiStepLabel-label {
+            font-size: 0.75rem;
+          }
+
+          .MuiStep-root:first-of-type {
+            padding-left: 0;
+          }
+
+          .MuiStep-root:last-of-type {
+            padding-right: 0;
+          }
+
+          .MuiStepLabel-iconContainer {
+            padding-right: 5px;
+          }
+        `};
       `}
     >
       <Stepper activeStep={activeStep}>

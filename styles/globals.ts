@@ -175,7 +175,6 @@ const globalStyles = css`
 
     header {
       padding: 0 2rem;
-
       ${media.down("sm")`padding: 0;`};
     }
   }
@@ -198,53 +197,104 @@ const globalStyles = css`
     font-family: ${vars.font.standard.family};
   }
 
-  .death-knight {
+  .death-knight,
+  .death-knight a {
     font-weight: ${vars.font.standard.weights.bold};
-    color: #c41e3a;
+    color: #c41e3a !important;
+
+    &:is(a):hover {
+      color: #d92a48 !important;
+    }
   }
 
-  .druid {
+  .druid,
+  .druid a {
     font-weight: ${vars.font.standard.weights.bold};
-    color: #ff7c0a;
+    color: #ff7c0a !important;
+
+    &:is(a):hover {
+      color: #ff9538 !important;
+    }
   }
 
-  .hunter {
+  .hunter,
+  .hunter a {
     font-weight: ${vars.font.standard.weights.bold};
-    color: #aad372;
+    color: #aad372 !important;
+
+    &:is(a):hover {
+      color: #b3e26f !important;
+    }
   }
 
-  .mage {
+  .mage,
+  .mage a {
     font-weight: ${vars.font.standard.weights.bold};
-    color: #3fc7eb;
+    color: #3fc7eb !important;
+
+    &:is(a):hover {
+      color: #64d8f9 !important;
+    }
   }
 
-  .paladin {
+  .paladin,
+  .paladin a {
     font-weight: ${vars.font.standard.weights.bold};
-    color: #f48cba;
+    color: #f48cba !important;
+
+    &:is(a):hover {
+      color: #ffa7ce !important;
+    }
   }
 
-  .priest {
+  .priest,
+  .priest a {
     font-weight: ${vars.font.standard.weights.bold};
+    color: ${colors.black} !important;
+
+    &:is(a):hover {
+      color: #484848 !important;
+    }
   }
 
-  .rogue {
+  .rogue,
+  .rogue a {
     font-weight: ${vars.font.standard.weights.bold};
-    color: #9f9200;
+    color: #9f9200 !important;
+
+    &:is(a):hover {
+      color: #d0be00 !important;
+    }
   }
 
-  .shaman {
+  .shaman,
+  .shaman a {
     font-weight: ${vars.font.standard.weights.bold};
-    color: #0070dd;
+    color: #0070dd !important;
+
+    &:is(a):hover {
+      color: #2290ff !important;
+    }
   }
 
+  .warlock,
   .warlock {
     font-weight: ${vars.font.standard.weights.bold};
-    color: #8788ee;
+    color: #8788ee !important;
+
+    &:is(a):hover {
+      color: #a3a4f7 !important;
+    }
   }
 
-  .warrior {
+  .warrior,
+  .warrior a {
     font-weight: ${vars.font.standard.weights.bold};
-    color: #c69b6d;
+    color: #c69b6d !important;
+
+    &:is(a):hover {
+      color: #d2a87b !important;
+    }
   }
 
   .user-id {

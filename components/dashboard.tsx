@@ -28,15 +28,6 @@ export const DashboardMainSection = styled.section<IDashboardMainSectionProps>(
         display: ${fullscreen ? "none" : "block"};
       }
     `};
-
-    iframe {
-      width: calc(100% - 30px);
-      min-height: 70vh;
-      background-color: ${colors.white};
-      outline: none;
-      border: 1px solid ${colors.grey.border};
-      margin: 20px 15px;
-    }
   `,
 );
 
@@ -65,7 +56,7 @@ export const DashboardContentPanel: React.FC<IDashboardContentPanelProps> = ({
   <div
     css={css`
       flex: 1;
-      padding: 15px;
+      padding: 15px 0;
       background-color: #f6faff;
       min-height: 100%;
       position: relative;
@@ -76,8 +67,9 @@ export const DashboardContentPanel: React.FC<IDashboardContentPanelProps> = ({
         padding: 0;
       `};
 
-      ${media.down("sm")`
-        padding: 8px 6px;        
+      ${!full &&
+      media.down("sm")`
+        padding: 8px 0;
       `};
     `}
   >

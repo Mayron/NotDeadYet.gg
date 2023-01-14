@@ -27,12 +27,11 @@ const NotSubmitted: React.FC<INotSubmitted> = ({ loggedIn, applyInfo }) => (
     <header>
       <h1
         css={css`
-          font-size: 4rem;
-          margin-bottom: 50px;
+          font-size: 2.5rem;
+          margin-bottom: 10px;
 
           ${media.down("sm")`
-            font-size: 2.4rem;
-            margin-bottom: 1rem;
+            font-size: 2rem;
           `};
         `}
       >
@@ -42,7 +41,7 @@ const NotSubmitted: React.FC<INotSubmitted> = ({ loggedIn, applyInfo }) => (
       {loggedIn && <ApplicationStepper activeStep={0} />}
     </header>
     <WhitePanel>
-      <article dangerouslySetInnerHTML={{ __html: marked.parse(applyInfo) }}></article>
+      <div dangerouslySetInnerHTML={{ __html: marked.parse(applyInfo) }}></div>
     </WhitePanel>
 
     <hr />
@@ -85,7 +84,7 @@ export default ApplyPage;
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const session = await unstable_getServerSession(context.req, context.res, authOptions);
 
-  let application: IApplication | undefined;
+  let application: IApplication | null = null;
   let applyInfo: string | null = null;
 
   if (session?.user) {
@@ -101,7 +100,8 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     }
 
     if (userId) {
-      application = await getDocument<IApplication>(userId, Collections.Applications);
+      application =
+        (await getDocument<IApplication>(userId, Collections.Applications)) || null;
     }
   }
 

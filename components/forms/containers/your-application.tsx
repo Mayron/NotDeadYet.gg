@@ -29,7 +29,10 @@ const YourApplication: React.FC<IYourApplicationProps> = ({ application }) => {
       <header
         css={css`
           text-align: center;
-          margin-bottom: 40px;
+          margin-bottom: 20px;
+          h1 {
+            font-size: 2.5rem;
+          }
         `}
       >
         <h1>Your Application</h1>

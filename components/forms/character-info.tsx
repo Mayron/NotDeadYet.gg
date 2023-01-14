@@ -8,6 +8,7 @@ import {
   SelectChangeEvent,
   TextField,
 } from "@mui/material";
+import Button from "@mui/material/Button";
 import { useCallback } from "react";
 import { useWatch, useFormContext } from "react-hook-form";
 import { characterClasses, specializations } from "../../data";
@@ -17,9 +18,10 @@ import WhitePanel from "../white-panel";
 
 interface ICharacterInfoProps {
   characterId: number;
+  onRemove: (index: number) => void;
 }
 
-const CharacterInfo: React.FC<ICharacterInfoProps> = ({ characterId }) => {
+const CharacterInfo: React.FC<ICharacterInfoProps> = ({ characterId, onRemove }) => {
   const {
     control,
     setValue,
@@ -58,8 +60,10 @@ const CharacterInfo: React.FC<ICharacterInfoProps> = ({ characterId }) => {
 
   return (
     <WhitePanel>
-      <header>
-        <h2>{characterId === 0 ? "Main Character" : `Alt Character #${characterId}`}</h2>
+      <header style={{ position: "relative" }}>
+        <h2 style={{ textAlign: characterId > 0 ? "left" : "center" }}>
+          {characterId === 0 ? "Main Character" : `Alt Character #${characterId}`}
+        </h2>
         {characterId === 0 && (
           <p>
             This section relates to the main character you are applying to join our
@@ -67,6 +71,19 @@ const CharacterInfo: React.FC<ICharacterInfoProps> = ({ characterId }) => {
             considered your main character. This will be the character you will be
             attending the majority of our raids with.
           </p>
+        )}
+        {characterId > 0 && (
+          <Button
+            variant="outlined"
+            onClick={() => onRemove(characterId)}
+            css={css`
+              position: absolute;
+              top: 0;
+              right: 0;
+            `}
+          >
+            Remove Alt
+          </Button>
         )}
       </header>
       <Question horizontal>

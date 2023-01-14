@@ -52,15 +52,23 @@ const CharacterInfoForm = () => {
     setValue(`characters.${characters.length}`, altInfo);
   }, [characters.length, setValue]);
 
+  const removeAltCharacter = useCallback(
+    (index: number) => {
+      characters.splice(index, 1);
+      setValue(`characters`, characters);
+    },
+    [characters, setValue],
+  );
+
   const getCharacterInfoForms = useCallback(() => {
     const forms = [];
 
     for (let i = 0; i < characters.length; i++) {
-      forms.push(<CharacterInfo key={i} characterId={i} />);
+      forms.push(<CharacterInfo key={i} characterId={i} onRemove={removeAltCharacter} />);
     }
 
     return forms;
-  }, [characters.length]);
+  }, [characters.length, removeAltCharacter]);
 
   return (
     <FormProvider {...form}>
@@ -71,13 +79,12 @@ const CharacterInfoForm = () => {
           <WhitePanel headerBorder={false}>
             <header
               css={css`
-                text-align: center;
-
                 p {
                   border-bottom: none;
                 }
 
                 button {
+                  display: block;
                   margin: 20px auto 0 auto;
                 }
               `}
