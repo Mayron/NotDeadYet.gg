@@ -1,4 +1,5 @@
 import Head from "next/head";
+import BackgroundPattern from "./background-pattern";
 import Footer from "./footer";
 import PageNavigation from "./page-navigation";
 
@@ -52,7 +53,10 @@ const Layout: React.FC<ILayoutProps> = ({ children, title, hidePageNavigation })
     </Head>
 
     {!hidePageNavigation && <PageNavigation />}
-    <main>{children}</main>
+    <main>
+      <BackgroundPattern />
+      {children}
+    </main>
     <Footer />
   </>
 );

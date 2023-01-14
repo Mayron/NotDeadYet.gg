@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { unstable_getServerSession } from "next-auth";
 import { Collections } from "../../../data";
-import { getDocument, updateDocument } from "../../../firebase";
+import { updateDocument } from "../../../firebase";
 import { authOptions } from "../auth/[...nextauth]";
 
 const lootHandler = async (req: NextApiRequest, res: NextApiResponse) => {
@@ -15,12 +15,8 @@ const lootHandler = async (req: NextApiRequest, res: NextApiResponse) => {
 
   const { userId, loot } = JSON.parse(req.body as string) as {
     userId: string;
-    loot: boolean;
+    loot: number[];
   };
-
-  await updateDocument(userId, Collections.Applications, {
-    loot,
-  });
 
   await updateDocument(userId, Collections.Users, {
     loot,

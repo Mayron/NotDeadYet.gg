@@ -1,13 +1,11 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import { css } from "@emotion/react";
 import Layout from "../../components/layout";
-import BackgroundPattern from "../../components/background-pattern";
 import AboutYouForm from "../../components/forms/containers/about-you-form";
 import ApplicationStepper from "../../components/application-stepper";
 
 const AboutYouPage: React.FC = () => (
   <Layout title="Apply | Not Dead Yet">
-    <BackgroundPattern />
     <section>
       <header
         css={css`

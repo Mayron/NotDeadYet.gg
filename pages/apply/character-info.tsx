@@ -1,13 +1,11 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import { css } from "@emotion/react";
 import Layout from "../../components/layout";
-import BackgroundPattern from "../../components/background-pattern";
 import CharacterInfoForm from "../../components/forms/containers/character-info-form";
 import ApplicationStepper from "../../components/application-stepper";
 
 const CharacterInfoPage: React.FC = () => (
   <Layout title="Apply | Not Dead Yet">
-    <BackgroundPattern />
     <section>
       <header>
         <h1

@@ -59,48 +59,53 @@ export const getGuildSummary = async (): Promise<string> => {
   return response.data.guildSummary.text;
 };
 
-interface IDashboardContentResponse {
+export interface ILootTabContentful {
   data: {
-    dashboard: {
-      text: string;
+    lootTabCollection: {
+      items: { phase: number; content: string; instructions: string }[];
     };
   };
 }
 
-export const getDashboardContent = async (
-  canViewLootStandings?: boolean,
-): Promise<string> => {
-  const id = canViewLootStandings ? "48oyrMdaXNIeeFVrVFdnyD" : "31A1AXAWDqKrZO02tkZFPw";
-
+export const getLootTabContent = async (): Promise<ILootTabContentful> => {
   const query = `#graphql    
     query {
-      dashboard(id: "${id}") {
-        text 
+      lootTabCollection {
+        items {
+          phase
+          content
+          instructions
+        }
       }
     }
   `;
 
-  const response = await fetchGraphQL<IDashboardContentResponse>(query);
-  return response.data.dashboard.text;
+  const response = await fetchGraphQL<ILootTabContentful>(query);
+  return response;
 };
 
-interface INewsResponse {
+export interface IContentfulPostsResponse {
   data: {
-    newsCollection: {
-      items: NewsArticle[];
+    postCollection: {
+      items: ContentfulPost[];
     };
   };
 }
 
-export const getAllNews = async (): Promise<NewsArticle[]> => {
+export const getContentfulPosts: (
+  publicOnly: boolean,
+) => Promise<ContentfulPost[]> = async (publicOnly) => {
+  const condition = publicOnly ? ", where: {public: true}" : "";
+
   const query = `#graphql    
     query {
-      newsCollection(order: sys_publishedAt_DESC) {
+      postCollection(order: sys_publishedAt_DESC${condition}) {
         items {
           title
           excerpt
           sys {
             publishedAt
+            id
           }
           author {
             name
@@ -117,8 +122,63 @@ export const getAllNews = async (): Promise<NewsArticle[]> => {
     }
   `;
 
-  const response = await fetchGraphQL<INewsResponse>(query);
-  return response.data.newsCollection.items;
+  const response = await fetchGraphQL<IContentfulPostsResponse>(query);
+  return response.data.postCollection.items;
+};
+
+export interface IContentfulPostResponse {
+  data: {
+    post: ContentfulPost;
+  };
+}
+
+export const getContentfulPost: (postId: string) => Promise<ContentfulPost> = async (
+  postId,
+) => {
+  const query = `#graphql    
+    query {
+      post(id: "${postId}") {
+        title
+        body
+        sys {
+          publishedAt
+        }
+        author {
+          name
+          bio
+          profilePicture {
+            title
+            url
+            width
+            height
+          }
+        }          
+      }      
+    }
+  `;
+
+  const response = await fetchGraphQL<IContentfulPostResponse>(query);
+  return response.data.post;
+};
+
+interface IResourcesContentfulResponse {
+  data: {
+    resources: {
+      content: string;
+    };
+  };
+}
+export const getResourcesContent = async (): Promise<string> => {
+  const query = `#graphql    
+    query {
+      resources(id: "4U4CAcYVMz5x4gi960IBiS") {
+        content
+      }
+    }
+  `;
+
+  const response = await fetchGraphQL<IResourcesContentfulResponse>(query);
+  return response.data.resources.content;
 };
 
 interface IApplyInfoResponse {

@@ -35,7 +35,7 @@ export const authOptions: NextAuthOptions = {
         session.user.userId = token.sub as string;
         session.user.username = token.username as string;
         session.user.member = token.member as boolean;
-        session.user.loot = token.loot as boolean;
+        session.user.loot = token.loot as number[];
       }
 
       return session;

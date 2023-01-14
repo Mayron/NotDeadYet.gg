@@ -1,6 +1,10 @@
+// import slugify from "slugify";
 import { Session } from "next-auth";
 import { marked } from "marked";
 import { sanitize } from "dompurify";
+
+// export const getSlug: (value: string) => string = (value) =>
+//   slugify(value, { lower: true, remove: /[*+~.()'"!?:@]/g });
 
 export const getUsername = (session: Session | null) => {
   if (!session?.user) {

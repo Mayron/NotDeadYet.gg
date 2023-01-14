@@ -95,21 +95,26 @@ const PageNavigation: React.FC = () => {
           </Route>
         </li>
 
-        <li>
-          <Route to="/news" text="News" />
-        </li>
-        <li>
-          <Route to="/rules" text="Rules" />
-        </li>
-        <li>
-          {member ? (
+        {member ? (
+          <li>
             <a href={`${process.env.NEXT_PUBLIC_WEBSITE_URL || ""}/dashboard`}>
               Dashboard
             </a>
-          ) : (
-            <a href={`${process.env.NEXT_PUBLIC_WEBSITE_URL || ""}/apply`}>Apply</a>
-          )}
-        </li>
+          </li>
+        ) : (
+          <>
+            <li>
+              <Route to="/news" text="News" />
+            </li>
+            <li>
+              <Route to="/rules" text="Rules" />
+            </li>
+            <li>
+              <a href={`${process.env.NEXT_PUBLIC_WEBSITE_URL || ""}/apply`}>Apply</a>
+            </li>
+          </>
+        )}
+
         <li
           css={css`
             svg {

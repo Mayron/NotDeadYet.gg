@@ -3,13 +3,14 @@ declare type Rule = {
   content: string;
 };
 
-declare type NewsArticle = {
+declare type ContentfulPost = {
   title: string;
-  body: string;
-  excerpt: string;
   author: Author;
+  excerpt: string;
+  body: string;
   sys: {
     publishedAt: string;
+    id: string;
   };
 };
 

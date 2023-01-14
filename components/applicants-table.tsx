@@ -1,6 +1,13 @@
 import styled from "@emotion/styled";
 import { css } from "@emotion/react";
-import { Button } from "@mui/material";
+import {
+  Checkbox,
+  FormControl,
+  ListItemText,
+  MenuItem,
+  Select,
+  SelectChangeEvent,
+} from "@mui/material";
 import {
   DataGrid,
   type GridValueGetterParams,
@@ -8,7 +15,8 @@ import {
   GridCellParams,
 } from "@mui/x-data-grid";
 import moment from "moment";
-import { ChangeEventHandler, useState } from "react";
+import { useState } from "react";
+import vars from "../styles/vars";
 
 const StyledAlts = styled.div`
   display: flex;
@@ -22,35 +30,58 @@ const StyledAlts = styled.div`
   }
 `;
 
-interface ICanViewLootStandingsCheckButtonProps {
+interface ILootSheetsDropDownProps {
   app: IApplication;
-  defaultValue: boolean;
+  initialLoot: number[];
 }
 
-const CanViewLootStandingsCheckButton: React.FC<
-  ICanViewLootStandingsCheckButtonProps
-> = ({ app, defaultValue }) => {
-  const [checked, setChecked] = useState(defaultValue);
+const LootSheetValue = styled.p`
+  font-weight: ${vars.font.standard.weights.medium};
+  text-align: center;
+`;
 
-  const handleOnChange: ChangeEventHandler<HTMLInputElement> = async (e) => {
-    setChecked(e.currentTarget.checked);
+const LootSheetsDropDown: React.FC<ILootSheetsDropDownProps> = ({ app, initialLoot }) => {
+  const [loot, setLoot] = useState<number[]>(initialLoot);
+
+  const handleChange = async (e: SelectChangeEvent<number[]>) => {
+    const value = e.target.value as number[];
+    setLoot(value);
 
     await fetch(`/api/applicant/loot`, {
       method: "POST",
       body: JSON.stringify({
         userId: app.userId,
-        loot: e.currentTarget.checked,
+        loot: value,
       }),
     });
   };
 
   return (
-    <input
-      type="checkbox"
-      style={{ width: 20, height: 20 }}
-      checked={checked}
-      onChange={handleOnChange}
-    ></input>
+    <FormControl sx={{ m: 1, width: 300 }}>
+      <Select<number[]>
+        labelId={`lootList-${app.userId}`}
+        multiple
+        value={loot}
+        displayEmpty
+        renderValue={(selected) => {
+          if (selected.length > 0) {
+            return <LootSheetValue>{selected.length}</LootSheetValue>;
+          }
+
+          return <LootSheetValue>None</LootSheetValue>;
+        }}
+        onChange={handleChange}
+      >
+        <MenuItem value={1}>
+          <Checkbox checked={loot.includes(1)} />
+          <ListItemText primary="Phase 1" secondary="Naxx, OS, EoE" />
+        </MenuItem>
+        <MenuItem value={2}>
+          <Checkbox checked={loot.includes(2)} />
+          <ListItemText primary="Phase 2" secondary="Ulduar" />
+        </MenuItem>
+      </Select>
+    </FormControl>
   );
 };
 
@@ -226,13 +257,18 @@ const columns: GridColDef[] = [
   },
   {
     field: "status",
-    headerName: "Can View Loot Standings?",
+    headerName: "Submitted Loot Lists",
     align: "center",
-    width: 200,
+    width: 180,
     renderCell: ({ row }) => {
       const app = row as IApplication;
-      const checked = !!app.loot;
-      return <CanViewLootStandingsCheckButton app={app} defaultValue={checked} />;
+
+      if (typeof app.loot === "boolean") {
+        app.loot = [];
+      }
+
+      const loot = app.loot || [];
+      return <LootSheetsDropDown app={app} initialLoot={loot} />;
     },
   },
 ];

@@ -1,11 +1,10 @@
 import { css } from "@emotion/react";
 import AdminNav from "../../components/admin/admin-nav";
 import ApplicantsTable from "../../components/applicants-table";
-import BackgroundPattern from "../../components/background-pattern";
 import Layout from "../../components/layout";
 import WhitePanel from "../../components/white-panel";
-import { Status } from "../../data";
-import { getAllApplicationsByStatus } from "../../firebase";
+import { Collections, Status } from "../../data";
+import { getAllApplicationsByStatus, getDocumentField } from "../../firebase";
 
 interface IAdminPageProps {
   applications: IApplication[];
@@ -13,7 +12,6 @@ interface IAdminPageProps {
 
 const AdminAcceptedPage: React.FC<IAdminPageProps> = ({ applications }) => (
   <Layout title="Admin | Not Dead Yet">
-    <BackgroundPattern />
     <section style={{ maxWidth: 1200 }}>
       <header>
         <h1
@@ -41,9 +39,23 @@ export default AdminAcceptedPage;
 export async function getStaticProps() {
   const pending = await getAllApplicationsByStatus(Status.PendingInvite);
   const members = await getAllApplicationsByStatus(Status.GuildMember);
+  const applications = [...pending, ...members];
+
+  for (let i = 0; i < applications.length; i++) {
+    const applicant = applications[i];
+
+    // eslint-disable-next-line no-await-in-loop
+    const userLoot = await getDocumentField<number[]>(
+      applicant.userId,
+      Collections.Users,
+      "loot",
+    );
+
+    applicant.loot = userLoot;
+  }
 
   return {
-    props: { applications: [...pending, ...members] },
+    props: { applications },
     revalidate: 120,
   };
 }

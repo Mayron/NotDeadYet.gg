@@ -3,7 +3,6 @@ import { Button } from "@mui/material";
 import { GetServerSidePropsContext } from "next";
 import { useRouter } from "next/router";
 import ApplicationOverview from "../../../components/application-overview";
-import BackgroundPattern from "../../../components/background-pattern";
 import GoBackButton from "../../../components/go-back-button";
 import Layout from "../../../components/layout";
 import { Collections, Status } from "../../../data";
@@ -71,7 +70,6 @@ const AdminApplicantPage: React.FC<IAdminApplicantPageProps> = ({ application })
 
   return (
     <Layout title="Admin | Not Dead Yet">
-      <BackgroundPattern />
       <section>
         <header>
           <h1

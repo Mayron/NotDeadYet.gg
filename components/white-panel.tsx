@@ -11,11 +11,12 @@ const WhitePanel = styled.div<IWhitePanelProps>(
   ({ headerBorder = true }) => css`
     overflow-wrap: anywhere;
     background-color: ${colors.white};
-    padding: 25px;
+    border-radius: 2px;
     border: 1px solid #cfcfcf;
-    border-radius: 4px;
-    box-shadow: 0px 4px 10px rgb(0 0 0 / 20%);
-    margin-bottom: 30px;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 2px 0px;
+    padding: 30px;
+    margin-bottom: 15px;
+    font-size: 0.9rem;
 
     ${media.down("sm")`
       padding: 10px;

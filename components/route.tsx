@@ -25,7 +25,7 @@ const Route: React.FC<IRouteProps> = ({ text, to, children, className, ssr = fal
   if (!ssr && to?.startsWith("/")) {
     return (
       <Link href={to}>
-        <a className={className} css={isMatch && activeStyle}>
+        <a className={className} css={isMatch && activeStyle} data-match={isMatch}>
           {children}
           {text}
         </a>

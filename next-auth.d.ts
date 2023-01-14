@@ -11,7 +11,7 @@ declare module "next-auth" {
       userId: string; // user document ID
       username?: string; // our custom username (user.name is the battle.net username)
       member?: boolean; // if true, they're in the guild
-      loot?: boolean; // if true, they can see the loot standings on the dashboard
+      loot?: number[]; // if true, they can see the loot standings on the dashboard
     } & DefaultSession["user"];
   }
 }

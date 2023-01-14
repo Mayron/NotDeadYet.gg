@@ -14,6 +14,8 @@ const globalStyles = css`
   }
 
   main {
+    display: flex;
+    flex-direction: column;
     background-color: ${colors.background};
     transition: margin-top 0.2s ease-in;
     min-height: 100vh;
@@ -51,8 +53,16 @@ const globalStyles = css`
 
     return css`
       ${tag} {
-        font-family: ${vars.font.header.family};
-        font-weight: ${vars.font.header.weight};
+        ${index < 4
+          ? css`
+              font-family: ${vars.font.header.family};
+              font-weight: ${vars.font.header.weight};
+            `
+          : css`
+              font-family: ${vars.font.standard.family};
+              font-weight: ${vars.font.standard.weights.medium};
+            `}
+
         font-size: ${fontSize}rem;
         line-height: normal;
         text-transform: uppercase;
@@ -132,6 +142,7 @@ const globalStyles = css`
   section {
     position: relative;
     max-width: ${vars.maxContentSize};
+    width: 100%;
     margin: 0 auto;
     padding: ${vars.sectionPadding};
 
@@ -143,9 +154,13 @@ const globalStyles = css`
   article {
     padding: 0 15px;
 
-    ${media.down("xs")`
-      padding: 0;
-    `};
+    a {
+      color: ${colors.link.default};
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
 
     ul,
     p {
@@ -162,22 +177,6 @@ const globalStyles = css`
       padding: 0 2rem;
 
       ${media.down("sm")`padding: 0;`};
-    }
-
-    h3:not(:first-child) {
-      margin-top: 20px;
-    }
-
-    h4 {
-      margin-top: 20px;
-      font-size: 1.75rem;
-      margin-bottom: 10px;
-    }
-
-    h5 {
-      margin-top: 10px;
-      font-size: 1.275rem;
-      margin-bottom: 5px;
     }
   }
 
@@ -281,6 +280,10 @@ const globalStyles = css`
     padding: 10px;
     background-color: #f9f9f9;
     border-radius: 2px;
+
+    &:not(:last-child) {
+      margin-bottom: 20px;
+    }
   }
 `;
 

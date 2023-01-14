@@ -10,7 +10,6 @@ import RequirementsForm from "../../components/forms/containers/requirements-for
 import BattleNetSignInPanel from "../../components/panel";
 import BattleNet from "../../svgs/battle-net.svg";
 import { authOptions } from "../api/auth/[...nextauth]";
-import BackgroundPattern from "../../components/background-pattern";
 import WhitePanel from "../../components/white-panel";
 import ApplicationStepper from "../../components/application-stepper";
 import { getDocument } from "../../firebase";
@@ -73,8 +72,6 @@ interface IApplyPageProps {
 
 const ApplyPage: React.FC<IApplyPageProps> = ({ applyInfo, loggedIn, application }) => (
   <Layout title="Apply | Not Dead Yet">
-    <BackgroundPattern />
-
     {application ? (
       <YourApplication application={application} />
     ) : (
