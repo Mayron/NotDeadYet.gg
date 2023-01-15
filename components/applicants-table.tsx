@@ -76,16 +76,16 @@ const LootSheetsDropDown: React.FC<ILootSheetsDropDownProps> = ({ app, initialLo
           <Checkbox checked={loot.includes(1)} />
           <ListItemText primary="Phase 1 - 25 Man" secondary="Naxx, OS, EoE" />
         </MenuItem>
-        <MenuItem value={2}>
-          <Checkbox checked={loot.includes(2)} />
+        <MenuItem value={1.5}>
+          <Checkbox checked={loot.includes(1.5)} />
           <ListItemText primary="Phase 1 - 10 Man" secondary="Naxx, OS, EoE" />
         </MenuItem>
-        <MenuItem value={3}>
-          <Checkbox checked={loot.includes(3)} />
+        <MenuItem value={2}>
+          <Checkbox checked={loot.includes(2)} />
           <ListItemText primary="Phase 2 - 25 Man" secondary="Ulduar" />
         </MenuItem>
-        <MenuItem value={4}>
-          <Checkbox checked={loot.includes(4)} />
+        <MenuItem value={2.5}>
+          <Checkbox checked={loot.includes(2.5)} />
           <ListItemText primary="Phase 2 - 10 Man" secondary="Ulduar" />
         </MenuItem>
       </Select>

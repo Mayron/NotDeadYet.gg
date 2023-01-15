@@ -63,7 +63,6 @@ const LoadingMessage = styled.div`
 
 const IFrameSection = styled.div`
   position: relative;
-  padding: 20px 0 0 0;
 
   article {
     padding: 0;
@@ -113,7 +112,15 @@ const TabContent: React.FC<ITabContentProps> = ({
   }, [tabIndex]);
 
   return (
-    <div ref={containerRef} hidden={hidden}>
+    <div
+      ref={containerRef}
+      hidden={hidden}
+      css={css`
+        padding-top: 20px;
+
+        ${media.down("xs")`padding-top: 10px;`};
+      `}
+    >
       <IFrameSection>
         {loading1 && (
           <LoadingMessage>
@@ -130,6 +137,7 @@ const TabContent: React.FC<ITabContentProps> = ({
           dangerouslySetInnerHTML={{ __html: marked.parse(content1) }}
         ></article>
       </IFrameSection>
+      <hr />
       <IFrameSection>
         {loading2 && (
           <LoadingMessage>
@@ -179,7 +187,7 @@ const DashboardLootPage: React.FC<IDashboardPageProps> = ({
           <DashboardContentPanel full>
             <div
               css={css`
-                padding: 0 15px;
+                padding: 0 15px 15px 15px;
                 ${media.down("sm")`padding: 0 8px;`};
               `}
             >
@@ -229,7 +237,7 @@ const DashboardLootPage: React.FC<IDashboardPageProps> = ({
                     loot.includes(data.index) ? data.section1 : data.instructions1
                   }
                   content2={
-                    loot.includes(data.index + 1) ? data.section2 : data.instructions2
+                    loot.includes(data.index + 0.5) ? data.section2 : data.instructions2
                   }
                 />
               ))}
@@ -251,6 +259,12 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 
     if (member) {
       const contentfulResponse = await getLootTabContent();
+      console.info(
+        "loot: ",
+        JSON.stringify(loot),
+        ", response: ",
+        JSON.stringify(contentfulResponse),
+      );
 
       return {
         props: { contentfulResponse, loot },
