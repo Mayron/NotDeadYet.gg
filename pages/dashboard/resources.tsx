@@ -1,3 +1,4 @@
+import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 import { marked } from "marked";
 import { unstable_getServerSession } from "next-auth";
@@ -6,20 +7,14 @@ import {
   DashboardContentPanel,
   DashboardHeader,
   DashboardContainer,
+  DashboardMainSection,
 } from "../../components/dashboard";
 import DashboardSideNavMenu from "../../components/dashboard-side-nav-menu";
 import Layout from "../../components/layout";
 import { getResourcesContent } from "../../contentful";
 import { contentfulStyles } from "../../styles/fonts";
+import media from "../../styles/media-queries";
 import { authOptions } from "../api/auth/[...nextauth]";
-
-const DashboardMainSection = styled.section`
-  max-width: 1140px;
-  width: 100%;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-`;
 
 interface IDashboardResourcesPageProps {
   content: string;
@@ -33,7 +28,7 @@ const DashboardResourcesPage: React.FC<IDashboardResourcesPageProps> = ({ conten
         <DashboardSideNavMenu />
         <DashboardContentPanel>
           <article
-            css={contentfulStyles}
+            css={[contentfulStyles, media.up("sm")`padding: 10px 30px;`]}
             dangerouslySetInnerHTML={{ __html: marked.parse(content) }}
           ></article>
         </DashboardContentPanel>

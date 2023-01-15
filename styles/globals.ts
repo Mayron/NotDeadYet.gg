@@ -18,8 +18,8 @@ const globalStyles = css`
     flex-direction: column;
     background-color: ${colors.background};
     transition: margin-top 0.2s ease-in;
-    min-height: 100vh;
     position: relative;
+    ${media.up("sm")`min-height: 100vh;`};
   }
 
   ul,

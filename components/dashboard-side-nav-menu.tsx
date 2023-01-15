@@ -12,29 +12,35 @@ const DashboardSideNavMenu: React.FC = () => {
       css={css`
         padding: 0 20px;
         ${media.up("md")`min-width: 160px;`};
-        ${media.down("sm")`border-bottom: 1px solid #dbe5f1;`};
+
+        ${media.down("sm")`
+          border-bottom: 1px solid #dbe5f1;
+          padding: 0 8px;
+        `};
       `}
     >
       <ul
         css={css`
           list-style-type: none;
           margin-left: 0;
+
           ${media.down("sm")`
             display: flex;
-
           `};
+
           li {
             user-select: none;
+            border-bottom: 1px solid #dbe5f1;
 
             a {
-              padding: 20px 0;
+              padding: 20px;
+              margin: 0 -20px;
               font-size: ${vars.font.smallSize};
               display: flex;
               align-items: center;
               font-family: ${vars.font.header.family};
               font-weight: 500;
               position: relative;
-              border-bottom: 1px solid #dbe5f1;
 
               &[data-match="true"] {
                 font-weight: 700;
@@ -45,6 +51,7 @@ const DashboardSideNavMenu: React.FC = () => {
               }
 
               ${media.down("sm")`
+                margin: 0;
                 padding: 10px 10px;
                 border-right: 1px solid #dbe5f1;
                 border-bottom: none;
@@ -56,11 +63,12 @@ const DashboardSideNavMenu: React.FC = () => {
               `};
             }
 
-            &:last-of-type a {
+            &:last-of-type {
               border-bottom: 0;
             }
 
             ${media.down("sm")`
+              border-bottom: 0;
               &:first-of-type a {
                 padding-left: 0;
               }
@@ -167,7 +175,7 @@ const DashboardSideNavMenu: React.FC = () => {
                   d="M17 13c-2.21 0-4 1.79-4 4s1.79 4 4 4s4-1.79 4-4s-1.79-4-4-4zm0 1.38c.62 0 1.12.51 1.12 1.12s-.51 1.12-1.12 1.12s-1.12-.51-1.12-1.12s.5-1.12 1.12-1.12zm0 5.37c-.93 0-1.74-.46-2.24-1.17c.05-.72 1.51-1.08 2.24-1.08s2.19.36 2.24 1.08c-.5.71-1.31 1.17-2.24 1.17z"
                 />
               </svg>
-              <span>Admin</span>
+              <span className="sm-up">Admin</span>
             </Route>
           </li>
         )}

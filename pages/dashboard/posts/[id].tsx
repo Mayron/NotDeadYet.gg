@@ -6,34 +6,17 @@ import {
   DashboardContentPanel,
   DashboardHeader,
   DashboardContainer,
+  DashboardMainSection,
 } from "../../../components/dashboard";
 import DashboardSideNavMenu from "../../../components/dashboard-side-nav-menu";
 import Layout from "../../../components/layout";
 import PostThumbnail from "../../../components/post-thumbnail";
 import { getContentfulPost } from "../../../contentful";
-import colors from "../../../styles/colors";
 import { authOptions } from "../../api/auth/[...nextauth]";
 
 interface IDashboardPostPageProps {
   post: ContentfulPost;
 }
-
-const DashboardMainSection = styled.section`
-  max-width: 1140px;
-  width: 100%;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-
-  iframe {
-    width: 100%;
-    min-height: 70vh;
-    background-color: ${colors.white};
-    outline: none;
-    border: 1px solid ${colors.grey.border};
-    margin: 20px 0;
-  }
-`;
 
 const DashboardPostPage: React.FC<IDashboardPostPageProps> = ({ post }) => (
   <Layout title={`${post.title} | Not Dead Yet`}>

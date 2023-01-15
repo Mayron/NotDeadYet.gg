@@ -17,7 +17,11 @@ export const DashboardMainSection = styled.section<IDashboardMainSectionProps>(
     flex-direction: column;
 
     ${media.down("sm")`
-      display: block;  
+      padding: 0;
+
+      & > header {
+        display: none;
+      }
     `};
 
     ${fullscreen &&
@@ -66,11 +70,6 @@ export const DashboardContentPanel: React.FC<IDashboardContentPanelProps> = ({
         margin-top: 0;
         padding: 0;
       `};
-
-      ${!full &&
-      media.down("sm")`
-        padding: 8px 0;
-      `};
     `}
   >
     {children}
@@ -86,6 +85,7 @@ export const DashboardContainer = styled.div`
   box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
 
   ${media.down("sm")`
-    display: block;
+    flex-direction: column;
+    min-height: 100%;
   `};
 `;
