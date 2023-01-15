@@ -62,7 +62,14 @@ export const getGuildSummary = async (): Promise<string> => {
 export interface ILootTabContentful {
   data: {
     lootTabCollection: {
-      items: { index: number; name: string; content: string; instructions: string }[];
+      items: {
+        index: number;
+        label: string;
+        section1: string;
+        instructions1: string;
+        section2: string;
+        instructions2: string;
+      }[];
     };
   };
 }
@@ -73,9 +80,11 @@ export const getLootTabContent = async (): Promise<ILootTabContentful> => {
       lootTabCollection {
         items {
           index
-          name
-          content
-          instructions
+          label
+          section1
+          instructions1
+          section2
+          instructions2
         }
       }
     }

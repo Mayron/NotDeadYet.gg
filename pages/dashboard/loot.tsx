@@ -1,14 +1,15 @@
 import { css } from "@emotion/react";
+import styled from "@emotion/styled";
 import { CircularProgress, Tab, Tabs } from "@mui/material";
 import { marked } from "marked";
+import { GetServerSidePropsContext } from "next";
 import { unstable_getServerSession } from "next-auth";
-import { GetServerSidePropsContext } from "next/types";
 import { useEffect, useRef, useState } from "react";
 import {
   DashboardMainSection,
-  DashboardContentPanel,
-  DashboardContainer,
   DashboardHeader,
+  DashboardContainer,
+  DashboardContentPanel,
 } from "../../components/dashboard";
 import DashboardSideNavMenu from "../../components/dashboard-side-nav-menu";
 import Layout from "../../components/layout";
@@ -20,7 +21,9 @@ import { authOptions } from "../api/auth/[...nextauth]";
 
 interface ITabContentProps {
   hidden: boolean;
-  content: string;
+  tabIndex: number;
+  content1: string;
+  content2: string;
 }
 
 const iframeStyle = css`
@@ -42,80 +45,101 @@ const iframeStyle = css`
   }
 `;
 
-const TabContent: React.FC<ITabContentProps> = ({ hidden, content }) => {
-  const [loadingIFrame, setLoadingIFrame] = useState(true);
+const LoadingMessage = styled.div`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+
+  & > p {
+    margin-top: 20px;
+    text-align: center;
+    max-width: 400px;
+  }
+`;
+
+const IFrameSection = styled.div`
+  position: relative;
+  padding: 20px 0 0 0;
+
+  article {
+    padding: 0;
+  }
+
+  ${media.down("sm")`
+    padding: 10px 0 0 0 ;
+  `};
+`;
+
+const TabContent: React.FC<ITabContentProps> = ({
+  hidden,
+  tabIndex,
+  content1,
+  content2,
+}) => {
+  const [loading1, setLoading1] = useState(true);
+  const [loading2, setLoading2] = useState(true);
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const container = containerRef.current;
     if (container) {
-      const iframes = Array.from(container.getElementsByTagName("iframe"));
+      const iframe1 = document.getElementById(
+        `${tabIndex}-section1`,
+      ) as HTMLIFrameElement;
+      const iframe2 = document.getElementById(
+        `${tabIndex}-section2`,
+      ) as HTMLIFrameElement;
 
-      let totalLoaded = 0;
+      if (iframe1?.contentDocument?.body) {
+        iframe1.addEventListener("load", () => {
+          setLoading1(false);
+        });
+      } else {
+        setLoading1(false);
+      }
 
-      iframes.forEach((iframe) => {
-        if (iframe?.contentDocument?.body) {
-          iframe.addEventListener("load", () => {
-            totalLoaded++;
-            if (totalLoaded === iframes.length) {
-              setLoadingIFrame(false);
-            }
-          });
-        } else {
-          totalLoaded++;
-        }
-      });
-
-      if (totalLoaded === iframes.length) {
-        setLoadingIFrame(false);
+      if (iframe2?.contentDocument?.body) {
+        iframe2.addEventListener("load", () => {
+          setLoading2(false);
+        });
+      } else {
+        setLoading2(false);
       }
     }
-  }, []);
+  }, [tabIndex]);
 
   return (
-    <div
-      ref={containerRef}
-      hidden={hidden}
-      css={css`
-        position: relative;
-        padding: 20px 0 0 0;
-
-        article {
-          padding: 0;
-        }
-
-        ${media.down("sm")`
-          padding: 10px 0 0 0 ;
-        `};
-      `}
-    >
-      {loadingIFrame && (
-        <div
-          css={css`
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            display: flex;
-            align-items: center;
-            flex-direction: column;
-
-            & > p {
-              margin-top: 20px;
-              text-align: center;
-              max-width: 400px;
-            }
-          `}
-        >
-          <CircularProgress size={100} thickness={2} />
-          <p>Loading spreadsheet... this can take a while, please be patient!</p>
-        </div>
-      )}
-      <article
-        role="tabpanel"
-        css={[contentfulStyles, iframeStyle]}
-        dangerouslySetInnerHTML={{ __html: marked.parse(content) }}
-      ></article>
+    <div ref={containerRef} hidden={hidden}>
+      <IFrameSection>
+        {loading1 && (
+          <LoadingMessage>
+            <CircularProgress size={100} thickness={2} />
+            <p>Loading spreadsheet... this can take a while, please be patient!</p>
+          </LoadingMessage>
+        )}
+        <article
+          role="tabpanel"
+          css={[contentfulStyles, iframeStyle]}
+          dangerouslySetInnerHTML={{ __html: marked.parse(content1) }}
+        ></article>
+      </IFrameSection>
+      <IFrameSection>
+        {loading2 && (
+          <LoadingMessage>
+            <CircularProgress size={100} thickness={2} />
+            <p>Loading spreadsheet... this can take a while, please be patient!</p>
+          </LoadingMessage>
+        )}
+        <article
+          role="tabpanel"
+          css={[contentfulStyles, iframeStyle]}
+          dangerouslySetInnerHTML={{ __html: marked.parse(content2) }}
+        ></article>
+      </IFrameSection>
     </div>
   );
 };
@@ -155,7 +179,7 @@ const DashboardLootPage: React.FC<IDashboardPageProps> = ({
             >
               <Tabs value={selectedTab} onChange={(_, v) => setSelectedTab(v as number)}>
                 {tabData.map((data) => (
-                  <Tab key={data.index} label={data.name} />
+                  <Tab key={data.index} label={data.label} />
                 ))}
               </Tabs>
               <button
@@ -194,7 +218,13 @@ const DashboardLootPage: React.FC<IDashboardPageProps> = ({
                 <TabContent
                   hidden={selectedTab !== data.index - 1}
                   key={data.index}
-                  content={loot.includes(data.index) ? data.content : data.instructions}
+                  tabIndex={data.index}
+                  content1={
+                    loot.includes(data.index) ? data.section1 : data.instructions1
+                  }
+                  content2={
+                    loot.includes(data.index + 1) ? data.section2 : data.instructions2
+                  }
                 />
               ))}
             </div>
