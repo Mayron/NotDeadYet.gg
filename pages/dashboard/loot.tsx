@@ -160,6 +160,7 @@ const DashboardLootPage: React.FC<IDashboardPageProps> = ({
               </Tabs>
               <button
                 type="button"
+                className="md-up"
                 onClick={handleFullScreen}
                 css={css`
                   position: absolute;
