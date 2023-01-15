@@ -17,6 +17,7 @@ import { getLootTabContent, type ILootTabContentful } from "../../contentful";
 import colors from "../../styles/colors";
 import { contentfulStyles } from "../../styles/fonts";
 import media from "../../styles/media-queries";
+import vars from "../../styles/vars";
 import { authOptions } from "../api/auth/[...nextauth]";
 
 interface ITabContentProps {
@@ -61,8 +62,9 @@ const LoadingMessage = styled.div`
   }
 `;
 
-const IFrameSection = styled.div`
+const IFrameSection = styled.details`
   position: relative;
+  margin-top: 20px;
 
   article {
     padding: 0;
@@ -71,6 +73,17 @@ const IFrameSection = styled.div`
   ${media.down("sm")`
     padding: 10px 0 0 0 ;
   `};
+
+  summary {
+    cursor: pointer;
+    margin-bottom: 10px;
+    user-select: none;
+    font-weight: ${vars.font.standard.weights.medium};
+
+    &:hover {
+      color: ${colors.link.active};
+    }
+  }
 `;
 
 const TabContent: React.FC<ITabContentProps> = ({
@@ -112,16 +125,9 @@ const TabContent: React.FC<ITabContentProps> = ({
   }, [tabIndex]);
 
   return (
-    <div
-      ref={containerRef}
-      hidden={hidden}
-      css={css`
-        padding-top: 20px;
-
-        ${media.down("xs")`padding-top: 10px;`};
-      `}
-    >
-      <IFrameSection>
+    <div ref={containerRef} hidden={hidden}>
+      <IFrameSection open>
+        <summary>25 Man Spreadsheet</summary>
         {loading1 && (
           <LoadingMessage>
             <CircularProgress size={100} thickness={2} />
@@ -137,8 +143,8 @@ const TabContent: React.FC<ITabContentProps> = ({
           dangerouslySetInnerHTML={{ __html: marked.parse(content1) }}
         ></article>
       </IFrameSection>
-      <hr />
-      <IFrameSection>
+      <IFrameSection open>
+        <summary>10 Man Spreadsheet</summary>
         {loading2 && (
           <LoadingMessage>
             <CircularProgress size={100} thickness={2} />
