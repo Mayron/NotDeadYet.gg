@@ -118,7 +118,10 @@ const TabContent: React.FC<ITabContentProps> = ({
         {loading1 && (
           <LoadingMessage>
             <CircularProgress size={100} thickness={2} />
-            <p>Loading spreadsheet... this can take a while, please be patient!</p>
+            <p>
+              Loading 25 man loot standings spreadsheet... this can take a while so please
+              be patient!
+            </p>
           </LoadingMessage>
         )}
         <article
@@ -131,7 +134,10 @@ const TabContent: React.FC<ITabContentProps> = ({
         {loading2 && (
           <LoadingMessage>
             <CircularProgress size={100} thickness={2} />
-            <p>Loading spreadsheet... this can take a while, please be patient!</p>
+            <p>
+              Loading 10 man loot standings spreadsheet... this can take a while so please
+              be patient!
+            </p>
           </LoadingMessage>
         )}
         <article
