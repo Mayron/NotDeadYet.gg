@@ -21,7 +21,6 @@ interface IDashboardPostPageProps {
 const DashboardPostPage: React.FC<IDashboardPostPageProps> = ({ post }) => (
   <Layout title={`${post.title} | Not Dead Yet`}>
     <DashboardMainSection>
-      <DashboardHeader />
       <DashboardContainer>
         <DashboardSideNavMenu />
         <DashboardContentPanel full>
