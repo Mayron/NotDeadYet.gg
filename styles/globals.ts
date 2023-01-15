@@ -66,7 +66,7 @@ const globalStyles = css`
         font-size: ${fontSize}rem;
         line-height: normal;
         text-transform: uppercase;
-        margin-bottom: 20px;
+        margin-bottom: 10px;
 
         ${media.down("sm")`
           font-size: ${fontSize * 0.85}rem;

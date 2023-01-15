@@ -1,4 +1,5 @@
 import { css } from "@emotion/react";
+import media from "../../styles/media-queries";
 import Route from "../route";
 
 const AdminNav: React.FC = () => (
@@ -7,22 +8,57 @@ const AdminNav: React.FC = () => (
       list-style: none;
       display: flex;
       margin-left: 0;
-      margin-bottom: 10px;
+      margin-bottom: 0.5em;
       justify-content: space-between;
-      margin-top: 40px;
+      align-items: center;
+      margin-top: 1.2em;
+      font-size: 0.95rem;
+
+      ${media.down("sm")`
+        font-size: 0.85rem;
+        text-align: center;
+      `};
     `}
   >
     <li>
-      <Route text="New Applicants" to="/admin" />
+      <Route to="/admin">
+        <span>
+          New
+          <span className="sm-up" style={{ paddingLeft: 4 }}>
+            Applicants
+          </span>
+        </span>
+      </Route>
     </li>
     <li>
-      <Route text="Unconfirmed Members" to="/admin/unconfirmed" />
+      <Route to="/admin/unconfirmed">
+        <span>
+          Unconfirmed
+          <span className="md-up" style={{ paddingLeft: 4 }}>
+            Members
+          </span>
+        </span>
+      </Route>
     </li>
     <li>
-      <Route text="Declined" to="/admin/declined" />
+      <Route to="/admin/declined">
+        <span>
+          Declined
+          <span className="md-up" style={{ paddingLeft: 4 }}>
+            Applicants
+          </span>
+        </span>
+      </Route>
     </li>
     <li>
-      <Route text="Guild Members" to="/admin/accepted" />
+      <Route to="/admin/accepted">
+        <span>
+          <span className="sm-up" style={{ paddingRight: 4 }}>
+            Guild
+          </span>
+          Members
+        </span>
+      </Route>
     </li>
   </ul>
 );

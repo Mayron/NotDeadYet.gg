@@ -25,7 +25,7 @@ const font = {
 const vars = {
   font,
   maxContentSize: "900px",
-  sectionPadding: "60px 30px",
+  sectionPadding: "30px",
   sectionMobilePadding: "30px 8px",
   navHeight: "40px",
 };

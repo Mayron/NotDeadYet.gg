@@ -1,6 +1,7 @@
 import { css } from "@emotion/react";
 import AdminNav from "../../components/admin/admin-nav";
 import ApplicantsTable from "../../components/applicants-table";
+import { DashboardHeader } from "../../components/dashboard";
 import Layout from "../../components/layout";
 import WhitePanel from "../../components/white-panel";
 import { Collections, Status } from "../../data";
@@ -13,15 +14,7 @@ interface IAdminPageProps {
 const AdminAcceptedPage: React.FC<IAdminPageProps> = ({ applications }) => (
   <Layout title="Admin | Not Dead Yet">
     <section style={{ maxWidth: 1200 }}>
-      <header>
-        <h1
-          css={css`
-            font-size: 2rem;
-          `}
-        >
-          Guild Members
-        </h1>
-      </header>
+      <DashboardHeader title="Guild Members" />
       <AdminNav />
       <WhitePanel
         css={css`
