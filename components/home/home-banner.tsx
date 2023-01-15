@@ -56,7 +56,7 @@ const HomeBanner: React.FC = () => {
               },
               direction: "bottom-left",
               random: false,
-              speed: 8,
+              speed: 2,
               straight: false,
             },
             number: {

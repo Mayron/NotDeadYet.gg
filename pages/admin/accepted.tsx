@@ -19,7 +19,7 @@ const AdminAcceptedPage: React.FC<IAdminPageProps> = ({ applications }) => (
             font-size: 2rem;
           `}
         >
-          Accepted Applicants
+          Guild Members
         </h1>
       </header>
       <AdminNav />
@@ -51,7 +51,7 @@ export async function getStaticProps() {
       "loot",
     );
 
-    applicant.loot = userLoot;
+    applicant.loot = userLoot || null;
   }
 
   return {
