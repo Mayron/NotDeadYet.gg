@@ -141,9 +141,9 @@ const DashboardLootPage: React.FC<IDashboardPageProps> = ({
   };
 
   return (
-    <Layout title="Loot | Not Dead Yet">
+    <Layout title="Loot - Dashboard | Not Dead Yet">
       <DashboardMainSection fullscreen={fullscreen}>
-        <DashboardHeader />
+        <DashboardHeader title="Loot Standings" />
         <DashboardContainer>
           <DashboardSideNavMenu />
           <DashboardContentPanel full>

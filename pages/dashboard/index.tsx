@@ -18,9 +18,9 @@ interface IDashboardPageProps {
 }
 
 const DashboardPage: React.FC<IDashboardPageProps> = ({ posts }) => (
-  <Layout title="Dashboard | Not Dead Yet">
+  <Layout title="News - Dashboard | Not Dead Yet">
     <DashboardMainSection>
-      <DashboardHeader />
+      <DashboardHeader title="News & Announcements" />
       <DashboardContainer>
         <DashboardSideNavMenu />
         <DashboardContentPanel>

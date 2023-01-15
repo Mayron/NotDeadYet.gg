@@ -35,7 +35,7 @@ export const DashboardMainSection = styled.section<IDashboardMainSectionProps>(
   `,
 );
 
-export const DashboardHeader: React.FC = () => (
+export const DashboardHeader: React.FC<{ title: string }> = ({ title }) => (
   <header>
     <h1
       css={css`
@@ -43,7 +43,7 @@ export const DashboardHeader: React.FC = () => (
         margin-bottom: 10px;
       `}
     >
-      Guild Dashboard
+      {title}
     </h1>
   </header>
 );

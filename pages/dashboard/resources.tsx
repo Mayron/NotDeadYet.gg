@@ -21,9 +21,9 @@ interface IDashboardResourcesPageProps {
 }
 
 const DashboardResourcesPage: React.FC<IDashboardResourcesPageProps> = ({ content }) => (
-  <Layout title="Dashboard | Not Dead Yet">
+  <Layout title="Resources - Dashboard | Not Dead Yet">
     <DashboardMainSection>
-      <DashboardHeader />
+      <DashboardHeader title="Guild Resources" />
       <DashboardContainer>
         <DashboardSideNavMenu />
         <DashboardContentPanel>
