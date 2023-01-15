@@ -132,9 +132,9 @@ const DashboardLootPage: React.FC<IDashboardPageProps> = ({
   const [fullscreen, setFullscreen] = useState(false);
 
   const tabData = contentfulResponse.data.lootTabCollection.items;
-  tabData.sort((a, b) => a.phase - b.phase);
+  tabData.sort((a, b) => a.index - b.index);
 
-  const [selectedTab, setSelectedTab] = useState(tabData[0].phase - 1);
+  const [selectedTab, setSelectedTab] = useState(tabData[0].index - 1);
 
   const handleFullScreen = () => {
     setFullscreen(!fullscreen);
@@ -155,7 +155,7 @@ const DashboardLootPage: React.FC<IDashboardPageProps> = ({
             >
               <Tabs value={selectedTab} onChange={(_, v) => setSelectedTab(v as number)}>
                 {tabData.map((data) => (
-                  <Tab key={data.phase} label={`Phase ${data.phase}`} />
+                  <Tab key={data.index} label={data.name} />
                 ))}
               </Tabs>
               <button
@@ -192,9 +192,9 @@ const DashboardLootPage: React.FC<IDashboardPageProps> = ({
               </button>
               {tabData.map((data) => (
                 <TabContent
-                  hidden={selectedTab !== data.phase - 1}
-                  key={data.phase}
-                  content={loot.includes(data.phase) ? data.content : data.instructions}
+                  hidden={selectedTab !== data.index - 1}
+                  key={data.index}
+                  content={loot.includes(data.index) ? data.content : data.instructions}
                 />
               ))}
             </div>
