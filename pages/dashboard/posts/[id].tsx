@@ -1,14 +1,6 @@
-import { css } from "@emotion/react";
-import styled from "@emotion/styled";
 import { GetServerSidePropsContext } from "next";
 import { unstable_getServerSession } from "next-auth";
-import {
-  DashboardContentPanel,
-  DashboardHeader,
-  DashboardContainer,
-  DashboardMainSection,
-} from "../../../components/dashboard";
-import DashboardSideNavMenu from "../../../components/dashboard-side-nav-menu";
+import DashboardLayout from "../../../components/dashboard-layout";
 import Layout from "../../../components/layout";
 import PostThumbnail from "../../../components/post-thumbnail";
 import { getContentfulPost } from "../../../contentful";
@@ -20,21 +12,16 @@ interface IDashboardPostPageProps {
 
 const DashboardPostPage: React.FC<IDashboardPostPageProps> = ({ post }) => (
   <Layout title={`${post.title} | Not Dead Yet`}>
-    <DashboardMainSection>
-      <DashboardContainer>
-        <DashboardSideNavMenu />
-        <DashboardContentPanel full>
-          <PostThumbnail
-            key={post.title}
-            author={post.author}
-            body={post.body}
-            title={post.title}
-            publishedAt={post.sys.publishedAt}
-            path="/dashboard"
-          />
-        </DashboardContentPanel>
-      </DashboardContainer>
-    </DashboardMainSection>
+    <DashboardLayout id="Post" contentPadding={false}>
+      <PostThumbnail
+        key={post.title}
+        author={post.author}
+        body={post.body}
+        title={post.title}
+        publishedAt={post.sys.publishedAt}
+        path="/dashboard"
+      />
+    </DashboardLayout>
   </Layout>
 );
 

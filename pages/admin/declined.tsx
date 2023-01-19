@@ -1,7 +1,7 @@
 import { css } from "@emotion/react";
 import AdminNav from "../../components/admin/admin-nav";
 import ApplicantsTable from "../../components/applicants-table";
-import { DashboardHeader } from "../../components/dashboard";
+import { DashboardHeader } from "../../components/dashboard-layout";
 import Layout from "../../components/layout";
 import WhitePanel from "../../components/white-panel";
 import { Status } from "../../data";

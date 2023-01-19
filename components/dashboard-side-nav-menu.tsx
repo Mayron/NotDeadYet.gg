@@ -9,24 +9,16 @@ const DashboardSideNavMenu: React.FC = () => {
 
   return (
     <aside
+      className="md-up"
       css={css`
         padding: 0 20px;
-        ${media.up("md")`min-width: 160px;`};
-
-        ${media.down("sm")`
-          border-bottom: 1px solid #dbe5f1;
-          padding: 0 8px;
-        `};
+        min-width: 160px;
       `}
     >
       <ul
         css={css`
           list-style-type: none;
           margin-left: 0;
-
-          ${media.down("sm")`
-            display: flex;
-          `};
 
           li {
             user-select: none;
@@ -49,48 +41,11 @@ const DashboardSideNavMenu: React.FC = () => {
               &[data-match="false"]:not(:hover) {
                 color: #6181a9;
               }
-
-              ${media.down("sm")`
-                margin: 0;
-                padding: 10px;
-                border-right: 1px solid #dbe5f1;
-                border-bottom: none;
-                font-size: 0.8rem;
-
-                svg {
-                  margin-right: 5px;
-                  
-                }
-              `};
-
-              @media all and (max-width: 430px) {
-                padding: 8px;
-
-                svg {
-                  width: 18px;
-                }
-
-                #adminText {
-                  display: none;
-                }
-              }
             }
 
             &:last-of-type {
               border-bottom: 0;
             }
-
-            ${media.down("sm")`
-              border-bottom: 0;
-              &:first-of-type a {
-                padding-left: 0;
-              }
-
-              &:last-of-type a {
-                padding-right: 0;
-                border-right: none;
-              }
-            `};
 
             svg {
               margin-right: 10px;

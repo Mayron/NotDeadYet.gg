@@ -1,13 +1,6 @@
-import styled from "@emotion/styled";
 import { unstable_getServerSession } from "next-auth";
 import { GetServerSidePropsContext } from "next/types";
-import {
-  DashboardContentPanel,
-  DashboardContainer,
-  DashboardHeader,
-  DashboardMainSection,
-} from "../../components/dashboard";
-import DashboardSideNavMenu from "../../components/dashboard-side-nav-menu";
+import DashboardLayout from "../../components/dashboard-layout";
 import Layout from "../../components/layout";
 import PostThumbnail from "../../components/post-thumbnail";
 import { getContentfulPosts } from "../../contentful";
@@ -19,24 +12,18 @@ interface IDashboardPageProps {
 
 const DashboardPage: React.FC<IDashboardPageProps> = ({ posts }) => (
   <Layout title="News - Dashboard | Not Dead Yet">
-    <DashboardMainSection>
-      <DashboardHeader title="News & Announcements" />
-      <DashboardContainer>
-        <DashboardSideNavMenu />
-        <DashboardContentPanel>
-          {posts.map((p) => (
-            <PostThumbnail
-              key={p.title}
-              author={p.author}
-              excerpt={p.excerpt}
-              title={p.title}
-              publishedAt={p.sys.publishedAt}
-              path={`/dashboard/posts/${p.sys.id}`}
-            />
-          ))}
-        </DashboardContentPanel>
-      </DashboardContainer>
-    </DashboardMainSection>
+    <DashboardLayout id="News" header="News & Announcements">
+      {posts.map((p) => (
+        <PostThumbnail
+          key={p.title}
+          author={p.author}
+          excerpt={p.excerpt}
+          title={p.title}
+          publishedAt={p.sys.publishedAt}
+          path={`/dashboard/posts/${p.sys.id}`}
+        />
+      ))}
+    </DashboardLayout>
   </Layout>
 );
 

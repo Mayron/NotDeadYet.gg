@@ -1,15 +1,7 @@
-import { css } from "@emotion/react";
-import styled from "@emotion/styled";
 import { marked } from "marked";
 import { unstable_getServerSession } from "next-auth";
 import { GetServerSidePropsContext } from "next/types";
-import {
-  DashboardContentPanel,
-  DashboardHeader,
-  DashboardContainer,
-  DashboardMainSection,
-} from "../../components/dashboard";
-import DashboardSideNavMenu from "../../components/dashboard-side-nav-menu";
+import DashboardLayout from "../../components/dashboard-layout";
 import Layout from "../../components/layout";
 import { getResourcesContent } from "../../contentful";
 import { contentfulStyles } from "../../styles/fonts";
@@ -22,18 +14,13 @@ interface IDashboardResourcesPageProps {
 
 const DashboardResourcesPage: React.FC<IDashboardResourcesPageProps> = ({ content }) => (
   <Layout title="Resources - Dashboard | Not Dead Yet">
-    <DashboardMainSection>
-      <DashboardHeader title="Guild Resources" />
-      <DashboardContainer>
-        <DashboardSideNavMenu />
-        <DashboardContentPanel>
-          <article
-            css={[contentfulStyles, media.up("sm")`padding: 10px 30px;`]}
-            dangerouslySetInnerHTML={{ __html: marked.parse(content) }}
-          ></article>
-        </DashboardContentPanel>
-      </DashboardContainer>
-    </DashboardMainSection>
+    <DashboardLayout header="Guild Resources" id="Resources">
+      <article
+        css={[contentfulStyles]}
+        style={{ padding: 0 }}
+        dangerouslySetInnerHTML={{ __html: marked.parse(content) }}
+      ></article>
+    </DashboardLayout>
   </Layout>
 );
 

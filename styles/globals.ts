@@ -13,13 +13,19 @@ const globalStyles = css`
     box-sizing: border-box;
   }
 
+  #__next {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
   main {
     display: flex;
     flex-direction: column;
     background-color: ${colors.background};
     transition: margin-top 0.2s ease-in;
     position: relative;
-    min-height: 100vh;
+    flex: 1;
   }
 
   ul,

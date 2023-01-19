@@ -1,5 +1,6 @@
 import { css } from "@emotion/react";
 import colors from "../styles/colors";
+import media from "../styles/media-queries";
 import Route from "./route";
 
 const Footer: React.FC = () => (
@@ -10,9 +11,12 @@ const Footer: React.FC = () => (
       padding: 30px;
       text-align: center;
 
+      ${media.down("sm")`padding: 15px 5px; font-size: 0.85rem;`};
+
       ul {
         list-style-type: none;
         margin-top: 20px;
+        margin-left: 0;
       }
     `}
   >
