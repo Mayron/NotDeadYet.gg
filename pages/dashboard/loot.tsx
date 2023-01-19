@@ -199,7 +199,7 @@ const DashboardLootPage: React.FC<IDashboardPageProps> = ({
             >
               <Tabs value={selectedTab} onChange={(_, v) => setSelectedTab(v as number)}>
                 {tabData.map((data) => (
-                  <Tab key={data.index} label={data.label} />
+                  <Tab key={data.index} label={`Phase ${data.index}`} />
                 ))}
               </Tabs>
               <button

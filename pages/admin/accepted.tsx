@@ -18,7 +18,7 @@ const AdminAcceptedPage: React.FC<IAdminPageProps> = ({ applications }) => (
       <AdminNav />
       <WhitePanel
         css={css`
-          padding: 0;
+          padding: 0 !important;
         `}
       >
         <ApplicantsTable data={applications} hiddenColumns={["age"]} />

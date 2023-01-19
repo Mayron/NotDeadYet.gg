@@ -49,6 +49,13 @@ const PostThumbnail: React.FC<IPostThumbnailProps> = ({
     `}
   >
     <CardHeader
+      css={css`
+        padding: 15px;
+
+        ${media.down("xs")`
+          padding: 10px;
+        `};
+      `}
       avatar={
         <Image
           src={author.profilePicture.url}

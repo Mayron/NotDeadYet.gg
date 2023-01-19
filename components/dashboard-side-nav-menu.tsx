@@ -52,15 +52,28 @@ const DashboardSideNavMenu: React.FC = () => {
 
               ${media.down("sm")`
                 margin: 0;
-                padding: 10px 10px;
+                padding: 10px;
                 border-right: 1px solid #dbe5f1;
                 border-bottom: none;
                 font-size: 0.8rem;
 
                 svg {
                   margin-right: 5px;
+                  
                 }
               `};
+
+              @media all and (max-width: 430px) {
+                padding: 8px;
+
+                svg {
+                  width: 18px;
+                }
+
+                #adminText {
+                  display: none;
+                }
+              }
             }
 
             &:last-of-type {
@@ -175,7 +188,7 @@ const DashboardSideNavMenu: React.FC = () => {
                   d="M17 13c-2.21 0-4 1.79-4 4s1.79 4 4 4s4-1.79 4-4s-1.79-4-4-4zm0 1.38c.62 0 1.12.51 1.12 1.12s-.51 1.12-1.12 1.12s-1.12-.51-1.12-1.12s.5-1.12 1.12-1.12zm0 5.37c-.93 0-1.74-.46-2.24-1.17c.05-.72 1.51-1.08 2.24-1.08s2.19.36 2.24 1.08c-.5.71-1.31 1.17-2.24 1.17z"
                 />
               </svg>
-              <span className="sm-up">Admin</span>
+              <span id="adminText">Admin</span>
             </Route>
           </li>
         )}

@@ -19,7 +19,7 @@ const globalStyles = css`
     background-color: ${colors.background};
     transition: margin-top 0.2s ease-in;
     position: relative;
-    ${media.up("sm")`min-height: 100vh;`};
+    min-height: 100vh;
   }
 
   ul,
@@ -153,6 +153,10 @@ const globalStyles = css`
 
   article {
     padding: 0 15px;
+
+    ${media.down("xs")`
+      padding: 0 10px;
+    `};
 
     a {
       color: ${colors.link.default};
