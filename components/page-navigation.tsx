@@ -47,7 +47,7 @@ const PageNavigation: React.FC = () => {
           min-height: 40px;
           padding: 0 20px;
 
-          ${media.down("xs")`
+          ${media.down("sm")`
             padding: 0 6px 0 0;
           `};
 
@@ -61,32 +61,31 @@ const PageNavigation: React.FC = () => {
             align-items: center;
             padding: 0 8px;
 
-            ${media.down("xs")`
-              font-size: 0.85rem;              
-              padding: 0 10px;
-            `};
+            @media (max-width: ${member ? "500px" : "600px"}) {
+              padding: 0 6px;
+
+              svg {
+                width: 28px;
+                height: 28px;
+              }
+            }
           }
 
           span {
             margin-left: 8px;
 
             ${media.down("sm")`
-              font-size: 0.75rem;
+              font-size: 0.85rem;
             `};
 
-            @media (max-width: 450px) {
+            @media (max-width: ${member ? "500px" : "600px"}) {
               display: none;
             }
           }
 
           li:not(:last-of-type) {
-            ${media.up("md")`
-              margin-right: 20px;
-            `};
-
-            ${media.down("sm")`
-              margin-right: 0;
-            `};
+            margin-right: 20px;
+            ${media.down("md")`margin-right: 10px;`};
           }
         `}
       >
