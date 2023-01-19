@@ -45,7 +45,7 @@ const HomeBanner: React.FC = () => {
           z-index: 1;
         `}
         options={{
-          fpsLimit: 120,
+          fpsLimit: 60,
           fullScreen: false,
           particles: {
             color: {
@@ -65,7 +65,7 @@ const HomeBanner: React.FC = () => {
               straight: false,
             },
             number: {
-              value: 160,
+              limit: 120,
             },
             opacity: {
               value: 0.8,
@@ -81,7 +81,10 @@ const HomeBanner: React.FC = () => {
               enable: true,
             },
             size: {
-              value: 2,
+              value: {
+                min: 0.5,
+                max: 1.5,
+              },
               random: true,
             },
           },
