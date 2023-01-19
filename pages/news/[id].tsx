@@ -1,7 +1,9 @@
+import { css } from "@emotion/react";
 import { GetStaticPropsContext } from "next";
 import Layout from "../../components/layout";
 import PostThumbnail from "../../components/post-thumbnail";
 import { getContentfulPost, getContentfulPosts } from "../../contentful";
+import media from "../../styles/media-queries";
 
 interface INewsPostPageProps {
   post: ContentfulPost;
@@ -9,7 +11,13 @@ interface INewsPostPageProps {
 
 const NewsPostPage: React.FC<INewsPostPageProps> = ({ post }) => (
   <Layout title="News | Not Dead Yet">
-    <section>
+    <section
+      css={css`
+        ${media.down("sm")`
+          padding: 0;
+        `};
+      `}
+    >
       <PostThumbnail
         key={post.title}
         author={post.author}

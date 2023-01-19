@@ -1,6 +1,8 @@
+import { css } from "@emotion/react";
 import Layout from "../../components/layout";
 import PostThumbnail from "../../components/post-thumbnail";
 import { getContentfulPosts } from "../../contentful";
+import media from "../../styles/media-queries";
 
 interface INewsPageProps {
   posts: ContentfulPost[];
@@ -10,7 +12,17 @@ const NewsPage: React.FC<INewsPageProps> = ({ posts }) => (
   <Layout title="News | Not Dead Yet">
     <section>
       <header>
-        <h1>Guild News and Updates</h1>
+        <h1
+          css={css`
+            font-size: 2rem;
+
+            ${media.down("sm")`
+              font-size: 1.85rem;
+            `};
+          `}
+        >
+          Guild News and Updates
+        </h1>
       </header>
 
       {posts.length === 0 ? (

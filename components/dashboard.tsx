@@ -65,6 +65,8 @@ export const DashboardContentPanel: React.FC<IDashboardContentPanelProps> = ({
       min-height: 100%;
       position: relative;
 
+      ${!full && media.down("sm")`padding: 10px 0;`};
+
       ${full &&
       css`
         margin-top: 0;

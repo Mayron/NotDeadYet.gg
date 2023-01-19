@@ -19,17 +19,17 @@ const NavBar: React.FC = () => {
         max-width: 1000px;
         margin: 0 auto;
         width: 100%;
-        mask-image: linear-gradient(
-          to right,
-          transparent 0,
-          black 20%,
-          black 80%,
-          transparent 100%
-        );
 
         ${media.up("sm")`
-        height: 70px;
-      `};
+          height: 70px;
+          mask-image: linear-gradient(
+            to right,
+            transparent 0,
+            black 20%,
+            black 80%,
+            transparent 100%
+          );
+        `};
       `}
     >
       <ul
@@ -44,6 +44,11 @@ const NavBar: React.FC = () => {
           border-top: 1px solid ${colors.link.hover};
           border-bottom: 1px solid ${colors.link.hover};
           box-shadow: 0 0px 6px black;
+
+          ${media.down("xs")`
+            padding-left: 0;
+            padding-right: 0;
+          `};
 
           svg {
             margin-right: 8px;
@@ -61,24 +66,20 @@ const NavBar: React.FC = () => {
             font-size: 1.25rem;
 
             ${media.up("sm")`
-            padding: 0 30px;
-          `};
+              padding: 0 30px;
+            `};
 
             ${media.down("xs")`
-            padding: 15px;
-            justify-content: center;
-        `};
-          }
+              padding: 15px 20px;
+              justify-content: center;
+              font-size: 1.1rem;
+            `};
 
-          ${media.down("xs")`
-          flex-direction: column;
-          align-items: center;
-          padding: 10px 0;
-
-          li {
-            width: 100%;
+            @media all and (max-width: 420px) {
+              padding: 15px 12.5px;
+              font-size: 1rem;
+            }
           }
-        `};
         `}
       >
         <li>

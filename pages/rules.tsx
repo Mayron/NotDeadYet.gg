@@ -4,6 +4,7 @@ import Layout from "../components/layout";
 import WhitePanel from "../components/white-panel";
 import { getAllRules } from "../contentful";
 import { contentfulStyles } from "../styles/fonts";
+import media from "../styles/media-queries";
 
 interface IRulesPageProps {
   rules: Rule[];
@@ -20,12 +21,21 @@ const RulesPage: React.FC<IRulesPageProps> = ({ rules }) => (
         css={css`
           text-align: center;
           margin-bottom: 20px;
+
           h1 {
             margin-bottom: 0;
+
+            ${media.down("sm")`
+              font-size: 1.85rem;
+            `};
           }
 
           p {
             font-size: 1.125rem;
+
+            ${media.down("sm")`
+              font-size: 1rem;
+            `};
           }
         `}
       >

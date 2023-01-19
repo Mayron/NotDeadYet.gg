@@ -27,6 +27,11 @@ const HomeBanner: React.FC = () => {
         height: 55vh;
         min-height: 490px;
         max-height: 1080px;
+
+        ${media.down("xs")`
+          height: 40vh;
+          min-height: 300px;
+        `};
       `}
     >
       <Particles

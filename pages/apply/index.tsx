@@ -31,7 +31,7 @@ const NotSubmitted: React.FC<INotSubmitted> = ({ loggedIn, applyInfo }) => (
           margin-bottom: 10px;
 
           ${media.down("sm")`
-            font-size: 2rem;
+            font-size: 1.85rem;
           `};
         `}
       >
