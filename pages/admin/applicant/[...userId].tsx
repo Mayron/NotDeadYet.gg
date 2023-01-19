@@ -85,6 +85,8 @@ const AdminApplicantPage: React.FC<IAdminApplicantPageProps> = ({ application })
             margin-top: 60px;
             border: 1px solid ${colors.grey.border};
             background-color: ${colors.grey.background.medium};
+
+            ${media.down("xs")`padding: 10px; margin-top: 30px;`};
           `}
         >
           <div
@@ -96,22 +98,27 @@ const AdminApplicantPage: React.FC<IAdminApplicantPageProps> = ({ application })
 
               button {
                 min-width: 180px;
+
+                ${media.down("sm")`
+                  margin-right: 0;
+                  height: 50px;
+                  margin-bottom: 20px;
+                  width: 100%;
+                  min-width: 300px;
+                  max-width: 340px;
+                `};
+
+                @media all and (max-width: 440px) {
+                  max-width: 100%;
+                }
               }
 
               ${media.down(`sm`)`    
-                margin-bottom: 30px;    
+                margin-bottom: 10px;
                 display: flex;                
                 align-items: center;
                 width: 100%;
                 flex-direction: column-reverse;
-
-                button {
-                  margin-right: 0;
-                  height: 50px;
-                  margin-bottom: 20px;
-                  width: 360px;
-                  min-width: 360px;
-                }
               `};
             `}
           >
@@ -161,7 +168,7 @@ const AdminApplicantPage: React.FC<IAdminApplicantPageProps> = ({ application })
               </Button>
             )}
           </div>
-          <GoBackButton text="Back to Admin Dashboard" to="/admin" />
+          <GoBackButton text="Go Back" to="/admin" />
         </footer>
       </section>
     </Layout>

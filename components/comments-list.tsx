@@ -6,12 +6,29 @@ import { useSession } from "next-auth/react";
 import colors from "../styles/colors";
 import CommentBox from "./comment-box";
 import { fetchJson, markdownToSafeHtml } from "../utils";
+import media from "../styles/media-queries";
 
 const CommentOptions = styled.div`
   position: relative;
   display: flex;
   justify-content: space-between;
   padding-top: 10px;
+
+  ${media.down("xs")`
+    align-items: center;
+    
+    button, p {
+      font-size: 0.75rem;
+    }
+
+    p {
+      position: relative;
+      left: unset;
+      transform: unset;
+      margin-left: auto;
+      margin-right: 15px;
+    }
+  `};
 `;
 
 const SupportsMarkdownText = styled.p`
