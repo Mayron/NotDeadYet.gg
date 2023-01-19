@@ -62,7 +62,7 @@ const HomePage: NextPage<IHomePageProps> = ({ guildSummary }) => {
         >
           <header
             css={css`
-              padding-bottom: 30px;
+              padding-bottom: 20px;
 
               p:last-of-type {
                 padding-top: 15px;
