@@ -9,7 +9,6 @@ const StyledPanel = styled.div`
   display: flex;
   padding: 15px;
   border: 1px solid #000000;
-  margin: 50px 0;
   background: linear-gradient(45deg, #2d3240, #21242d);
   color: white;
   box-shadow: inset 0px 0px 15px rgb(0 0 0 / 50%), 0px 2px 6px rgb(0 0 0 / 80%);
@@ -48,7 +47,6 @@ const StyledPanel = styled.div`
   ${media.down("sm")`
     flex-direction: column;
     align-items: center;
-    margin: 20px 0 0 0;
 
     p {
       padding-bottom: 20px;
