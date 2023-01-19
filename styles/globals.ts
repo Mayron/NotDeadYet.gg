@@ -143,7 +143,7 @@ const globalStyles = css`
     -webkit-user-drag: none;
     user-select: none;
     display: block;
-    max-width: 90%;
+    max-width: 100%;
   }
 
   section {

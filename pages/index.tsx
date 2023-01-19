@@ -197,6 +197,10 @@ const HomePage: NextPage<IHomePageProps> = ({ guildSummary }) => {
           padding-top: 10px;
           padding-bottom: 40px;
 
+          h4 {
+            padding: 0 15px;
+          }
+
           button {
             margin: auto;
           }
