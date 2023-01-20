@@ -1,4 +1,4 @@
-import { css } from "@emotion/react";
+import { css, Global } from "@emotion/react";
 import Image from "next/image";
 import Particles from "react-tsparticles";
 import { loadFull } from "tsparticles";
@@ -133,12 +133,51 @@ const HomeBanner: React.FC = () => {
             `};
           `}
         >
+          <Global
+            styles={css`
+              @keyframes ndy-logo-glow {
+                15% {
+                  filter: brightness(1) saturate(1);
+                }
+                35% {
+                  filter: brightness(1.25) saturate(1.3);
+                }
+                40% {
+                  filter: brightness(1) saturate(1.1);
+                }
+                60% {
+                  filter: brightness(1) saturate(1.2);
+                }
+                90% {
+                  filter: brightness(1) saturate(1);
+                }
+                93% {
+                  filter: brightness(1.35) saturate(1.5);
+                }
+                95% {
+                  filter: brightness(1) saturate(1);
+                }
+              }
+
+              @keyframes ndy-logo-scale {
+                from {
+                  transform: scale(0.96);
+                }
+                to {
+                  transform: scale(1);
+                }
+              }
+            `}
+          />
           <Image
             src={logo}
             alt="Not Dead Yet [Gehennas EU]"
             css={css`
               object-fit: cover;
               object-position: center center;
+              animation: ndy-logo-glow 5s cubic-bezier(0.75, 0.27, 0.16, 0.76) infinite
+                  alternate,
+                ndy-logo-scale 5s cubic-bezier(0.32, 0.79, 0.78, 0.33) infinite alternate;
             `}
             placeholder="blur"
           />
