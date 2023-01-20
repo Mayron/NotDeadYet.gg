@@ -206,6 +206,11 @@ const PageNavigation: React.FC = () => {
           <li
             css={css`
               margin-left: auto;
+
+              button {
+                height: 100%;
+                font-size: 0.95rem;
+              }
             `}
           >
             <Button

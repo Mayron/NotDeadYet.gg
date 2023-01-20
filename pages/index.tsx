@@ -10,6 +10,7 @@ import { getGuildSummary } from "../contentful";
 import arrowDown from "../public/assets/arrow-down.png";
 import colors from "../styles/colors";
 import media from "../styles/media-queries";
+import vars from "../styles/vars";
 
 interface IHomePageProps {
   guildSummary: string;
@@ -64,6 +65,10 @@ const HomePage: NextPage<IHomePageProps> = ({ guildSummary }) => {
             css={css`
               padding-bottom: 20px;
 
+              p {
+                font-size: 1.125rem;
+              }
+
               p:last-of-type {
                 padding-top: 15px;
               }
@@ -83,7 +88,7 @@ const HomePage: NextPage<IHomePageProps> = ({ guildSummary }) => {
 
               ${media.down("xs")`
                 margin-top: -10px;
-                
+
                 img {     
                   transform: scale(0.9);
                 }
@@ -114,7 +119,7 @@ const HomePage: NextPage<IHomePageProps> = ({ guildSummary }) => {
         `}
       >
         <section ref={nextSection}>
-          <article>
+          <article className="text-lg">
             <header>
               <h3>What You Can Expect From Us</h3>
             </header>
@@ -154,7 +159,7 @@ const HomePage: NextPage<IHomePageProps> = ({ guildSummary }) => {
           padding-bottom: 10px;
         `}
       >
-        <article>
+        <article className="text-lg">
           <header>
             <h3>What we expect from you</h3>
           </header>
@@ -186,7 +191,7 @@ const HomePage: NextPage<IHomePageProps> = ({ guildSummary }) => {
           </ul>
           <p
             css={css`
-              font-size: 1.2rem;
+              font-size: 1.325rem;
               padding-top: 10px;
               line-height: 27px;
             `}
@@ -211,6 +216,10 @@ const HomePage: NextPage<IHomePageProps> = ({ guildSummary }) => {
 
           button {
             margin: auto;
+          }
+
+          hr {
+            margin-top: 25px;
           }
         `}
       >

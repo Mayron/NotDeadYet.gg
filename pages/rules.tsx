@@ -29,18 +29,12 @@ const RulesPage: React.FC<IRulesPageProps> = ({ rules }) => (
               font-size: 1.85rem;
             `};
           }
-
-          p {
-            font-size: 1.125rem;
-
-            ${media.down("sm")`
-              font-size: 1rem;
-            `};
-          }
         `}
       >
         <h1>Guild Rules</h1>
-        <p>Members should read and follow our guild rules before raiding with us.</p>
+        <p className="text-lg">
+          Members should read and follow our guild rules before raiding with us.
+        </p>
       </header>
 
       {rules.map((rule) => (

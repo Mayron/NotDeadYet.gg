@@ -51,13 +51,12 @@ const NavBar: React.FC = () => {
       `}
     >
       <ul
-        className="no-markers"
+        className="no-markers text-lg"
         css={css`
           display: flex;
           justify-content: center;
           padding: 0 30px;
           text-transform: uppercase;
-          font-size: 1.125rem;
           height: 100%;
           border-top: 1px solid ${colors.link.hover};
           border-bottom: 1px solid ${colors.link.hover};

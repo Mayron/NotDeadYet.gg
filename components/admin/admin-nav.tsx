@@ -15,7 +15,7 @@ const AdminNav: React.FC = () => (
       font-size: 0.95rem;
 
       ${media.down("sm")`
-        font-size: 0.85rem;
+
         text-align: center;
       `};
     `}

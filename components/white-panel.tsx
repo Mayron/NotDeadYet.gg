@@ -18,7 +18,6 @@ const WhitePanel = styled.article<IWhitePanelProps>(
     box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 2px 0px;
     padding: 30px;
     margin-bottom: 15px;
-    font-size: 0.9rem;
 
     ${media.down("sm")`
       padding: 10px;

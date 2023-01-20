@@ -27,7 +27,7 @@ const StyledCommentHeader = styled.header`
   justify-content: space-between;
   align-items: center;
   padding-bottom: 15px;
-  font-size: 0.9rem;
+  font-size: 0.95rem;
 
   .username {
     font-weight: ${vars.font.standard.weights.medium};
@@ -36,7 +36,7 @@ const StyledCommentHeader = styled.header`
 
   .info {
     color: ${colors.grey.font};
-    font-size: 0.9rem;
+    font-size: 0.95rem;
   }
 `;
 

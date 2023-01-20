@@ -1,6 +1,6 @@
 const font = {
   // Used for small labels, etc...
-  smallSize: "0.875rem",
+  smallSize: "0.9rem",
   header: {
     family: "'Rajdhani', sans-serif",
     weight: 700,
@@ -8,8 +8,8 @@ const font = {
   },
   standard: {
     family: "Roboto, sans-serif",
-    size: "18px",
-    lineHeight: "24px",
+    size: "16px",
+    lineHeight: "normal",
     weights: {
       regular: 400,
       medium: 500,
@@ -17,8 +17,8 @@ const font = {
     },
   },
   mobile: {
-    size: "16",
-    lineHeight: "19px",
+    size: "14px",
+    lineHeight: "normal",
   },
 };
 

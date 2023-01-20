@@ -38,6 +38,10 @@ const globalStyles = css`
     }
   }
 
+  .text-lg {
+    font-size: 1.125rem;
+  }
+
   body,
   button,
   input,
@@ -318,7 +322,7 @@ const globalStyles = css`
   dt {
     text-transform: uppercase;
     color: ${colors.text.secondary};
-    font-size: 0.85rem;
+    font-size: 0.95rem;
   }
 
   dd {

@@ -26,7 +26,7 @@ const PrivacyPolicy: React.FC = () => {
 
           & > a:first-of-type {
             position: relative;
-            top: -20px;
+            top: -10px;
           }
         `}
       >
