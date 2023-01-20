@@ -18,10 +18,24 @@ const NavBar: React.FC = () => {
         color: ${colors.white};
         max-width: 1000px;
         margin: 0 auto;
+        margin-top: 10px;
         width: 100%;
 
-        ${media.up("sm")`
-          height: 70px;
+        @media all and (max-width: 879px) and (min-width: 675px) {
+          mask-image: linear-gradient(
+            to right,
+            transparent 0,
+            black 10%,
+            black 90%,
+            transparent 100%
+          );
+
+          a {
+            padding: 20px 30px;
+          }
+        }
+
+        @media all and (min-width: 880px) {
           mask-image: linear-gradient(
             to right,
             transparent 0,
@@ -29,7 +43,11 @@ const NavBar: React.FC = () => {
             black 80%,
             transparent 100%
           );
-        `};
+
+          a {
+            padding: 20px 30px;
+          }
+        }
       `}
     >
       <ul
@@ -46,8 +64,8 @@ const NavBar: React.FC = () => {
           box-shadow: 0 0px 6px black;
 
           ${media.down("xs")`
-            padding-left: 0;
-            padding-right: 0;
+            padding-left: 10px;
+            padding-right: 10px;
           `};
 
           svg {
@@ -65,19 +83,20 @@ const NavBar: React.FC = () => {
             font-family: ${vars.font.header.family};
             font-size: 1.25rem;
 
-            ${media.up("sm")`
-              padding: 0 30px;
-            `};
-
-            ${media.down("xs")`
+            @media all and (max-width: 879px) {
               padding: 15px 20px;
               justify-content: center;
               font-size: 1.1rem;
-            `};
+            }
 
-            @media all and (max-width: 420px) {
-              padding: 15px 12.5px;
-              font-size: 1rem;
+            @media all and (max-width: 440px) {
+              padding: 15px 10px;
+              font-size: 0.96rem;
+
+              svg {
+                margin-right: 4px;
+                height: 15px;
+              }
             }
           }
         `}

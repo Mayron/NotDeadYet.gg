@@ -81,6 +81,14 @@ const HomePage: NextPage<IHomePageProps> = ({ guildSummary }) => {
               transition: transform 0.8s cubic-bezier(0.215, 0.61, 0.355, 1) 0s,
                 fill 0.2s ease-in-out 0s;
 
+              ${media.down("xs")`
+                margin-top: -10px;
+                
+                img {     
+                  transform: scale(0.9);
+                }
+              `};
+
               &:hover {
                 filter: brightness(1.5);
                 cursor: pointer;
